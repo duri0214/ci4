@@ -23,7 +23,7 @@ class HomeTest extends CIUnitTestCase
         $result = $this->call('get', '/');
         $result->assertOK();
         
-        // $result = $this->call('get', '/Home/store');
-        // $result->assertOK();
+        $result = $this->call('get', '/Home/store');
+        $result->assertOK();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\VocabularyBookModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Home extends BaseController
 {
@@ -21,4 +22,18 @@ class Home extends BaseController
         
         return view('welcome_message', $data);
     }
+    
+    /**
+     * @param string $a
+     * @param int $b
+     * @return ResponseInterface
+     */
+    public function store(string $a = 'Home', int $b = 8): ResponseInterface
+    {
+        helper('text');
+        return $this->response->setJSON(
+            ["a" => $a, "b" => $b, "c" => random_string('crypto', $b)]
+        );
+    }
+
 }
