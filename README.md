@@ -1,3 +1,27 @@
+## TODO
+- リポジトリ層の操作を整備（テンプレートに表示）
+- 複数のリポジトリ操作をサービス層に持っていく
+  - とともに、ドメイン層も整備することになると思う
+- CSVアップロード機能
+  - ユーザーテーブルをダイナミックに作れる？
+
+# seederの順番
+1. php spark db:seed VocabularyBookSeeder
+2. php spark db:seed SchoolCategorySeeder
+3. php spark db:seed SchoolSeeder
+4. php spark db:seed PeriodSeeder
+5. php spark db:seed UserCategorySeeder
+6. php spark db:seed UserRoleSeeder
+7. php spark db:seed UserSeeder
+8. php spark db:seed TimeSeeder
+9. php spark db:seed StatusSeeder
+10. php spark db:seed StatusDetailSeeder
+11. php spark db:seed HomeroomSeeder
+12. php spark db:seed AttendanceSeeder
+
+## codeigniterにおけるエンティティと関係
+https://forum.codeigniter.com/thread-80298.html
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?

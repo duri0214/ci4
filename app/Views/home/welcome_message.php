@@ -10,7 +10,7 @@
         <!-- for bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <!-- for css -->
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="assets/home/css/index.css">
         <!-- fontawesome -->
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     
@@ -28,9 +28,9 @@
             <tbody>
             <?php
             if (isset($vocabulary_book)) {
-                foreach ($vocabulary_book as $item): ?>
+                foreach ($vocabulary_book as $item) : ?>
                     <tr class="sortable correct">
-                        <?php foreach ($item as $td): ?>
+                        <?php foreach ($item as $td) : ?>
                             <td><?= $td ?></td>
                         <?php endforeach;?>
                     </tr>
@@ -38,7 +38,21 @@
             } ?>
             </tbody>
         </table>
-        
+
+        <h1>Hello World!</h1>
+        <a href='/home/csv_export'>
+            <button>csvダウンロード</button>
+        </a>
+        <a href='/home/excel_export'>
+            <button>excelダウンロード</button>
+        </a>
+        <a href='/home/rotate_pdf'>
+            <button>pdf回転</button>
+        </a>
+        <a href='/school'>
+            <button>school</button>
+        </a>
+
         <!-- for bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         
@@ -47,6 +61,6 @@
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
         
         <!-- my script -->
-        <script src="js/script.js"></script>
+        <script src="assets/home/js/script.js"></script>
     </body>
 </html>
