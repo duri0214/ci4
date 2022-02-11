@@ -33,8 +33,8 @@ class Period extends Migration
                     'constraint' => 11,
                     'unsigned' => true,
                 ],
-                'created_at' => ['type' => 'datetime', 'null' => true],
-                'updated_at' => ['type' => 'datetime', 'null' => true],
+                'created_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
