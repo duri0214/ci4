@@ -119,5 +119,4 @@ class Services extends BaseService
         
         return new SchoolCategoryModel();
     }
-
 }
