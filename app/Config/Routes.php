@@ -21,7 +21,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -31,7 +31,15 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'HomeController::index');
+$routes->get('home/csv_export', 'HomeController::csvExport');
+$routes->get('home/excel_export', 'HomeController::excelExport');
+$routes->get('home/rotate_pdf', 'HomeController::rotatePdf');
+$routes->get('api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
+$routes->get('school', 'SchoolController::index');
+$routes->get('school/lesson/(\d+)', 'SchoolController::lessonDetail/$1');
+
+$routes->post('school/lesson/register/(\d+)', 'School::lessonRegister/$1');
 
 /*
  * --------------------------------------------------------------------
