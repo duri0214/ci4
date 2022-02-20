@@ -12,7 +12,6 @@ class School extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
@@ -40,22 +39,22 @@ class School extends Migration
                     'constraint' => '20',
                     'null' => true,
                 ],
-                'school_code' => [
+                'code' => [
                     'type' => 'VARCHAR',
                     'constraint' => '50',
                     'null' => true,
                 ],
                 'school_category_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_category_id', 'school_category', 'id');
+        $this->forge->addUniqueKey('code');
         $this->forge->createTable('school');
     }
 

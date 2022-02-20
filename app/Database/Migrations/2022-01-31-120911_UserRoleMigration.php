@@ -12,7 +12,6 @@ class UserRoleMigration extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
@@ -21,10 +20,11 @@ class UserRoleMigration extends Migration
                     'constraint' => '100',
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
+        $this->forge->addUniqueKey('name');
         $this->forge->createTable('user_role');
     }
     

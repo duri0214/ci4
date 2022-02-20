@@ -12,7 +12,6 @@ class TimeMigration extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
@@ -22,15 +21,15 @@ class TimeMigration extends Migration
                 ],
                 'school_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['school_id', 'name']);
         $this->forge->createTable('m_time');
     }
     

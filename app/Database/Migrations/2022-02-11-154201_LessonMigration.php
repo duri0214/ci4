@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Period extends Migration
+class LessonMigration extends Migration
 {
     public function up()
     {
@@ -17,17 +17,17 @@ class Period extends Migration
                 ],
                 'name' => [
                     'type' => 'VARCHAR',
-                    'constraint' => '50',
+                    'constraint' => '100',
                 ],
-                'from_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
+                'description' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '255',
                 ],
-                'to_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
+                'homeroom_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
                 ],
-                'school_id' => [
+                'sub_subject_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
@@ -36,13 +36,14 @@ class Period extends Migration
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'from_date', 'to_date']);
-        $this->forge->createTable('period');
+        $this->forge->addForeignKey('homeroom_id', 'homeroom', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('sub_subject_id', 'sub_subject', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['homeroom_id', 'sub_subject_id', 'name']);
+        $this->forge->createTable('lesson');
     }
-
+    
     public function down()
     {
-        $this->forge->dropTable('period');
+        $this->forge->dropTable('lesson');
     }
 }

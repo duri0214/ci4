@@ -11,11 +11,13 @@ class UserSeeder extends Seeder
         $data = [
             [
                 'name' => '岡田 義隆',
+                'email' => 'yoshi@gmail.ac.jp',
                 'user_category_id' => 4,
                 'user_role_id' => 5,
             ],
             [
-                'name' => '学校 ミドルネーム 先生',
+                'name' => 'デモ ミドルネーム 先生',
+                'email' => 'demo@gmail.ac.jp',
                 'user_category_id' => 1,
                 'user_role_id' => 1,
             ],

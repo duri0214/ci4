@@ -12,7 +12,6 @@ class StatusDetailMigration extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
@@ -22,16 +21,14 @@ class StatusDetailMigration extends Migration
                 ],
                 'school_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'm_status_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
@@ -43,6 +40,7 @@ class StatusDetailMigration extends Migration
             'CASCADE',
             'CASCADE'
         );
+        $this->forge->addUniqueKey(['school_id', 'm_status_id', 'name']);
         $this->forge->createTable('m_status_detail');
     }
     

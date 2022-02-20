@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SchoolCategory extends Migration
+class SubSubjectMigration extends Migration
 {
     public function up()
     {
@@ -17,20 +17,24 @@ class SchoolCategory extends Migration
                 ],
                 'name' => [
                     'type' => 'VARCHAR',
-                    'constraint' => '50',
-                    'null' => false,
+                    'constraint' => '100',
+                ],
+                'subject_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey('name');
-        $this->forge->createTable('school_category');
+        $this->forge->addForeignKey('subject_id', 'subject', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['subject_id', 'name']);
+        $this->forge->createTable('sub_subject');
     }
-
+    
     public function down()
     {
-        $this->forge->dropTable('school_category');
+        $this->forge->dropTable('sub_subject');
     }
 }

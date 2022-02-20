@@ -12,7 +12,6 @@ class AttendanceMigration extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
@@ -30,42 +29,38 @@ class AttendanceMigration extends Migration
                 ],
                 'user_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
-                    'unsigned' => true,
-                ],
-                'school_id' => [
-                    'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'homeroom_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
+                    'null' => true,
+                ],
+                'lesson_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'null' => true,
                 ],
                 'm_time_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'm_status_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'm_status_detail_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('user_id', 'user', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('homeroom_id', 'homeroom', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('lesson_id', 'lesson', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey(
             'm_time_id',
             'm_time',
@@ -88,9 +83,9 @@ class AttendanceMigration extends Migration
             'CASCADE'
         );
         $this->forge->addUniqueKey([
-            'school_id',
             'user_id',
             'homeroom_id',
+            'lesson_id',
             'attendance_date',
             'm_time_category_id'
         ]);

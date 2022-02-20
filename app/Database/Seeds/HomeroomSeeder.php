@@ -10,6 +10,7 @@ class HomeroomSeeder extends Seeder
     {
         $data = [
             [
+                'id' => 1,
                 'hr_grade' => 1,
                 'hr_class' => 1,
                 'name' => '1年1組',
@@ -17,6 +18,7 @@ class HomeroomSeeder extends Seeder
                 'school_id' => 1,
             ],
             [
+                'id' => 2,
                 'hr_grade' => 2,
                 'hr_class' => 1,
                 'name' => '2年1組',
@@ -24,6 +26,7 @@ class HomeroomSeeder extends Seeder
                 'school_id' => 1,
             ],
             [
+                'id' => 3,
                 'hr_grade' => 3,
                 'hr_class' => 1,
                 'name' => '3年1組',

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Period extends Migration
+class LessonTeacherMigration extends Migration
 {
     public function up()
     {
@@ -15,34 +15,29 @@ class Period extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
-                'name' => [
-                    'type' => 'VARCHAR',
-                    'constraint' => '50',
-                ],
-                'from_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
-                ],
-                'to_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
-                ],
-                'school_id' => [
+                'lesson_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
+                    'null' => true,
+                ],
+                'teacher_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'null' => true,
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'from_date', 'to_date']);
-        $this->forge->createTable('period');
+        $this->forge->addForeignKey('lesson_id', 'lesson', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('teacher_id', 'teacher', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['lesson_id', 'teacher_id']);
+        $this->forge->createTable('lesson_teacher');
     }
-
+    
     public function down()
     {
-        $this->forge->dropTable('period');
+        $this->forge->dropTable('lesson_teacher');
     }
 }

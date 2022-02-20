@@ -12,18 +12,15 @@ class HomeroomMigration extends Migration
             [
                 'id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
                 'hr_grade' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'hr_class' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'name' => [
@@ -36,15 +33,20 @@ class HomeroomMigration extends Migration
                 ],
                 'school_id' => [
                     'type' => 'INT',
-                    'constraint' => 11,
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey([
+            'school_id',
+            'hr_grade',
+            'hr_class',
+            'name'
+                                   ]);
         $this->forge->createTable('homeroom');
     }
     
