@@ -7,13 +7,10 @@
 </head>
 <body>
     <h1>school</h1>
-    <p>name: <?= $school_name ?></p>
-    <p>zipcode: <?= $zipcode ?></p>
-    <p>address: <?= $address ?></p>
-    <p>tel: <?= $tel ?></p>
-    <p>prefecture: <?= $prefecture ?></p>
-    <p>code: <?= $school_code ?></p>
-    <p>school_category_name: <?= $school_category_name ?></p>
+    <p>学校名: <?= $school->name ?></p>
+    <p>所在地: 〒<?= $school->zipcode ?> <?= $school->address ?></p>
+    <p>tel: <?= $school->tel ?></p>
+    <p>学校のカテゴリー: <?= $school_category->name ?></p>
     <p>学期情報:</p>
     <?php
     if (!empty($periods)) {

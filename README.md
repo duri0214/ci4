@@ -17,7 +17,12 @@
 9. php spark db:seed StatusSeeder
 10. php spark db:seed StatusDetailSeeder
 11. php spark db:seed HomeroomSeeder
-12. php spark db:seed AttendanceSeeder
+12. php spark db:seed SubjectSeeder
+13. php spark db:seed SubSubjectSeeder
+14. php spark db:seed LessonSeeder
+15. php spark db:seed AttendanceSeeder
+16. php spark db:seed TeacherSeeder
+17. php spark db:seed LessonTeacherSeeder
 
 ## codeigniterにおけるエンティティと関係
 https://forum.codeigniter.com/thread-80298.html
