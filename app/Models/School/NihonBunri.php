@@ -15,7 +15,6 @@ class NihonBunri extends AbstractSchool
     {
         $this->school = $domain->getSchoolEntity();
         $this->school_category = $domain->getSchoolCategory();
-        $this->periods = $domain->getPeriods();
     }
     
     /**

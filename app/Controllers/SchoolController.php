@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Domain\SchoolDomain;
 use App\Models\HomeroomModel;
 use App\Models\SchoolModel;
 use App\Repository\AttendanceRepository;
@@ -11,24 +12,28 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolController extends BaseController
 {
+    // TODO: グローバル定数として school.id のリストを定義しておく
+    const SCHOOL_LIST = ['Demo' => 1, 'NihonBunri' => 2];
+    
     public function index(): string
     {
         $school_code_from_login = 'NihonBunri';
         // $school_code_from_login = 'Demo';
-        // グローバル定数として school.id のリストを定義しておく
-        $school_list = ['Demo' => 1, 'NihonBunri' => 2];
         
         $model = new SchoolModel();
-        $school = $model->find($school_list[$school_code_from_login]);
+        $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
         // dd($school);
+        $schoolDomain = new SchoolDomain($school);
+        dd($schoolDomain);
         
-        // TODO: Service層に持ってってね
+        // TODO: Service層に持ってってね（日付のフォーマット変更も）
         // dd($periodRepository->getPeriods($school));
         $periodRepository = new PeriodRepository();
         $periods = [];
         foreach ($periodRepository->getSchoolPeriod($school)->entity as $entity) {
             $periods[] = $entity->toArray();
         }
+        
         
         $schoolCategoryRepository = new SchoolCategoryRepository();
         $schoolCategory = $schoolCategoryRepository->getSchoolCategory($school)->entity;
@@ -45,14 +50,9 @@ class SchoolController extends BaseController
         }
         
         $data = [
-            'school_name' => $school->name,
-            'zipcode' => $school->zipcode,
-            'address' => $school->address,
-            'tel' => $school->tel,
-            'prefecture' => $school->prefecture,
-            'school_code' => $school->school_code,
+            'school' => $school,
             'periods' => $periods,
-            'school_category_name' => $schoolCategory->name,
+            'school_category' => $schoolCategory,
             'attendances' => $attendances,
         ];
         

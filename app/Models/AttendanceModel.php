@@ -21,7 +21,7 @@ class AttendanceModel extends Model
         'address',
         'tel',
         'prefecture',
-        'school_code',
+        'code',
         'school_category_id'
     ];
 
