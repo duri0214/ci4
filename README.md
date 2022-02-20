@@ -4,6 +4,7 @@
   - とともに、ドメイン層も整備することになると思う
 - CSVアップロード機能
   - ユーザーテーブルをダイナミックに作れる？
+- 年度更新
 
 # seederの順番
 1. php spark db:seed VocabularyBookSeeder

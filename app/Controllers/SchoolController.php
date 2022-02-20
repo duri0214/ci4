@@ -6,7 +6,6 @@ use App\Domain\SchoolDomain;
 use App\Models\HomeroomModel;
 use App\Models\SchoolModel;
 use App\Repository\AttendanceRepository;
-use App\Repository\PeriodRepository;
 use App\Repository\SchoolCategoryRepository;
 use CodeIgniter\HTTP\RedirectResponse;
 
@@ -17,29 +16,27 @@ class SchoolController extends BaseController
     
     public function index(): string
     {
-        $school_code_from_login = 'NihonBunri';
-        // $school_code_from_login = 'Demo';
+        // $school_code_from_login = 'NihonBunri';
+        $school_code_from_login = 'Demo';
         
         $model = new SchoolModel();
         $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
-        // dd($school);
         $schoolDomain = new SchoolDomain($school);
-        dd($schoolDomain);
+        // dd($schoolDomain);
         
         // TODO: Service層に持ってってね（日付のフォーマット変更も）
-        // dd($periodRepository->getPeriods($school));
-        $periodRepository = new PeriodRepository();
         $periods = [];
-        foreach ($periodRepository->getSchoolPeriod($school)->entity as $entity) {
+        foreach ($schoolDomain->getPeriods() as $entity) {
             $periods[] = $entity->toArray();
         }
         
-        
+        // TODO: SchoolDomainへ
         $schoolCategoryRepository = new SchoolCategoryRepository();
         $schoolCategory = $schoolCategoryRepository->getSchoolCategory($school)->entity;
         
-        // TODO: 学校ごとのロジックを流す
+        // TODO: Service層に持ってってね（学校ごとのロジックを流す）
         // $school = SchoolFactory::createInstance($school);
+        // $school->autoCalculate()
     
         $model = new HomeroomModel();
         $homeroom = $model->find(1);  # TODO: ダミー
@@ -52,6 +49,7 @@ class SchoolController extends BaseController
         $data = [
             'school' => $school,
             'periods' => $periods,
+            'current_period' => $schoolDomain->getCurrentPeriod()->toArray(),
             'school_category' => $schoolCategory,
             'attendances' => $attendances,
         ];

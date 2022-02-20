@@ -27,6 +27,6 @@
     echo form_input($data);
     echo form_submit('submit_grades', '成績を登録する');
     ?>
-    <p><a href='/school'>school</a></p>
+    <p><a href='/school'>ホームへもどる</a></p>
 </body>
 </html>

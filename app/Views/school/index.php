@@ -11,6 +11,7 @@
     <p>所在地: 〒<?= $school->zipcode ?> <?= $school->address ?></p>
     <p>tel: <?= $school->tel ?></p>
     <p>学校のカテゴリー: <?= $school_category->name ?></p>
+    
     <p>学期情報:</p>
     <?php
     if (!empty($periods)) {
@@ -21,6 +22,12 @@
         echo 'レコードなし';
     }
     ?>
+    
+    <p>現在の学期:</p>
+    <?php if (!empty($current_period)) { ?>
+        <li><?= $current_period['name'] ?> <?= $current_period['from_date'] ?> <?= $current_period['to_date'] ?></li>
+    <?php } ?>
+    
     <p>出席情報:</p>
     <?php
     if (!empty($attendances)) {
@@ -58,6 +65,6 @@
         </tr>
         </tbody>
     </table>
-    <a href='/'>home</a>
+    <a href='/'>ポートフォリオへもどる</a>
 </body>
 </html>
