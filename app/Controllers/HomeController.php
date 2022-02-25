@@ -46,7 +46,7 @@ class HomeController extends BaseController
     }
     
     /**
-     * dev\ci4> php public/index.php home message
+     * dev\ci4> php public/index.php HomeController message
      * @param string $to
      * @return void
      */

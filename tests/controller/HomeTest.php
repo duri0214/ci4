@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Controller;
+namespace tests\controller;
 
 use CodeIgniter\Router\Exceptions\RedirectException;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -23,7 +23,7 @@ class HomeTest extends CIUnitTestCase
         $result = $this->call('get', '/');
         $result->assertOK();
         
-        $result = $this->call('get', '/Home/store');
+        $result = $this->call('get', '/home/store');
         $result->assertOK();
     }
 }

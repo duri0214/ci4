@@ -40,6 +40,9 @@
         </table>
 
         <h1>Hello World!</h1>
+        <a href='/home/store'>
+            <button>store</button>
+        </a>
         <a href='/home/csv_export'>
             <button>csvダウンロード</button>
         </a>

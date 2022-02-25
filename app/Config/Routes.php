@@ -35,6 +35,7 @@ $routes->get('/', 'HomeController::index');
 $routes->get('home/csv_export', 'HomeController::csvExport');
 $routes->get('home/excel_export', 'HomeController::excelExport');
 $routes->get('home/rotate_pdf', 'HomeController::rotatePdf');
+$routes->get('home/store', 'HomeController::store');
 $routes->get('api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
 $routes->get('school', 'SchoolController::index');
 $routes->get('school/lesson/(\d+)', 'SchoolController::lessonDetail/$1');
