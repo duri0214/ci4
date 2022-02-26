@@ -27,7 +27,7 @@
     <?php
     if (!empty($periods)) {
         foreach ($periods as $period) : ?>
-            <li><?= $period->name ?> <?= $period->from_date ?> <?= $period->to_date ?></li>
+            <li><?= $period->name ?> <?= $period->from_date->format('Y-m-d') ?> <?= $period->to_date->format('Y-m-d') ?></li>
         <?php endforeach;
     } else {
         echo '<p>レコードなし</p>';
@@ -36,14 +36,14 @@
     
     <p>現在の学期:</p>
     <?php if (!empty($current_period)) { ?>
-        <li><?= $current_period->name ?> <?= $current_period->from_date ?> <?= $current_period->to_date ?></li>
+        <li><?= $current_period->name ?> <?= $current_period->from_date->format('Y-m-d') ?> <?= $current_period->to_date->format('Y-m-d') ?></li>
     <?php } ?>
     
     <p>出席情報:</p>
     <?php
     if (!empty($attendances)) {
         foreach ($attendances as $attendance) : ?>
-            <li><?= $attendance->attendance_date ?> <?= $attendance->comment ?></li>
+            <li><?= $attendance->attendance_date->format('Y-m-d') ?> <?= $attendance->comment ?></li>
         <?php endforeach;
     } else {
         echo '<p>レコードなし</p>';

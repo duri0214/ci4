@@ -18,6 +18,8 @@ class SchoolController extends BaseController
         
         $model = new SchoolModel();
         $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
+        
+        // TODO: シェアード化してね（画面が切り替わっても保持できるように）
         $schoolDomain = new SchoolDomain($school);
         
         // TODO: Service層に持ってってね（学校ごとのロジックを流す）
@@ -27,7 +29,8 @@ class SchoolController extends BaseController
         // TODO: pagination
         // https://codeigniter.com/user_guide/libraries/pagination.html
     
-        $schoolDomain->setActiveHomeroom(1);  # TODO: ダミー
+        // TODO: homeroomはschoolDomainからスピンオフして、クラスがクリックされて、コントローラが変わってからでいいのかも（レッスンも）
+        $schoolDomain->setActiveHomeroom(1);
         // $schoolDomain->setActiveLesson(1);
         
         $data = [
