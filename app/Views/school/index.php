@@ -12,30 +12,41 @@
     <p>tel: <?= $school->tel ?></p>
     <p>学校のカテゴリー: <?= $school_category->name ?></p>
     
+    <p>学校がもつすべてのホームルームリスト:</p>
+    <?php
+    if (!empty($homerooms)) {
+        foreach ($homerooms as $homeroom) : ?>
+            <li><?= $homeroom->name ?> <?= $homeroom->description ?></li>
+        <?php endforeach;
+    } else {
+        echo '<p>レコードなし</p>';
+    }
+    ?>
+    
     <p>学期情報:</p>
     <?php
     if (!empty($periods)) {
         foreach ($periods as $period) : ?>
-            <li><?= $period['name'] ?> <?= $period['from_date'] ?> <?= $period['to_date'] ?></li>
+            <li><?= $period->name ?> <?= $period->from_date ?> <?= $period->to_date ?></li>
         <?php endforeach;
     } else {
-        echo 'レコードなし';
+        echo '<p>レコードなし</p>';
     }
     ?>
     
     <p>現在の学期:</p>
     <?php if (!empty($current_period)) { ?>
-        <li><?= $current_period['name'] ?> <?= $current_period['from_date'] ?> <?= $current_period['to_date'] ?></li>
+        <li><?= $current_period->name ?> <?= $current_period->from_date ?> <?= $current_period->to_date ?></li>
     <?php } ?>
     
     <p>出席情報:</p>
     <?php
     if (!empty($attendances)) {
         foreach ($attendances as $attendance) : ?>
-            <li><?= $attendance['attendance_date'] ?> <?= $attendance['comment'] ?></li>
+            <li><?= $attendance->attendance_date ?> <?= $attendance->comment ?></li>
         <?php endforeach;
     } else {
-        echo 'レコードなし';
+        echo '<p>レコードなし</p>';
     }
     ?>
     

@@ -2,13 +2,10 @@
 
 namespace App\Repository;
 
-use App\Entities\HomeroomEntity;
-use App\Models\AttendanceModel;
-
-class AttendanceRepository extends AttendanceModel
+class AttendanceRepository
 {
-    /** TODO: ややライブラリ的な使い方をしてるので、どこだろう。。ヘルパ？
-     * 生徒別出欠ステータス別にカウントされたレコードセットを、生徒名で名寄せする
+    /** TODO: attendanceModelで集計クエリ投げて返す
+     * 生徒別出欠ステータス別にカウントされたレコードセットを、生徒id別出欠ステータスid別で名寄せする
      * e.g. [999 => [1(出席) => '4', 2(欠席) => '1'], ... ]
      * @param $attendances  // require 'student_id' and 'attendance_status' in array
      * @return array
@@ -23,21 +20,5 @@ class AttendanceRepository extends AttendanceModel
         }
         
         return $temp;
-    }
-    
-    /**
-     * @param HomeroomEntity $homeroom
-     * @return AttendanceModel|null
-     */
-    public function getHomeroomAttendance(HomeroomEntity $homeroom): ?AttendanceModel
-    {
-        if ($homeroom->id) {
-            $model = service('attendanceModel');
-            $model->entity = $model->where('homeroom_id', $homeroom->id)->findAll();
-
-            return $model;
-        }
-    
-        return null;
     }
 }

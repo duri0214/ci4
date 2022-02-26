@@ -3,10 +3,7 @@
 namespace App\Controllers;
 
 use App\Domain\SchoolDomain;
-use App\Models\HomeroomModel;
 use App\Models\SchoolModel;
-use App\Repository\AttendanceRepository;
-use App\Repository\SchoolCategoryRepository;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolController extends BaseController
@@ -22,36 +19,24 @@ class SchoolController extends BaseController
         $model = new SchoolModel();
         $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
         $schoolDomain = new SchoolDomain($school);
-        // dd($schoolDomain);
-        
-        // TODO: Service層に持ってってね（日付のフォーマット変更も）
-        $periods = [];
-        foreach ($schoolDomain->getPeriods() as $entity) {
-            $periods[] = $entity->toArray();
-        }
-        
-        // TODO: SchoolDomainへ
-        $schoolCategoryRepository = new SchoolCategoryRepository();
-        $schoolCategory = $schoolCategoryRepository->getSchoolCategory($school)->entity;
         
         // TODO: Service層に持ってってね（学校ごとのロジックを流す）
         // $school = SchoolFactory::createInstance($school);
         // $school->autoCalculate()
+        
+        // TODO: pagination
+        // https://codeigniter.com/user_guide/libraries/pagination.html
     
-        $model = new HomeroomModel();
-        $homeroom = $model->find(1);  # TODO: ダミー
-        $attendanceRepository = new AttendanceRepository();
-        $attendances = [];
-        foreach ($attendanceRepository->getHomeroomAttendance($homeroom)->entity as $entity) {
-            $attendances[] = $entity->toArray();
-        }
+        $schoolDomain->setActiveHomeroom(1);  # TODO: ダミー
+        // $schoolDomain->setActiveLesson(1);
         
         $data = [
             'school' => $school,
-            'periods' => $periods,
-            'current_period' => $schoolDomain->getCurrentPeriod()->toArray(),
-            'school_category' => $schoolCategory,
-            'attendances' => $attendances,
+            'homerooms' => $schoolDomain->getHomerooms(),
+            'periods' => $schoolDomain->getPeriods(),
+            'current_period' => $schoolDomain->getCurrentPeriod(),
+            'school_category' => $schoolDomain->getSchoolCategory(),
+            'attendances' => $schoolDomain->getActiveHomeroomAttendances(),
         ];
         
         return view('school/index', $data);
