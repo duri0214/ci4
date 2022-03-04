@@ -39,7 +39,7 @@ $routes->get('home/store', 'HomeController::store');
 $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
 
 $routes->get('school', 'SchoolController::index');
-$routes->get('school/lesson/list', 'SchoolLessonController::index');
+$routes->get('school/lesson/list', 'SchoolLessonController::index', ['as' => 'lesson_list']);
 $routes->get('school/lesson/(\d+)', 'SchoolLessonController::lessonDetail/$1');
 $routes->post('school/lesson/register/(\d+)', 'SchoolLessonController::lessonRegister/$1');
 

@@ -50,8 +50,6 @@
     }
     ?>
     
-    
-
     <label>
         <!-- '/change_year/' + this.value -->
         <select style="font-size:12px;padding: 7px 10px;" onChange="location.href = '/home/school/#';">
@@ -61,21 +59,7 @@
             <option value="2018" >2018年度</option>
             <option value="2017" >2017年度</option>
         </select>
-    </label>
-    <h2>授業のリスト</h2>
-    <table>
-        <thead>
-        <tr>
-            <th colspan="2">国語</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>国語総合</td>
-            <td><a href="/school/lesson/12332">詳細</a></td>
-        </tr>
-        </tbody>
-    </table>
+    </label><p><a href="<?= route_to('lesson_list')?>">授業管理へ</a></p>
     <a href='/'>ポートフォリオへもどる</a>
 </body>
 </html>
