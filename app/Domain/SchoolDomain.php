@@ -178,4 +178,12 @@ class SchoolDomain
     {
         return $this->attendances[$this->activeHomeroom->id];
     }
+    
+    /**
+     * @return SchoolEntity
+     */
+    public function getSchoolEntity(): SchoolEntity
+    {
+        return $this->schoolEntity;
+    }
 }
