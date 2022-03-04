@@ -36,11 +36,12 @@ $routes->get('home/csv_export', 'HomeController::csvExport');
 $routes->get('home/excel_export', 'HomeController::excelExport');
 $routes->get('home/rotate_pdf', 'HomeController::rotatePdf');
 $routes->get('home/store', 'HomeController::store');
-$routes->get('api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
-$routes->get('school', 'SchoolController::index');
-$routes->get('school/lesson/(\d+)', 'SchoolController::lessonDetail/$1');
+$routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
 
-$routes->post('school/lesson/register/(\d+)', 'School::lessonRegister/$1');
+$routes->get('school', 'SchoolController::index');
+$routes->get('school/lesson/list', 'SchoolLessonController::index');
+$routes->get('school/lesson/(\d+)', 'SchoolLessonController::lessonDetail/$1');
+$routes->post('school/lesson/register/(\d+)', 'SchoolLessonController::lessonRegister/$1');
 
 /*
  * --------------------------------------------------------------------
