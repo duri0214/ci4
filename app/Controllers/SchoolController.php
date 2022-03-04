@@ -37,7 +37,7 @@ class SchoolController extends BaseController
         // $schoolDomain->setActiveLesson(1);
         
         $data = [
-            'school' => $school,
+            'school' => $schoolDomain->getSchoolEntity(),
             'homerooms' => $schoolDomain->getHomerooms(),
             'periods' => $schoolDomain->getPeriods(),
             'current_period' => $schoolDomain->getCurrentPeriod(),
