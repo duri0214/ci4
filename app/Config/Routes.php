@@ -31,7 +31,7 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'HomeController::index');
+$routes->get('/', 'HomeController::index', ['as' => 'home']);
 $routes->get('home/csv_export', 'HomeController::csvExport');
 $routes->get('home/excel_export', 'HomeController::excelExport');
 $routes->get('home/rotate_pdf', 'HomeController::rotatePdf');
