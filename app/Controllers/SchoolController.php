@@ -4,13 +4,16 @@ namespace App\Controllers;
 
 use App\Domain\SchoolDomain;
 use App\Models\SchoolModel;
-use CodeIgniter\HTTP\RedirectResponse;
+use Exception;
 
 class SchoolController extends BaseController
 {
     // TODO: グローバル定数として school.id のリストを定義しておく
     const SCHOOL_LIST = ['Demo' => 1, 'NihonBunri' => 2];
     
+    /**
+     * @throws Exception
+     */
     public function index(): string
     {
         // $school_code_from_login = 'NihonBunri';
@@ -43,28 +46,5 @@ class SchoolController extends BaseController
         ];
         
         return view('school/index', $data);
-    }
-    
-    public function lessonDetail(int $groupId): string
-    {
-        $data = ['group_id' => $groupId];
-        
-        // ある授業の成績の一覧
-        return view('school/lesson/detail', $data);
-    }
-    
-    /**
-     * @param int $group_id
-     * @return RedirectResponse
-     */
-    public function lessonRegister(int $group_id): RedirectResponse
-    {
-        // シェアードから取得。app/Config/Services.php
-        // $school = service('schoolFactory');
-        
-        // TODO: $groupId にはセグメントがある（親子関係など）
-        // $school->autoRating($group_id);
-        
-        return redirect("school/lesson/$group_id");
     }
 }
