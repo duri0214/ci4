@@ -11,21 +11,21 @@ class LessonSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'name' => '1年1組入学式',
+                'name' => '1年1組 入学式',
                 'description' => '入学おめでとうございます',
                 'homeroom_id' => 1,
                 'sub_subject_id' => 4
             ],
             [
                 'id' => 2,
-                'name' => '1年2組入学式',
+                'name' => '1年2組 入学式',
                 'description' => '入学おめでとうございます',
                 'homeroom_id' => 2,
                 'sub_subject_id' => 4
             ],
             [
                 'id' => 3,
-                'name' => '1年3組入学式',
+                'name' => '1年3組 入学式',
                 'description' => '入学おめでとうございます',
                 'homeroom_id' => 3,
                 'sub_subject_id' => 4
