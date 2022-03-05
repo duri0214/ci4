@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Domain\SchoolDomain;
 use App\Models\SchoolModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use Exception;
 
 class SchoolController extends BaseController
@@ -21,6 +22,10 @@ class SchoolController extends BaseController
         
         $model = new SchoolModel();
         $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
+        
+        if (is_null($school)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
         
         // TODO: シェアード化してね（画面が切り替わっても保持できるように）
         $schoolDomain = new SchoolDomain($school);
