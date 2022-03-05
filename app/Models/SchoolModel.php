@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Entities\SchoolEntity;
 use CodeIgniter\Model;
 
+/**
+ * @method SchoolEntity find($id = null)
+ */
 class SchoolModel extends Model
 {
     protected $DBGroup          = 'default';
