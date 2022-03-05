@@ -6,19 +6,31 @@ class Breadcrumb
 {
     private array $breadcrumbs;
     
+    /** パンくずを追加
+     * @param $displayName
+     * @param $url
+     * @return void
+     */
     public function add($displayName, $url)
     {
         $this->breadcrumbs[] = [$displayName, $url];
     }
     
-    public function render(): string
+    /** パンくずをhtmlに組み立て
+     * @return string|null
+     */
+    public function render(): ?string
     {
         $html = null;
         foreach ($this->breadcrumbs as $index => $value) {
-            if ($index > 0 && $index < count($this->breadcrumbs)) {
+            if ($index > 0) {
                 $html .= ' / ';
             }
-            $html .= '<a href="'.$value[1].'">'.$value[0].'</a>';
+            if ($index < count($this->breadcrumbs) - 1) {
+                $html .= '<a href="'.$value[1].'">'.$value[0].'</a>';
+            } else {
+                $html .= $value[0];
+            }
         }
         
         return $html;
