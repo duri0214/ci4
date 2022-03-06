@@ -40,10 +40,12 @@ $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
 
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
 $routes->get('school/lesson/list', 'SchoolLessonController::index', ['as' => 'lesson_list']);
-$routes->get('school/lesson/(\d+)', 'SchoolLessonController::lessonDetail/$1', ['as' => 'lesson_detail']);
-$routes->post('school/lesson/register/(\d+)', 'SchoolLessonController::lessonRegister/$1');
+$routes->get('school/lesson/(\d+)', 'SchoolLessonController::detail/$1', ['as' => 'lesson_detail']);
+$routes->get('school/lesson/create', 'SchoolLessonController::create', ['as' => 'lesson_create']);
+$routes->post('school/lesson/edit', 'SchoolLessonController::edit', ['as' => 'lesson_edit']);
 $routes->get('school/lesson/upload', 'SchoolUploadController::index', ['as' => 'lesson_upload']);
 $routes->post('school/lesson/upload', 'SchoolUploadController::importFile');
+$routes->get('school/certification/list', 'SchoolCertificationController::index', ['as' => 'certification_list']);
 
 /*
  * --------------------------------------------------------------------
