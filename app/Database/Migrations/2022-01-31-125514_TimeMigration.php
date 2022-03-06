@@ -15,13 +15,13 @@ class TimeMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
-                'name' => [
-                    'type' => 'VARCHAR',
-                    'constraint' => '100',
-                ],
                 'school_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
+                ],
+                'name' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '100',
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
