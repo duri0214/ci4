@@ -7,11 +7,11 @@ class Breadcrumb
     private array $breadcrumbs;
     
     /** パンくずを追加
-     * @param $displayName
-     * @param $url
+     * @param string $displayName
+     * @param ?string $url nullを指定するとただの文字列になります
      * @return void
      */
-    public function add($displayName, $url)
+    public function add(string $displayName, ?string $url)
     {
         $this->breadcrumbs[] = [$displayName, $url];
     }
@@ -26,11 +26,7 @@ class Breadcrumb
             if ($index > 0) {
                 $html .= ' / ';
             }
-            if ($index < count($this->breadcrumbs) - 1) {
-                $html .= '<a href="'.$value[1].'">'.$value[0].'</a>';
-            } else {
-                $html .= $value[0];
-            }
+            $html .= !is_null($value[1]) ? '<a href="'.$value[1].'">'.$value[0].'</a>' : $value[0];
         }
         
         return $html;
