@@ -46,6 +46,8 @@ $routes->post('school/lesson/edit', 'SchoolLessonController::edit', ['as' => 'le
 $routes->get('school/lesson/upload', 'SchoolUploadController::index', ['as' => 'lesson_upload']);
 $routes->post('school/lesson/upload', 'SchoolUploadController::importFile');
 $routes->get('school/certification/list', 'SchoolCertificationController::index', ['as' => 'certification_list']);
+$routes->get('school/certification/edit', 'SchoolCertificationController::editGet', ['as' => 'certification_edit_get']);
+$routes->post('school/certification/edit', 'SchoolCertificationController::editPost', ['as' => 'certification_edit_post']);
 
 /*
  * --------------------------------------------------------------------

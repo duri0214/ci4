@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CertificationMigration extends Migration
+class CertificationMasterMigration extends Migration
 {
     public function up()
     {
