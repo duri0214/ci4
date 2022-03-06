@@ -59,7 +59,9 @@
                 <option value="2018" >2018年度</option>
                 <option value="2017" >2017年度</option>
             </select>
-        </label><p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
+        </label>
+        <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
+        <p><a href="<?= route_to('certification_list') ?>">資格管理へ</a></p>
         <a href="<?= route_to('home') ?>">ポートフォリオへもどる</a>
     </body>
 </html>
