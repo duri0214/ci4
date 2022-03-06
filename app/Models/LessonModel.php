@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Entities\LessonEntity;
 use CodeIgniter\Model;
 
+/**
+ * @method LessonEntity find($id = null)
+ */
 class LessonModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -15,14 +18,13 @@ class LessonModel extends Model
     protected $returnType       = LessonEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['name', 'description'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];
