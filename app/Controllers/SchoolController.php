@@ -9,18 +9,17 @@ use Exception;
 
 class SchoolController extends BaseController
 {
-    // TODO: グローバル定数として school.id のリストを定義しておく
-    const SCHOOL_LIST = ['Demo' => 1, 'NihonBunri' => 2];
+    // TODO: Demoになってます：グローバル定数として school.id のリストを定義しておく（defineに？）
+    public const SCHOOL_LIST = ['Demo' => 1, 'NihonBunri' => 2];
     
     /**
      * @throws Exception
      */
     public function index(): string
     {
-        // $school_code_from_login = 'NihonBunri';
         $school_code_from_login = 'Demo';
         
-        $model = new SchoolModel();
+        $model = model(SchoolModel::class);
         $school = $model->find(self::SCHOOL_LIST[$school_code_from_login]);
         
         if (is_null($school)) {
