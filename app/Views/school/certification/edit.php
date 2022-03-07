@@ -10,25 +10,29 @@
     <body>
         <?= $breadcrumb ?>
         <h1>取扱資格の設定</h1>
+        <?= service('validation')->listErrors(); ?>
         <?php
         if (!empty($certifications)) { ?>
-            <table>
-                <thead>
-                <tr>
-                    <th>使う</th>
-                    <th>資格名</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($certifications as $certification) : ?>
+            <form action="<?= route_to('certification_edit_post') ?>" method="post">
+                <?= csrf_field() ?>
+                <table>
+                    <thead>
                     <tr>
-                        <td><label><input type="checkbox" name="i_want_use" value="0"></label></td>
-                        <td><?= $certification['name'] ?></td>
+                        <th>使う</th>
+                        <th>資格名</th>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            <input type="submit" value="更新">
+                    </thead>
+                    <tbody>
+                    <?php foreach ($certifications as $k => $v) : ?>
+                        <tr>
+                            <td><label><input type="checkbox" name="use[]" value="<?= $k ?>" <?= $v['checked'] ?>></label></td>
+                            <td><?= $v['name'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <input type="submit" value="更新">
+            </form>
             <?php
         } else {
             echo '<p>レコードなし</p>';

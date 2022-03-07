@@ -22,7 +22,7 @@
                 <tbody>
                     <?php foreach ($certifications as $certification) : ?>
                         <tr>
-                            <td><?= $certification->name ?></td>
+                            <td><?= $certification->name_short ?></td>
                             <td>編集</td>
                         </tr>
                     <?php endforeach; ?>

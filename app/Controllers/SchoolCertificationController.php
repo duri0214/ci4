@@ -39,13 +39,11 @@ class SchoolCertificationController extends BaseController
         $schoolId = SchoolController::SCHOOL_LIST['Demo'];
         
         $certData = [];
+        $m_certification_ids = array_column($certUsing->where('school_id', $schoolId)->findAll(), 'm_certification_id');
         foreach ($certMaster->findAll() as $m_item) {
             $certData[$m_item->id]['name'] = $m_item->name;
-            foreach ($certUsing->where('school_id', $schoolId)->findAll() as $u_item) {
-                $certData[$m_item->id]['id'] = $u_item['id'];
-                $certData[$m_item->id]['m_certification_id'] = $m_item['id'];
-                $certData[$m_item->id]['name_short'] = $u_item['name_short'];
-            }
+            $alreadyManaged = in_array($m_item->id, $m_certification_ids);
+            $certData[$m_item->id]['checked'] = $alreadyManaged ? 'checked' : null;
         }
         
         $b = new Breadcrumb();
@@ -66,6 +64,7 @@ class SchoolCertificationController extends BaseController
      */
     public function editPost(): string
     {
-    
+        $use = $this->request->getPost('use');
+        dd($use);
     }
 }
