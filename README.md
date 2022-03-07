@@ -43,7 +43,7 @@
 15. php spark db:seed AttendanceSeeder
 16. php spark db:seed TeacherSeeder
 17. php spark db:seed LessonTeacherSeeder
-18. php spark db:seed CertificationSeeder
+18. php spark db:seed CertificationMasterSeeder
 
 ## codeigniterにおけるエンティティと関係
 https://forum.codeigniter.com/thread-80298.html
