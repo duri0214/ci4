@@ -25,8 +25,8 @@
                     <tbody>
                     <?php foreach ($certifications as $k => $v) : ?>
                         <tr>
-                            <td><label><input type="checkbox" name="use[]" value="<?= $k ?>" <?= $v['checked'] ?>></label></td>
-                            <td><?= $v['name'] ?></td>
+                            <td><label><input type="checkbox" name="use[<?= $k ?>]" <?= $v['checked'] ?>></label></td>
+                            <td><label><input type="text" name="name_short[<?= $k ?>]" value="<?= $v['name'] ?>"></label></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
