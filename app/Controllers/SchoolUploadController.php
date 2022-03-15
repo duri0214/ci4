@@ -29,7 +29,10 @@ class SchoolUploadController extends BaseController
     public function indexPostal(): string
     {
         $model = new PostalModel();
-        $data['postals'] = $model->findAll();
+        $data = [
+            'postals' => $model->paginate(100),
+            'pager' => $model->pager
+        ];
     
         return view(route_to("postal_upload_get"), $data);
     }

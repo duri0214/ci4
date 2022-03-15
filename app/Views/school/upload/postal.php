@@ -85,13 +85,14 @@
                         } else {
                             ?>
                             <tr>
-                                <td colspan="5">No record found.</td>
+                                <td colspan="5">レコードなし</td>
                             </tr>
                             <?php
                         }
                         ?>
                         </tbody>
                     </table>
+                    <?= isset($pager) ? $pager->links() : null ?>
                 </div>
             </div>
         </div>
