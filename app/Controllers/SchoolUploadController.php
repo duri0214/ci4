@@ -9,6 +9,8 @@ use App\Models\PostalModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use ReflectionException;
 
+use SplFileObject;
+
 use function PHPUnit\Framework\fileExists;
 
 class SchoolUploadController extends BaseController
@@ -20,7 +22,8 @@ class SchoolUploadController extends BaseController
         return view(route_to("lesson_upload_get"));
     }
     
-    /** Fetch all records
+    /**
+     * Fetch all records
      * @return string
      */
     public function indexPostal(): string
@@ -31,8 +34,8 @@ class SchoolUploadController extends BaseController
         return view(route_to("postal_upload_get"), $data);
     }
     
-    /** File upload and Insert records <br>
-     * https://qiita.com/shosho/items/b38d653a960bbbc010d6 PHPでSJISのデカイCSVデータを扱った時に困ったこと
+    /**
+     * File upload and Insert records <br>
      * @throws ReflectionException
      */
     public function importFile(): string|RedirectResponse
@@ -48,49 +51,48 @@ class SchoolUploadController extends BaseController
         //     return view("school/lesson/upload", $data);
         // }
         
-        // TODO: サイズオーバーを対処して
-        // Valid
         if ($file = $this->request->getFile('file')) {
             if ($file->isValid() && !$file->hasMoved()) {
-                // Store file in public/csvfile/ folder
-                $file->move("../writable/uploads/", $file->getName(), true);
-                $files["sjis"] = "../writable/uploads/".$file->getName();
+                // store file in writable/uploads
+                $newName = $file->getRandomName();
+                $file->move("../writable/uploads/", $newName, true);
+                $files["sjis"] = "../writable/uploads/".$newName;
     
                 // convert to utf8
                 $files["utf8"] = ConvertFile::sjisToUtf8($files["sjis"]);
                 
-                // Reading file
-                $file = fopen($files["utf8"], "r");
+                // reading file
+                $file = new SplFileObject($files["utf8"]);
+                $file->setFlags(
+                    SplFileObject::READ_AHEAD |   // 先読み/巻き戻しで読み出す
+                    SplFileObject::SKIP_EMPTY |   // 空行は読み飛ばす
+                    SplFileObject::DROP_NEW_LINE  // 行末の改行を読み飛ばす
+                );
+    
                 $i = 0;
                 $numberOfFields = 15; // Total number of fields
-                
                 $records = [];
-                
-                // Initialize $lessons Array
-                while (($fileData = fgetcsv($file, 1000, ",")) !== false) {
-                    $num = count($fileData);
-                    
-                    // Check number of fields
-                    if ($num == $numberOfFields) {
-                        echo implode(',', $fileData);
-                        // Key names are the insert table field names
-                        $records[$i]['code'] = str_replace(self::TRIM_LIST, '', $fileData[2]);
-                        $records[$i]['prefecture'] = str_replace(self::TRIM_LIST, '', $fileData[6]);
-                        $records[$i]['municipality'] = str_replace(self::TRIM_LIST, '', $fileData[7]);
-                        $records[$i]['town'] = str_replace(self::TRIM_LIST, '', $fileData[8]);
+    
+                foreach ($file as $line) {
+                    $row = str_getcsv(mb_convert_encoding($line, 'UTF-8', 'ASCII, JIS, UTF-8, SJIS-win'));
+                    if (count($row) == $numberOfFields) {
+                        // key name should be same the insert table field names
+                        $records[$i]['code'] = str_replace(self::TRIM_LIST, '', $row[2]);
+                        $records[$i]['prefecture'] = str_replace(self::TRIM_LIST, '', $row[6]);
+                        $records[$i]['municipality'] = str_replace(self::TRIM_LIST, '', $row[7]);
+                        $records[$i]['town'] = str_replace(self::TRIM_LIST, '', $row[8]);
                     }
                     $i++;
                 }
-                fclose($file);
                 
-                // Insert data
+                // insert data
                 if (count($records) > 0) {
                     $model = new PostalModel();
                     $model->truncate();
                     $model->insertBatch($records);
                 }
                 
-                // Delete upload files
+                // delete upload files
                 foreach ($files as $file) {
                     unlink($file);
                 }
