@@ -11,7 +11,7 @@ class SlackTest extends TestCase
     public function testSampleMessage()
     {
         $service = new Slack();
-        $expected = '2022-02-11' . PHP_EOL . '晴時々曇' . PHP_EOL . 'From PHP script';
+        $expected = '2022-03-12' . PHP_EOL . '晴れ' . PHP_EOL . 'From PHP script';
         $this->assertEquals($expected, $service->sampleMessage() . PHP_EOL . 'From PHP script');
     }
     
