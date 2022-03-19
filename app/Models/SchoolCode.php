@@ -4,8 +4,7 @@ namespace App\Models;
 
 class SchoolCode
 {
-    /** @var string */
-    private $value;
+    private string $value;
     
     public function __construct(string $schoolCode)
     {
