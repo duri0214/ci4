@@ -21,14 +21,14 @@ class HomeController extends BaseController
     
         $sentences = [];
         foreach ($vocabularyBook->findAll() as $row) {
-            var_dump($row->id); // entityに接続されているか(intになっているか）点検
+            var_dump($row->id);  // entityに接続されているか(intになっているか）点検
             $sentenceArray = explode(' ', $row->sentence);
             shuffle($sentenceArray);
             $sentences[] = $sentenceArray;
         }
         $data['vocabulary_book'] = $sentences;
         
-        return view('home/welcome_message', $data);
+        return view('home/index', $data);
     }
     
     /**
@@ -88,7 +88,7 @@ class HomeController extends BaseController
         header('Content-Transfer-Encoding: binary');
         
         // 出力されたCSVにデバッグ情報がついてしまう
-        return view('home/welcome_message');
+        return view('home/index');
     }
     
     /**
@@ -163,7 +163,7 @@ class HomeController extends BaseController
         $writer->save('php://output');
         
         // TODO: 出力されたexcelファイルがつねに壊れている？
-        return view('home/welcome_message');
+        return view('home/index');
     }
     
     /**

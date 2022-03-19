@@ -40,19 +40,19 @@
         </table>
 
         <h1>Hello World!</h1>
-        <a href='/home/store'>
+        <a href=<?= route_to('home_store') ?>>
             <button>store</button>
         </a>
-        <a href='/home/csv_export'>
+        <a href=<?= route_to('home_csv_export') ?>>
             <button>csvダウンロード</button>
         </a>
-        <a href='/home/excel_export'>
+        <a href=<?= route_to('home_excel_export') ?>>
             <button>excelダウンロード</button>
         </a>
-        <a href='/home/rotate_pdf'>
+        <a href=<?= route_to('home_rotate_pdf') ?>>
             <button>pdf回転</button>
         </a>
-        <a href='/school'>
+        <a href=<?= route_to('school_home') ?>>
             <button>school</button>
         </a>
 

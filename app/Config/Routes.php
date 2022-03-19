@@ -32,11 +32,11 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index', ['as' => 'home']);
-$routes->get('home/csv_export', 'HomeController::csvExport');
-$routes->get('home/excel_export', 'HomeController::excelExport');
-$routes->get('home/rotate_pdf', 'HomeController::rotatePdf');
-$routes->get('home/store', 'HomeController::store');
-$routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2');
+$routes->get('home/csv_export', 'HomeController::csvExport', ['as' => 'home_csv_export']);
+$routes->get('home/excel_export', 'HomeController::excelExport', ['as' => 'home_excel_export']);
+$routes->get('home/rotate_pdf', 'HomeController::rotatePdf', ['as' => 'home_rotate_pdf']);
+$routes->get('home/store', 'HomeController::store', ['as' => 'home_store']);
+$routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'home_api']);
 
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
 $routes->get('school/lesson/list', 'SchoolLessonController::index', ['as' => 'lesson_list']);
