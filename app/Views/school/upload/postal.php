@@ -11,7 +11,6 @@
     </head>
     <body>
         <h1>郵便番号のアップロード画面です</h1>
-        drug on drop でアップロードさせたい
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" href="<?= route_to('lesson_upload_get') ?>">授業</a>
@@ -21,6 +20,10 @@
             </li>
         </ul>
 
+        <ul>
+            <li>ページングのCSS（paddingなど）</li>
+            <li>郵便番号の検索窓</li>
+        </ul>
 
         <div class="container">
             <div class="row">
@@ -38,7 +41,7 @@
                     }
                     ?>
                     <?php $validation = Services::validation(); ?>
-                    <form method="post" action="<?=route_to('postal_upload_post')?>" enctype="multipart/form-data">
+                    <form method="post" action="<?= route_to('postal_upload_post') ?>" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <div class="form-group">
                             <label for="file">File:</label>
@@ -50,7 +53,7 @@
                                 </div>
                             <?php }?>
                         </div>
-                        <input type="submit" class="btn btn-success" name="submit" value="Import CSV">
+                        <input type="submit" class="btn btn-success" name="submit" value="インポート">
                     </form>
     
                 </div>
