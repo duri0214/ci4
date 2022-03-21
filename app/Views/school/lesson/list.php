@@ -8,6 +8,7 @@
         <title>Document</title>
     </head>
     <body>
+        <?= $breadcrumb ?? null ?>
         <h1>lesson list</h1>
         <?php
         if (!empty($lessons)) { ?>
@@ -32,7 +33,7 @@
             echo '<p>レコードなし</p>';
         }
         ?>
-        <p><a href="<?= route_to('lesson_upload') ?>">アップロード</a></p>
-        <p><a href="<?= route_to('school_home') ?>">ホームへもどる</a></p>
+        <p><a href="<?= route_to('lesson_create') ?>">レッスン作成</a></p>
+        <p><a href="<?= route_to('lesson_upload_get') ?>">CSVアップロード</a></p>
     </body>
 </html>
