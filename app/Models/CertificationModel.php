@@ -18,7 +18,7 @@ class CertificationModel extends Model
     protected $returnType       = CertificationEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name_formal', 'name_short'];
+    protected $allowedFields    = ['school_id', 'm_certification_id', 'name_short'];
 
     // Dates
     protected $useTimestamps = false;
