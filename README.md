@@ -16,7 +16,6 @@
     - 通知
 - 認証機能
 - 年度更新
-- Model->chunk() について
 - pdfタテ・ヨコ検証　phpオフィシャルから検索
   - https://codeigniter.com/user_guide/cli/cli.html?highlight=cli
 - 簡単な帳票を作って
