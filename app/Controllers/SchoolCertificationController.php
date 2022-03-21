@@ -100,6 +100,6 @@ class SchoolCertificationController extends BaseController
             }
         }
         
-        return redirect()->route('certification_list');
+        return redirect('certification_list');
     }
 }
