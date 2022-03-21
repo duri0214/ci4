@@ -2,20 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Libraries\ConvertFile;
-use App\Models\LessonModel;
 use App\Models\PostalModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use ReflectionException;
 
 class SchoolUploadController extends BaseController
 {
-    const UPLOAD_FOLDER = "../writable/uploads/";
+    public const UPLOAD_FOLDER = "../writable/uploads/";
     
     public function indexLesson(): string
     {
-        return view(route_to("lesson_upload_get"));
+        return view(route_to('lesson_upload_get'));
     }
     
     /**
@@ -30,7 +28,7 @@ class SchoolUploadController extends BaseController
             'pager' => $model->pager
         ];
     
-        return view(route_to("postal_upload_get"), $data);
+        return view(route_to('postal_upload_get'), $data);
     }
     
     /**
@@ -44,7 +42,7 @@ class SchoolUploadController extends BaseController
         if (!$input) {
             // Not valid then return index for upload
             $data['validation'] = $this->validator;
-            return view(route_to("postal_upload_get"), $data);
+            return view(route_to('postal_upload_get'), $data);
         }
     
         $model = new PostalModel();
@@ -73,6 +71,6 @@ class SchoolUploadController extends BaseController
             session()->setFlashdata('alert-class', 'alert-danger');
         }
         
-        return redirect()->route("postal_upload_get");
+        return redirect('postal_upload_get');
     }
 }
