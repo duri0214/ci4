@@ -28,10 +28,10 @@
             <tbody>
             <?php
             if (isset($vocabulary_book)) {
-                foreach ($vocabulary_book as $item) : ?>
+                foreach ($vocabulary_book as $items) : ?>
                     <tr class="sortable correct">
-                        <?php foreach ($item as $td) : ?>
-                            <td><?= $td ?></td>
+                        <?php foreach ($items as $item_k => $item_v) : ?>
+                            <td id="item<?= $item_k ?>"><?= $item_v ?></td>
                         <?php endforeach;?>
                     </tr>
                 <?php endforeach;
