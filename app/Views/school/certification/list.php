@@ -22,17 +22,32 @@
     <body>
         <?= $breadcrumb ?? null ?>
         <h1>資格一覧</h1>
-        <form action="<?= route_to('editGet') ?>" method="post">
-            <label for="selected_cert">処理対象の資格
-                <select class="select2_single" name="selected_cert">
-                    <option selected disabled>選択してください</option>
-                    <?php if (!empty($certifications)) { ?>
-                        <?php foreach ($certifications as $certification) : ?>
-                            <option value="<?= $certification->id ?>"><?= $certification->name_short ?></option>
-                        <?php endforeach; ?>
-                    <?php } ?>
-                </select>
-            </label>
+        編集を押したときに editPost に行けないのはなぜ？
+        <form action="<?= route_to('certification_edit_post') ?>" method="post">
+            <div>
+                <label class="select2-label" for="selected_cert_single">処理対象の資格
+                    <select class="select2_single" name="selected_cert_single">
+                        <option selected disabled>選択してください</option>
+                        <?php if (!empty($certifications)) { ?>
+                            <?php foreach ($certifications as $certification) : ?>
+                                <option value="<?= route_to('certification_edit_get', $certification->id) ?>"><?= $certification->name_short ?></option>
+                            <?php endforeach; ?>
+                        <?php } ?>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label class="select2-label" for="selected_cert_multi">処理対象の資格
+                    <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
+                        <?php if (!empty($certifications)) { ?>
+                            <?php foreach ($certifications as $certification) : ?>
+                                <option value="<?= $certification->id ?>"><?= $certification->name_short ?></option>
+                            <?php endforeach; ?>
+                        <?php } ?>
+                    </select>
+                </label>
+            </div>
+            <input type="submit" value="編集">
         </form>
         <?php
         if (!empty($certifications)) { ?>
@@ -61,7 +76,15 @@
     </body>
     <script>
         $(document).ready(function() {
-            $('.select2_single').select2();
+            $('.select2_single').select2({
+                width: 300,
+                tags: true
+            });
+            $('.select2_multi').select2({
+                placeholder: "選択してください（複数可）",
+                allowClear: true,
+                width: 300
+            });
         });
     </script>
 </html>

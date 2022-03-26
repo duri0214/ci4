@@ -4,3 +4,16 @@
 .padding50 {
     padding: 0 50px;
 }
+
+/* select2: all */
+.select2-container {
+    font-size: 12px;
+    margin: 10px;
+}
+/* select2: multi */
+.select2-container .select2-selection--multiple {
+    padding-left: 3px;
+}
+.select2-container  .select2-search--inline .select2-search__field {
+    margin-top: 6px;
+}

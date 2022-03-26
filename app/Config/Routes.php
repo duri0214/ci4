@@ -51,7 +51,7 @@ $routes->get('school/certification/manage', 'SchoolCertificationController::mana
 $routes->post('school/certification/manage', 'SchoolCertificationController::managePost', ['as' => 'certification_manage_post']);
 $routes->get('school/certification/edit/(:num)', 'SchoolCertificationController::editGet/$1', ['as' => 'certification_edit_get']);
 // TODO: なぜかこれを追加すると Undefined array key 0 が出る（forum質問中）
-// $routes->post('school/certification/edit/(:num)', 'SchoolCertificationController::editPost/$1', ['as' => 'certification_edit_post']);
+$routes->post('school/certification/edit', 'SchoolCertificationController::editPost', ['as' => 'certification_edit_post']);
 
 /*
  * --------------------------------------------------------------------

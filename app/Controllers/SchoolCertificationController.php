@@ -137,6 +137,6 @@ class SchoolCertificationController extends BaseController
      */
     public function editPost(int $certification_id): string
     {
-    
+        dd(['a', $certification_id]);
     }
 }
