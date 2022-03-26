@@ -11,7 +11,7 @@ use ReflectionException;
 
 class SchoolCertificationController extends BaseController
 {
-    public function index(): string
+    public function list(): string
     {
         $model = model(CertificationModel::class);
     
