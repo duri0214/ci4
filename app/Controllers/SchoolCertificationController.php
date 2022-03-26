@@ -105,11 +105,11 @@ class SchoolCertificationController extends BaseController
     }
     
     /**
-     * 資格の編集
+     * 資格1つの内訳アイテムを編集
      * @param int $certification_id
      * @return string
      */
-    public function editGet(int $certification_id): string
+    public function itemsEdit(int $certification_id): string
     {
         $model = model(CertificationModel::class);
         $certification['name'] = $model->find($certification_id)->name_short;
@@ -131,12 +131,14 @@ class SchoolCertificationController extends BaseController
     }
     
     /**
-     * 資格の編集
-     * @param int $certification_id
-     * @return string
+     * 資格のその他情報の登録
+     * @return RedirectResponse
      */
-    public function editPost(int $certification_id): string
+    public function infoRegister(): RedirectResponse
     {
-        dd(['a', $certification_id]);
+        // TODO: validation(callback), redirect
+        // dd($this->request->getPost());
+        
+        return redirect('certification_list');
     }
 }

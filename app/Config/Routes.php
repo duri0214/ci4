@@ -49,9 +49,8 @@ $routes->post('school/upload/postal', 'SchoolUploadController::importFile', ['as
 $routes->get('school/certification/list', 'SchoolCertificationController::list', ['as' => 'certification_list']);
 $routes->get('school/certification/manage', 'SchoolCertificationController::manageGet', ['as' => 'certification_manage_get']);
 $routes->post('school/certification/manage', 'SchoolCertificationController::managePost', ['as' => 'certification_manage_post']);
-$routes->get('school/certification/edit/(:num)', 'SchoolCertificationController::editGet/$1', ['as' => 'certification_edit_get']);
-// TODO: なぜかこれを追加すると Undefined array key 0 が出る（forum質問中）
-$routes->post('school/certification/edit', 'SchoolCertificationController::editPost', ['as' => 'certification_edit_post']);
+$routes->match(['get', 'post'], 'school/certification/items/edit/(:num)', 'SchoolCertificationController::itemsEdit/$1', ['as' => 'certification_item_edit']);
+$routes->match(['get', 'post'], 'school/certification/info/register', 'SchoolCertificationController::infoRegister', ['as' => 'certification_info_register']);
 
 /*
  * --------------------------------------------------------------------

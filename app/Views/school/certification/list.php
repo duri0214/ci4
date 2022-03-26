@@ -22,15 +22,24 @@
     <body>
         <?= $breadcrumb ?? null ?>
         <h1>資格一覧</h1>
-        編集を押したときに editPost に行けないのはなぜ？
-        <form action="<?= route_to('certification_edit_post') ?>" method="post">
+        <uo>
+            <li>ドロップダウンでなにかを登録させようとする</li>
+            <li>バリデーション（コールバックタイプ）をかけて</li>
+            <li>通れば redirect to list</li>
+            <li>通らなければ 差し戻し</li>
+        </uo>
+        <?= session()->getFlashdata('error') ?>
+        <?= service('validation')->listErrors() ?>
+        
+        <form action="<?= route_to('certification_info_register') ?>" method="post">
+            <?= csrf_field() ?>
             <div>
                 <label class="select2-label" for="selected_cert_single">処理対象の資格
                     <select class="select2_single" name="selected_cert_single">
                         <option selected disabled>選択してください</option>
                         <?php if (!empty($certifications)) { ?>
                             <?php foreach ($certifications as $certification) : ?>
-                                <option value="<?= route_to('certification_edit_get', $certification->id) ?>"><?= $certification->name_short ?></option>
+                                <option value="<?= $certification->id ?>"><?= $certification->name_short ?></option>
                             <?php endforeach; ?>
                         <?php } ?>
                     </select>
@@ -62,7 +71,9 @@
                     <?php foreach ($certifications as $certification) : ?>
                         <tr>
                             <td><?= $certification->name_short ?></td>
-                            <td class="text-center padding50"><a href="<?= route_to('certification_edit_get', $certification->id) ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                            <td class="text-center padding50">
+                                <a href="<?= route_to('certification_item_edit', $certification->id) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
