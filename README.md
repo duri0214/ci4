@@ -24,6 +24,16 @@
   - 学校で取り扱わない資格は表示されない
   - student に紐付いている
 
+# migration
+1. 該当テーブルを消す
+2. migrations テーブルから該当マイグレーションレコードを消す
+3. 新規のとき（編集はそのまま既存migrationを編集して）
+   1. php spark make:migration --suffix
+   2. [up()とdown()メソッドを記述](https://qiita.com/YoshitakaOkada/items/7bdc4906725dab5adca6#up-%E3%81%A8-down-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E8%A8%98%E8%BF%B0)
+4. php spark migrate
+5. php spark make:entity --suffix
+6. php spark make:model --suffix
+
 # seederの順番
 1. php spark db:seed VocabularyBookSeeder
 2. php spark db:seed SchoolCategorySeeder

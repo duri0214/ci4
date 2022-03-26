@@ -13,7 +13,7 @@
         <p>取り扱う資格を選んでください</p>
         <?= service('validation')->listErrors(); ?>
         <?php if (!empty($certifications)) { ?>
-            <form action="<?= route_to('certification_edit_post') ?>" method="post">
+            <form action="<?= route_to('certification_manage_post') ?>" method="post">
                 <?= csrf_field() ?>
                 <table>
                     <thead>

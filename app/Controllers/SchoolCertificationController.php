@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Entities\CertificationEntity;
 use App\Libraries\Breadcrumb;
+use App\Models\CertificationItemsModel;
 use App\Models\CertificationMasterModel;
 use App\Models\CertificationModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -28,10 +29,10 @@ class SchoolCertificationController extends BaseController
     }
     
     /**
-     * 取扱資格編集画面 初期表示
+     * 取扱資格管理画面 初期表示
      * @return string
      */
-    public function editGet(): string
+    public function manageGet(): string
     {
         // TODO: left join っていうかリレーション辿れないの！？
         // certDataのドメインクラスが必要かな
@@ -59,15 +60,15 @@ class SchoolCertificationController extends BaseController
             'breadcrumb' => $b->render(),
         ];
 
-        return view('school/certification/edit', $data);
+        return view('school/certification/manage', $data);
     }
     
     /**
-     * 取扱資格編集画面 編集
+     * 取扱資格管理画面 編集
      * @return RedirectResponse
      * @throws ReflectionException
      */
-    public function editPost(): RedirectResponse
+    public function managePost(): RedirectResponse
     {
         $checks = $this->request->getPost('checked');
         $nameShort = $this->request->getPost('name_short');
@@ -101,5 +102,41 @@ class SchoolCertificationController extends BaseController
         }
         
         return redirect('certification_list');
+    }
+    
+    /**
+     * 資格の編集
+     * @param int $certification_id
+     * @return string
+     */
+    public function editGet(int $certification_id): string
+    {
+        $model = model(CertificationModel::class);
+        $certification['name'] = $model->find($certification_id)->name_short;
+    
+        $model = model(CertificationItemsModel::class);
+        $certification['items'] = $model->where('certification_id', $certification_id)->findAll();
+        
+        $b = new Breadcrumb();
+        $b->add('Home', route_to('school_home'));
+        $b->add('資格一覧', route_to('certification_list'));
+        $b->add('資格編集', null);
+    
+        $data = [
+            'certification' => $certification,
+            'breadcrumb' => $b->render(),
+        ];
+    
+        return view('school/certification/detail', $data);
+    }
+    
+    /**
+     * 資格の編集
+     * @param int $certification_id
+     * @return string
+     */
+    public function editPost(int $certification_id): string
+    {
+    
     }
 }
