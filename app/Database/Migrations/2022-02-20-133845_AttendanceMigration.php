@@ -54,7 +54,7 @@ class AttendanceMigration extends Migration
                     'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
-                'updated_at datetime default current_timestamp on update current_timestamp',
+                'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
