@@ -33,6 +33,7 @@
 4. php spark migrate
 5. php spark make:entity --suffix
 6. php spark make:model --suffix
+7. php spark make:seeder --suffix
 
 # seederの順番
 1. php spark db:seed VocabularyBookSeeder
