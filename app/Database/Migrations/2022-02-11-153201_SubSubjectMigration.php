@@ -15,26 +15,26 @@ class SubSubjectMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_subject_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '100',
-                ],
-                'subject_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('subject_id', 'subject', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['subject_id', 'name']);
-        $this->forge->createTable('sub_subject');
+        $this->forge->addForeignKey('m_subject_id', 'm_subject', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_subject_id', 'name']);
+        $this->forge->createTable('m_sub_subject');
     }
     
     public function down()
     {
-        $this->forge->dropTable('sub_subject');
+        $this->forge->dropTable('m_sub_subject');
     }
 }

@@ -15,30 +15,31 @@ class LessonMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_homeroom_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
+                'm_sub_subject_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '100',
                 ],
-                'description' => [
+                'remark' => [
                     'type' => 'VARCHAR',
                     'constraint' => '255',
-                ],
-                'homeroom_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
-                ],
-                'sub_subject_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
+                    'comment' => '備考',
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('homeroom_id', 'homeroom', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('sub_subject_id', 'sub_subject', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['homeroom_id', 'sub_subject_id', 'name']);
+        $this->forge->addForeignKey('m_homeroom_id', 'm_homeroom', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('m_sub_subject_id', 'm_sub_subject', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_homeroom_id', 'm_sub_subject_id', 'name']);
         $this->forge->createTable('lesson');
     }
     

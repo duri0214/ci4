@@ -4,7 +4,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class CertificationMasterSeeder extends Seeder
+class CertMasterSeeder extends Seeder
 {
     public function run()
     {
@@ -45,6 +45,6 @@ class CertificationMasterSeeder extends Seeder
         ];
     
         // Using Query Builder
-        $this->db->table('m_certification')->insertBatch($data);
+        $this->db->table('m_cert')->insertBatch($data);
     }
 }

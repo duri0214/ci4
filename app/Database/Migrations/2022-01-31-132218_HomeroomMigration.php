@@ -15,6 +15,10 @@ class HomeroomMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_school_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'hr_grade' => [
                     'type' => 'INT',
                     'unsigned' => true,
@@ -27,31 +31,23 @@ class HomeroomMigration extends Migration
                     'type' => 'VARCHAR',
                     'constraint' => '100',
                 ],
-                'description' => [
+                'remark' => [
                     'type' => 'VARCHAR',
                     'constraint' => '255',
-                ],
-                'school_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
+                    'comment' => '備考',
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey([
-            'school_id',
-            'hr_grade',
-            'hr_class',
-            'name'
-                                   ]);
-        $this->forge->createTable('homeroom');
+        $this->forge->addForeignKey('m_school_id', 'm_school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_school_id', 'hr_grade', 'hr_class', 'name']);
+        $this->forge->createTable('m_homeroom');
     }
     
     public function down()
     {
-        $this->forge->dropTable('homeroom');
+        $this->forge->dropTable('m_homeroom');
     }
 }

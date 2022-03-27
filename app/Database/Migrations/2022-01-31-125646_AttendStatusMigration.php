@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UserRoleMigration extends Migration
+class AttendStatusMigration extends Migration
 {
     public function up()
     {
@@ -15,21 +15,27 @@ class UserRoleMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_school_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '100',
+                    'comment' => '「出席」「欠席」などの出欠ステータス',
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey('name');
-        $this->forge->createTable('user_role');
+        $this->forge->addForeignKey('m_school_id', 'm_school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_school_id', 'name']);
+        $this->forge->createTable('m_attend_status');
     }
     
     public function down()
     {
-        $this->forge->dropTable('roll');
+        $this->forge->dropTable('m_attend_status');
     }
 }

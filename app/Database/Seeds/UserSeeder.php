@@ -10,20 +10,18 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
-                'name' => '岡田 義隆',
+                'name' => '岡田 義隆（開発者）',
                 'email' => 'yoshi@gmail.ac.jp',
-                'user_category_id' => 4,
-                'user_role_id' => 5,
+                'm_category_id' => 11,
             ],
             [
-                'name' => 'デモ ミドルネーム 先生',
+                'name' => 'デモ ミドルネーム 先生（管理者）',
                 'email' => 'demo@gmail.ac.jp',
-                'user_category_id' => 1,
-                'user_role_id' => 1,
+                'm_category_id' => 7,
             ],
         ];
     
         // Using Query Builder
-        $this->db->table('user')->insertBatch($data);
+        $this->db->table('m_user')->insertBatch($data);
     }
 }

@@ -25,11 +25,11 @@ class SubjectMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('name');
-        $this->forge->createTable('subject');
+        $this->forge->createTable('m_subject');
     }
     
     public function down()
     {
-        $this->forge->dropTable('subject');
+        $this->forge->dropTable('m_subject');
     }
 }

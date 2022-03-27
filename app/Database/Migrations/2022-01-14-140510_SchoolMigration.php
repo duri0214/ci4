@@ -15,6 +15,11 @@ class School extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_category_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'comment' => '「中学」「高校」など、学校カテゴリー',
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '50',
@@ -23,6 +28,7 @@ class School extends Migration
                     'type' => 'VARCHAR',
                     'constraint' => '20',
                     'null' => true,
+                    'comment' => '郵便番号',
                 ],
                 'address' => [
                     'type' => 'VARCHAR',
@@ -43,23 +49,20 @@ class School extends Migration
                     'type' => 'VARCHAR',
                     'constraint' => '50',
                     'null' => true,
-                ],
-                'school_category_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
+                    'comment' => 'デモ学校は「demo」など、プログラムで内部的に使う用のコードネーム',
                 ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_category_id', 'school_category', 'id');
+        $this->forge->addForeignKey('m_category_id', 'm_category', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addUniqueKey('code');
-        $this->forge->createTable('school');
+        $this->forge->createTable('m_school');
     }
 
     public function down()
     {
-        $this->forge->dropTable('school');
+        $this->forge->dropTable('m_school');
     }
 }

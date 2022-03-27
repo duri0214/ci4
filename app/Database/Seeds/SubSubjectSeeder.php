@@ -10,24 +10,24 @@ class SubSubjectSeeder extends Seeder
     {
         $data = [
             [
-                'subject_id' => 1,
+                'm_subject_id' => 1,
                 'name' => '国語総合',
             ],
             [
-                'subject_id' => 2,
+                'm_subject_id' => 2,
                 'name' => '数学Ⅰ',
             ],
             [
-                'subject_id' => 3,
+                'm_subject_id' => 3,
                 'name' => '英語',
             ],
             [
-                'subject_id' => 4,
+                'm_subject_id' => 4,
                 'name' => '入学式',
             ],
         ];
     
         // Using Query Builder
-        $this->db->table('sub_subject')->insertBatch($data);
+        $this->db->table('m_sub_subject')->insertBatch($data);
     }
 }

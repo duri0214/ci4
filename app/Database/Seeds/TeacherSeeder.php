@@ -12,16 +12,16 @@ class TeacherSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'デモ先生',
-                'user_id' => 2,
+                'm_user_id' => 2,
             ],
             [
                 'id' => 2,
                 'name' => 'デモ先生（兼任）',
-                'user_id' => 2,
+                'm_user_id' => 2,
             ],
         ];
     
         // Using Query Builder
-        $this->db->table('teacher')->insertBatch($data);
+        $this->db->table('m_teacher')->insertBatch($data);
     }
 }

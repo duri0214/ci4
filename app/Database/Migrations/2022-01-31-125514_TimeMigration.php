@@ -15,7 +15,7 @@ class TimeMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
-                'school_id' => [
+                'm_school_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
@@ -28,8 +28,8 @@ class TimeMigration extends Migration
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'name']);
+        $this->forge->addForeignKey('m_school_id', 'm_school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_school_id', 'name']);
         $this->forge->createTable('m_time');
     }
     

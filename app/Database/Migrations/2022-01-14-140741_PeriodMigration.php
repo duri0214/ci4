@@ -15,6 +15,10 @@ class Period extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_school_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '50',
@@ -27,22 +31,18 @@ class Period extends Migration
                     'type' => 'date',
                     'default' => '0000-00-00',
                 ],
-                'school_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
-                ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'from_date', 'to_date']);
-        $this->forge->createTable('period');
+        $this->forge->addForeignKey('m_school_id', 'm_school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_school_id', 'from_date', 'to_date']);
+        $this->forge->createTable('m_period');
     }
 
     public function down()
     {
-        $this->forge->dropTable('period');
+        $this->forge->dropTable('m_period');
     }
 }

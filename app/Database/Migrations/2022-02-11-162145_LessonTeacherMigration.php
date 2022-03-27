@@ -20,7 +20,7 @@ class LessonTeacherMigration extends Migration
                     'unsigned' => true,
                     'null' => true,
                 ],
-                'teacher_id' => [
+                'm_teacher_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
                     'null' => true,
@@ -31,8 +31,8 @@ class LessonTeacherMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('lesson_id', 'lesson', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('teacher_id', 'teacher', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['lesson_id', 'teacher_id']);
+        $this->forge->addForeignKey('m_teacher_id', 'm_teacher', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['lesson_id', 'm_teacher_id']);
         $this->forge->createTable('lesson_teacher');
     }
     

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CertificationMasterMigration extends Migration
+class CertMigration extends Migration
 {
     public function up()
     {
@@ -15,7 +15,15 @@ class CertificationMasterMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
-                'name' => [
+                'm_school_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
+                'm_cert_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
+                'name_short' => [
                     'type' => 'VARCHAR',
                     'constraint' => '100',
                 ],
@@ -24,12 +32,14 @@ class CertificationMasterMigration extends Migration
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey('name');
-        $this->forge->createTable('m_certification');
+        $this->forge->addForeignKey('m_school_id', 'm_school', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('m_cert_id', 'm_cert', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['m_school_id', 'm_cert_id']);
+        $this->forge->createTable('cert');
     }
     
     public function down()
     {
-        $this->forge->dropTable('m_certification');
+        $this->forge->dropTable('cert');
     }
 }

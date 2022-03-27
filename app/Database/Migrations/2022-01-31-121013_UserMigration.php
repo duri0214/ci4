@@ -15,6 +15,11 @@ class UserMigration extends Migration
                     'unsigned' => true,
                     'auto_increment' => true,
                 ],
+                'm_category_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'comment' => '先生-Manager、先生-Normal、生徒、保護者など「種」「ロール」で使い分ける'
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '100',
@@ -23,29 +28,18 @@ class UserMigration extends Migration
                     'type' => 'VARCHAR',
                     'constraint' => '255',
                 ],
-                'user_category_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
-                    'COMMENT' => '先生、生徒、保護者など'
-                ],
-                'user_role_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
-                    'COMMENT' => 'Managerなどの権限（categoryの内訳）'
-                ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
         );
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('user_category_id', 'user_category', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('user_role_id', 'user_role', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('m_category_id', 'm_category', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addUniqueKey('email');
-        $this->forge->createTable('user');
+        $this->forge->createTable('m_user');
     }
 
     public function down()
     {
-        $this->forge->dropTable('user');
+        $this->forge->dropTable('m_user');
     }
 }

@@ -19,9 +19,10 @@ class LessonItemsMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
-                'lesson_item_segment_id' => [
+                'm_category_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
+                    'comment' => '授業の評価セグメント',
                 ],
                 'name' => [
                     'type' => 'VARCHAR',
@@ -38,7 +39,7 @@ class LessonItemsMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('lesson_id', 'lesson', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('lesson_item_segment_id', 'lesson_item_segment', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('m_category_id', 'm_category', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addUniqueKey(['lesson_id', 'lesson_item_segment_id']);
         $this->forge->createTable('lesson_items');
     }
