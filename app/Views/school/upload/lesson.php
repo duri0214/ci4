@@ -11,6 +11,7 @@
         <title>Hello, world!</title>
     </head>
     <body>
+        <?= $breadcrumb ?? null ?>
         <h1>レッスンのアップロード画面です</h1>
         
         <ul class="nav nav-tabs">

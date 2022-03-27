@@ -7,9 +7,11 @@
     
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
         <title>How to Import CSV file data to MySQL in CodeIgniter 4</title>
     </head>
     <body>
+        <?= $breadcrumb ?? null ?>
         <h1>郵便番号のアップロード画面です</h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -63,7 +65,7 @@
                 <!-- Postal list -->
                 <div class="col-md-12 mt-4" >
                     <h3 class="mb-4">登録済みの郵便番号</h3>
-                    <table class="table">
+                    <table class="table small table-sm">
                         <thead>
                         <tr>
                             <th>郵便番号</th>
@@ -99,8 +101,6 @@
                 </div>
             </div>
         </div>
-        <p><a href="<?= route_to('lesson_list') ?>">授業管理へもどる</a></p>
-        <p><a href="<?= route_to('school_home') ?>">ホームへもどる</a></p>
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

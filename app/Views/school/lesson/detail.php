@@ -23,7 +23,7 @@
                 $i = 1; ?>
                 <form action="<?= route_to('lesson_edit_post') ?>" method="post">
                     <?= csrf_field() ?>
-                    <table>
+                    <table class="table small table-sm">
                         <?php foreach ($lesson['items'] as $item) : ?>
                             <tr>
                                 <th><?= $i ?>回目</th>

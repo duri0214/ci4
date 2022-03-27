@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Breadcrumb;
 use App\Libraries\ConvertFile;
 use App\Models\PostalModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -13,7 +14,18 @@ class SchoolUploadController extends BaseController
     
     public function indexLesson(): string
     {
-        return view(route_to('lesson_upload_get'));
+        $b = new Breadcrumb();
+        $b->add('Home', route_to('school_home'));
+        $b->add('授業管理', route_to('lesson_list'));
+        $b->add('アップロード管理', null);
+    
+        $data = [
+            // 'postals' => $model->paginate(100),
+            // 'pager' => $model->pager,
+            'breadcrumb' => $b->render(),
+        ];
+    
+        return view(route_to('lesson_upload_get'), $data);
     }
     
     /**
@@ -23,9 +35,15 @@ class SchoolUploadController extends BaseController
     public function indexPostal(): string
     {
         $model = new PostalModel();
+        
+        $b = new Breadcrumb();
+        $b->add('Home', route_to('school_home'));
+        $b->add('アップロード管理', null);
+    
         $data = [
             'postals' => $model->paginate(100),
-            'pager' => $model->pager
+            'pager' => $model->pager,
+            'breadcrumb' => $b->render(),
         ];
     
         return view(route_to('postal_upload_get'), $data);
