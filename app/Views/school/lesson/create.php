@@ -10,10 +10,12 @@
     <body>
         <?= $breadcrumb ?? null ?>
         <h1>レッスンを作成する</h1>
+        <p>バリデーションを作っているところ</p>
+        <p><a href="https://codeigniter4.github.io/userguide/libraries/validation.html">https://codeigniter4.github.io/userguide/libraries/validation.html</a></p>
         <h2><?= esc($title ?? null) ?></h2>
         
         <?= session()->getFlashdata('error') ?>
-        <?= service('validation')->listErrors() ?>
+        <?= isset($validation) ? $validation->listErrors() : null ?>
         
         <form action="<?= route_to('lesson_create') ?>" method="post">
             <?= csrf_field() ?>

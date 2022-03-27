@@ -41,15 +41,15 @@ $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'ho
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
 $routes->get('school/lesson/list', 'SchoolLessonController::list', ['as' => 'lesson_list']);
 $routes->get('school/lesson/(:num)', 'SchoolLessonController::detail/$1', ['as' => 'lesson_detail']);
-$routes->get('school/lesson/create', 'SchoolLessonController::create', ['as' => 'lesson_create']);
-$routes->post('school/lesson/edit', 'SchoolLessonController::edit', ['as' => 'lesson_edit']);
+$routes->match(['get', 'post'], 'school/lesson/create', 'SchoolLessonController::create', ['as' => 'lesson_create']);
+$routes->match(['get', 'post'], 'school/lesson/edit', 'SchoolLessonController::edit', ['as' => 'lesson_edit']);
 $routes->get('school/upload/lesson', 'SchoolUploadController::indexLesson', ['as' => 'lesson_upload_get']);
 $routes->get('school/upload/postal', 'SchoolUploadController::indexPostal', ['as' => 'postal_upload_get']);
 $routes->post('school/upload/postal', 'SchoolUploadController::importFile', ['as' => 'postal_upload_post']);
 $routes->get('school/certification/list', 'SchoolCertificationController::list', ['as' => 'certification_list']);
 $routes->get('school/certification/manage', 'SchoolCertificationController::manageGet', ['as' => 'certification_manage_get']);
 $routes->post('school/certification/manage', 'SchoolCertificationController::managePost', ['as' => 'certification_manage_post']);
-$routes->match(['get', 'post'], 'school/certification/items/edit/(:num)', 'SchoolCertificationController::itemsEdit/$1', ['as' => 'certification_item_edit']);
+$routes->match(['get', 'post'], 'school/certification/items/edit/(:num)', 'SchoolCertificationController::detail/$1', ['as' => 'certification_item_edit']);
 $routes->match(['get', 'post'], 'school/certification/info/register', 'SchoolCertificationController::infoRegister', ['as' => 'certification_info_register']);
 
 /*

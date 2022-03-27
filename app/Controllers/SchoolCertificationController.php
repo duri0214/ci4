@@ -109,7 +109,7 @@ class SchoolCertificationController extends BaseController
      * @param int $certification_id
      * @return string
      */
-    public function itemsEdit(int $certification_id): string
+    public function detail(int $certification_id): string
     {
         $model = model(CertificationModel::class);
         $certification['name'] = $model->find($certification_id)->name_short;

@@ -9,7 +9,7 @@
     </head>
     <body>
         <?= $breadcrumb ?? null ?>
-        <h1>lesson list</h1>
+        <h1>授業一覧</h1>
         <?php
         if (!empty($lessons)) { ?>
             <table>
@@ -23,7 +23,7 @@
                         <tr>
                             <td><?= $lesson->name ?></td>
                             <td><?= $lesson->description ?></td>
-                            <td><a href="<?= route_to('lesson_detail', 12332) ?>">詳細</a></td>
+                            <td><a href="<?= route_to('lesson_detail', $lesson->id) ?>">詳細</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
