@@ -41,7 +41,7 @@ class SchoolLessonController extends BaseController
 
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));
-        $b->add('授業管理', route_to('school_list'));
+        $b->add('授業管理', route_to('lesson_list'));
         $b->add('授業詳細', null);
     
         $data = [
