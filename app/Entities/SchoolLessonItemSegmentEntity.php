@@ -4,13 +4,12 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
-class UserEntity extends Entity
+class SchoolLessonItemSegmentEntity extends Entity
 {
     protected $datamap = [];
     protected $dates   = ['created_at', 'updated_at'];
     protected $casts   = [
         'id' => 'integer',
-        'user_category_id' => 'integer',
-        'user_role_id' => 'integer',
+        'school_lesson_id' => 'integer',
     ];
 }
