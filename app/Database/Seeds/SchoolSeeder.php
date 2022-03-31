@@ -16,13 +16,12 @@ class SchoolSeeder extends Seeder
                 'address' => '東京都のどこかの住所',
                 'tel' => '0000-00-0000',
                 'prefecture' => '東京都',
-                'code' => 'Demo',
-                'm_category_id' => 3
+                'm_school_category_id' => 3
             ],
         ];
     
         // Using Query Builder
         $this->forge->addUniqueKey('code');
-        $this->db->table('m_school')->insertBatch($data);
+        $this->db->table('school')->insertBatch($data);
     }
 }

@@ -9,18 +9,10 @@ class VocabularyBookSeeder extends Seeder
     public function run()
     {
         $data = [
-            [
-                'sentence' => 'I would like an aisle seat.'
-            ],
-            [
-                'sentence' => 'My son asked for a window seat.'
-            ],
-            [
-                'sentence' => 'They wrapped the baby in a soft blanket.'
-            ],
-            [
-                'sentence' => 'Can I see your boarding pass?'
-            ],
+            ['sentence' => 'I would like an aisle seat.'],
+            ['sentence' => 'My son asked for a window seat.'],
+            ['sentence' => 'They wrapped the baby in a soft blanket.'],
+            ['sentence' => 'Can I see your boarding pass?'],
         ];
     
         // Using Query Builder
