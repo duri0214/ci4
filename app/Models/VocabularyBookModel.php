@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Entities\VocabularyBookEntity;
 use CodeIgniter\Model;
 
+/**
+ * @method VocabularyBookEntity find($id = null)
+ */
 class VocabularyBookModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -11,10 +15,10 @@ class VocabularyBookModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'App\Entities\VocabularyBook';
+    protected $returnType       = 'App\Entities\VocabularyBookEntity';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['sentence'];
 
     // Dates
     protected $useTimestamps = true;

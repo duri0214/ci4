@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Entities\PostalEntity;
+use App\Entities\MPostalEntity;
 use CodeIgniter\Model;
 use ReflectionException;
 use SplFileObject;
 
 /**
- * @method PostalEntity find($id = null)
+ * @method MPostalEntity find($id = null)
  */
-class PostalModel extends Model
+class MPostalModel extends Model
 {
     const TRIM_LIST = ["\""];
     protected $DBGroup          = 'default';
@@ -18,7 +18,7 @@ class PostalModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = PostalEntity::class;
+    protected $returnType       = MPostalEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['code', 'prefecture', 'municipality', 'town'];

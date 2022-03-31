@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\LessonItemsEntity;
+use App\Entities\SchoolLessonItemSegmentEntity;
 use CodeIgniter\Model;
 
 /**
- * @method LessonItemsEntity find($id = null)
+ * @method SchoolLessonItemSegmentEntity find($id = null)
  */
-class LessonItemsModel extends Model
+class SchoolLessonItemSegmentModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'lesson_items';
+    protected $table            = 'school_lesson_item_segment';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = LessonItemsEntity::class;
+    protected $returnType       = SchoolLessonItemSegmentEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['lesson_id', 'lesson_segment_id', 'name', 'remarks'];
+    protected $allowedFields    = ['school_lesson_id', 'name', 'remarks'];
 
     // Dates
     protected $useTimestamps = true;

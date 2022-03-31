@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
-use App\Entities\TimeEntity;
+use App\Entities\SchoolLessonEntity;
 use CodeIgniter\Model;
 
-class TimeModel extends Model
+/**
+ * @method SchoolLessonEntity find($id = null)
+ */
+class SchoolLessonModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'm_time';
+    protected $table            = 'school_lesson';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = TimeEntity::class;
+    protected $returnType       = SchoolLessonEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_homeroom_id', 'school_sub_subject_id', 'name', 'remark'];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

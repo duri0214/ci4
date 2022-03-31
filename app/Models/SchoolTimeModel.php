@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\UserCategoryEntity;
+use App\Entities\SchoolTimeEntity;
 use CodeIgniter\Model;
 
-class UserCategoryModel extends Model
+/**
+ * @method SchoolTimeEntity find($id = null)
+ */
+class SchoolTimeModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'user_category';
+    protected $table            = 'school_time';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = UserCategoryEntity::class;
+    protected $returnType       = SchoolTimeEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

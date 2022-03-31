@@ -2,9 +2,9 @@
 
 namespace App\Models\School;
 
-use App\Entities\PeriodEntity;
+use App\Entities\MSchoolCategoryEntity;
+use App\Entities\SchoolPeriodEntity;
 use App\Entities\SchoolEntity;
-use App\Entities\SchoolCategoryEntity;
 
 abstract class AbstractSchool
 {
@@ -14,12 +14,12 @@ abstract class AbstractSchool
     protected $school;
     
     /**
-     * @var SchoolCategoryEntity
+     * @var MSchoolCategoryEntity
      */
     protected $school_category;
     
     /**
-     * @var PeriodEntity[]
+     * @var SchoolPeriodEntity[]
      */
     protected $periods;
     
@@ -32,15 +32,15 @@ abstract class AbstractSchool
     }
     
     /**
-     * @return SchoolCategoryEntity
+     * @return MSchoolCategoryEntity
      */
-    public function getSchoolCategory(): SchoolCategoryEntity
+    public function getSchoolCategory(): MSchoolCategoryEntity
     {
         return $this->school_category;
     }
     
     /**
-     * @return PeriodEntity[]
+     * @return SchoolPeriodEntity[]
      */
     public function getPeriods(): array
     {

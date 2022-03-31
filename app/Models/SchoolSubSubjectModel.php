@@ -2,28 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\AttendanceEntity;
+use App\Entities\SchoolSubSubjectEntity;
 use CodeIgniter\Model;
 
-class AttendanceModel extends Model
+/**
+ * @method SchoolSubSubjectEntity find($id = null)
+ */
+class SchoolSubSubjectModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'attendance';
+    protected $table            = 'school_sub_subject';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = AttendanceEntity::class;
+    protected $returnType       = SchoolSubSubjectEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'name',
-        'zipcode',
-        'address',
-        'tel',
-        'prefecture',
-        'code',
-        'school_category_id'
-    ];
+    protected $allowedFields    = ['school_id', 'school_subject_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

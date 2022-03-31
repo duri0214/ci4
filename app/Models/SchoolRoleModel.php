@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\StatusEntity;
+use App\Entities\SchoolRoleEntity;
 use CodeIgniter\Model;
 
-class StatusModel extends Model
+/**
+ * @method SchoolRoleEntity find($id = null)
+ */
+class SchoolRoleModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'm_status';
+    protected $table            = 'school_role';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = StatusEntity::class;
+    protected $returnType       = SchoolRoleEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

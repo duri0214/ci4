@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\CertificationEntity;
+use App\Entities\SchoolCertEntity;
 use CodeIgniter\Model;
 
 /**
- * @method CertificationEntity find($id = null)
+ * @method SchoolCertEntity find($id = null)
  */
-class CertificationModel extends Model
+class SchoolCertModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'certification';
+    protected $table            = 'school_cert';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = CertificationEntity::class;
+    protected $returnType       = SchoolCertEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['school_id', 'm_certification_id', 'name_short'];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = false;

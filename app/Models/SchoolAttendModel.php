@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\SchoolEntity;
+use App\Entities\SchoolAttendEntity;
 use CodeIgniter\Model;
 
 /**
- * @method SchoolEntity find($id = null)
+ * @method SchoolAttendEntity find($id = null)
  */
-class SchoolModel extends Model
+class SchoolAttendModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'school';
+    protected $table            = 'school_attend';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = SchoolEntity::class;
+    protected $returnType       = SchoolAttendEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['m_school_category_id', 'name', 'zipcode', 'address', 'tel', 'prefecture', 'remark'];
+    protected $allowedFields    = ['school_user_id', 'attend_date', 'school_time_id', 'school_attend_status_id', 'school_attend_status_detail_id', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

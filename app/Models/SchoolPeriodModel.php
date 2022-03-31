@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\StatusDetailEntity;
+use App\Entities\SchoolPeriodEntity;
 use CodeIgniter\Model;
 
-class StatusDetailModel extends Model
+/**
+ * @method SchoolPeriodEntity find($id = null)
+ */
+class SchoolPeriodModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'm_status_detail';
+    protected $table            = 'school_period';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = StatusDetailEntity::class;
+    protected $returnType       = SchoolPeriodEntity::Class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'name', 'from_date', 'to_date', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

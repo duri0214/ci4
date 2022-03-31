@@ -2,26 +2,26 @@
 
 namespace App\Models;
 
-use App\Entities\CertificationMasterEntity;
+use App\Entities\SchoolSubjectEntity;
 use CodeIgniter\Model;
 
 /**
- * @method CertificationMasterEntity find($id = null)
+ * @method SchoolSubjectEntity find($id = null)
  */
-class CertificationMasterModel extends Model
+class SchoolSubjectModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'm_certification';
+    protected $table            = 'school_subject';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = CertificationMasterEntity::class;
+    protected $returnType       = SchoolSubjectEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name'];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

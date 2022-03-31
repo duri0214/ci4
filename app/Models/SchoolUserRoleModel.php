@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\SchoolEntity;
+use App\Entities\SchoolUserRoleEntity;
 use CodeIgniter\Model;
 
 /**
- * @method SchoolEntity find($id = null)
+ * @method SchoolUserRoleEntity find($id = null)
  */
-class SchoolModel extends Model
+class SchoolUserRoleModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'school';
+    protected $table            = 'school_user_role';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = SchoolEntity::class;
+    protected $returnType       = SchoolUserRoleEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['m_school_category_id', 'name', 'zipcode', 'address', 'tel', 'prefecture', 'remark'];
+    protected $allowedFields    = ['school_user_id', 'school_role_id', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

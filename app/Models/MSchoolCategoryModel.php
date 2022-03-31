@@ -2,29 +2,30 @@
 
 namespace App\Models;
 
-use App\Entities\LessonItemSegmentEntity;
+use App\Entities\MSchoolCategoryEntity;
 use CodeIgniter\Model;
 
 /**
- * @method LessonItemSegmentEntity find($id = null)
+ * @method MSchoolCategoryEntity find($id = null)
  */
-class LessonItemSegmentModel extends Model
+class MSchoolCategoryModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'lesson_item_segment';
+    protected $table            = 'm_school_category';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = LessonItemSegmentEntity::class;
+    protected $returnType       = MSchoolCategoryEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name'];
+    protected $allowedFields    = ['name', 'remark'];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];

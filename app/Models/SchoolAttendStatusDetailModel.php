@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\HomeroomEntity;
+use App\Entities\SchoolAttendStatusDetailEntity;
 use CodeIgniter\Model;
 
-class HomeroomModel extends Model
+/**
+ * @method SchoolAttendStatusDetailEntity find($id = null)
+ */
+class SchoolAttendStatusDetailModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'homeroom';
+    protected $table            = 'school_attend_status_detail';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = HomeroomEntity::class;
+    protected $returnType       = SchoolAttendStatusDetailEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'school_attend_status_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

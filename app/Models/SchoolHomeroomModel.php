@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\CertificationItemsEntity;
+use App\Entities\SchoolHomeroomEntity;
 use CodeIgniter\Model;
 
 /**
- * @method CertificationItemsEntity find($id = null)
+ * @method SchoolHomeroomEntity find($id = null)
  */
-class CertificationItemsModel extends Model
+class SchoolHomeroomModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'certification_items';
+    protected $table            = 'school_homeroom';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = CertificationItemsEntity::class;
+    protected $returnType       = SchoolHomeroomEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['certification_id', 'the_day_of_the_test'];
+    protected $allowedFields    = ['school_id', 'hr_grade', 'hr_class', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

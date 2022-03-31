@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\SchoolCategoryEntity;
+use App\Entities\SchoolCertItemEntity;
 use CodeIgniter\Model;
 
-class SchoolCategoryModel extends Model
+/**
+ * @method SchoolCertItemEntity find($id = null)
+ */
+class SchoolCertItemModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'school_category';
+    protected $table            = 'school_cert_item';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = SchoolCategoryEntity::class;
+    protected $returnType       = SchoolCertItemEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];  // TODO:変更させたいすべてのフィールドを含める
+    protected $allowedFields    = ['school_cert_id', 'the_day_of_the_test', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

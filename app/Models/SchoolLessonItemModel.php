@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\PeriodEntity;
+use App\Entities\SchoolLessonItemEntity;
 use CodeIgniter\Model;
 
-class PeriodModel extends Model
+/**
+ * @method SchoolLessonItemEntity find($id = null)
+ */
+class SchoolLessonItemModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'period';
+    protected $table            = 'school_lesson_item';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = PeriodEntity::Class;
+    protected $returnType       = SchoolLessonItemEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'from_date', 'to_date', 'school_id'];
+    protected $allowedFields    = ['school_lesson_id', 'school_lesson_item_segment_id', 'remarks'];
 
     // Dates
     protected $useTimestamps = true;

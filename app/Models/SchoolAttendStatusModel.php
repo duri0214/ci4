@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\UserRoleEntity;
+use App\Entities\SchoolAttendStatusEntity;
 use CodeIgniter\Model;
 
-class UserRoleModel extends Model
+/**
+ * @method SchoolAttendStatusEntity find($id = null)
+ */
+class SchoolAttendStatusModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'user_role';
+    protected $table            = 'school_attend_status';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = UserRoleEntity::class;
+    protected $returnType       = SchoolAttendStatusEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

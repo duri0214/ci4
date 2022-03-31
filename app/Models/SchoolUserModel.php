@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Entities\UserEntity;
+use App\Entities\SchoolUserEntity;
 use CodeIgniter\Model;
 
-class UserModel extends Model
+/**
+ * @method SchoolUserEntity find($id = null)
+ */
+class SchoolUserModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'user';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = UserEntity::class;
+    protected $returnType       = SchoolUserEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['school_id', 'name', 'email', 'remark'];
 
     // Dates
     protected $useTimestamps = true;
