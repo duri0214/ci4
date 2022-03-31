@@ -26,6 +26,11 @@ class SchoolLessonMemberMigration extends Migration
                     'null' => true,
                     'comment' => '先生も生徒もメンバーとして入ります',
                 ],
+                'remark' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '255',
+                    'comment' => '備考',
+                ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]

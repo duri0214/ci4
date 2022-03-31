@@ -24,6 +24,11 @@ class SchoolAttendStatusMigration extends Migration
                     'constraint' => '100',
                     'comment' => '「出席」「欠席」などの出欠ステータス',
                 ],
+                'remark' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '255',
+                    'comment' => '備考',
+                ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]

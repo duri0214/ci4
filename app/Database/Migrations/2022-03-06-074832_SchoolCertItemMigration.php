@@ -23,6 +23,11 @@ class SchoolCertItemMigration extends Migration
                     'type' => 'DATE',
                     'null' => true,
                 ],
+                'remark' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '255',
+                    'comment' => '備考',
+                ],
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default null on update current_timestamp',
             ]
