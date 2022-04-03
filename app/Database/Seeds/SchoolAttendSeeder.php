@@ -12,6 +12,7 @@ class SchoolAttendSeeder extends Seeder
             [
                 'id' => 1,
                 'school_user_id' => 1,
+                'school_lesson_id' => 1,
                 'attend_date' => '2021-04-06',
                 'school_time_id' => 1,
                 'school_attend_status_id' => 1,
@@ -21,6 +22,7 @@ class SchoolAttendSeeder extends Seeder
             [
                 'id' => 2,
                 'school_user_id' => 1,
+                'school_lesson_id' => 4,
                 'attend_date' => '2021-04-07',
                 'school_time_id' => 1,
                 'school_attend_status_id' => 2,

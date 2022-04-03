@@ -31,29 +31,32 @@
    1. php spark make:migration --suffix
    2. [up()とdown()メソッドを記述](https://qiita.com/YoshitakaOkada/items/7bdc4906725dab5adca6#up-%E3%81%A8-down-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E8%A8%98%E8%BF%B0)
 4. php spark migrate
-5. php spark make:entity --suffix
-6. php spark make:model --suffix
-7. php spark make:seeder --suffix
+5. php spark make:seeder --suffix
+6. php spark make:entity --suffix
+7. php spark make:model --suffix
 
 # seederの順番
 1. php spark db:seed VocabularyBookSeeder
-2. php spark db:seed SchoolCategorySeeder
+2. php spark db:seed MSchoolCategorySeeder
 3. php spark db:seed SchoolSeeder
-4. php spark db:seed PeriodSeeder
-5. php spark db:seed UserCategorySeeder
-6. php spark db:seed UserRoleSeeder
-7. php spark db:seed UserSeeder
-8. php spark db:seed TimeSeeder
-9. php spark db:seed StatusSeeder
-10. php spark db:seed StatusDetailSeeder
-11. php spark db:seed HomeroomSeeder
-12. php spark db:seed SubjectSeeder
-13. php spark db:seed SubSubjectSeeder
-14. php spark db:seed LessonSeeder
-15. php spark db:seed AttendanceSeeder
-16. php spark db:seed TeacherSeeder
-17. php spark db:seed LessonTeacherSeeder
-18. php spark db:seed CertificationMasterSeeder
+4. php spark db:seed SchoolCurriculumSeeder
+5. php spark db:seed SchoolPeriodSeeder
+6. php spark db:seed SchoolRoleSeeder
+7. php spark db:seed SchoolUserSeeder
+8. php spark db:seed SchoolUserRoleSeeder
+9. php spark db:seed SchoolTimeSeeder
+10. php spark db:seed SchoolHomeroomSeeder
+11. php spark db:seed SchoolSubjectSeeder
+12. php spark db:seed SchoolSubSubjectSeeder
+13. php spark db:seed SchoolLessonSeeder
+14. php spark db:seed SchoolLessonItemSegmentSeeder
+15. php spark db:seed SchoolLessonItemSeeder
+16. php spark db:seed SchoolLessonMemberSeeder
+17. php spark db:seed SchoolAttendStatusSeeder
+18. php spark db:seed SchoolAttendStatusDetailSeeder
+19. php spark db:seed SchoolAttendSeeder
+20. php spark db:seed SchoolCertSeeder
+21. php spark db:seed SchoolCertItemSeeder
 
 ## codeigniterにおけるエンティティと関係
 https://forum.codeigniter.com/thread-80298.html

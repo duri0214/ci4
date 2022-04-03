@@ -19,6 +19,10 @@ class SchoolAttendMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
+                'school_lesson_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                ],
                 'attend_date' => [
                     'type' => 'DATE',
                     'comment' => 'いつ付という項目があることで、未来日出欠等にも対応できる',
@@ -47,6 +51,7 @@ class SchoolAttendMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_user_id', 'school_user', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('school_lesson_id', 'school_lesson', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('school_time_id', 'school_time', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('school_attend_status_id', 'school_attend_status', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('school_attend_status_detail_id', 'school_attend_status_detail', 'id', 'CASCADE', 'CASCADE');

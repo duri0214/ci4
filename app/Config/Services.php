@@ -2,15 +2,17 @@
 
 namespace Config;
 
-use App\Models\AttendanceModel;
-use App\Models\HomeroomModel;
-use App\Models\PeriodModel;
-use App\Models\SchoolCategoryModel;
+use App\Models\MSchoolCategoryModel;
+use App\Models\SchoolAttendModel;
+use App\Models\SchoolAttendStatusDetailModel;
+use App\Models\SchoolAttendStatusModel;
+use App\Models\SchoolCurriculumModel;
+use App\Models\SchoolHomeroomModel;
+use App\Models\SchoolLessonModel;
+use App\Models\SchoolPeriodModel;
 use App\Models\SchoolModel;
-use App\Models\StatusDetailModel;
-use App\Models\StatusModel;
-use App\Models\TimeModel;
-use App\Models\UserModel;
+use App\Models\SchoolTimeModel;
+use App\Models\SchoolUserModel;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -39,13 +41,13 @@ class Services extends BaseService
      * }
      */
     
-    public static function userModel($getShared = true)
+    public static function schoolUserModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('userModel');
+            return static::getSharedInstance('schoolUserModel');
         }
     
-        return new UserModel();
+        return new SchoolUserModel();
     }
     
     public static function schoolModel($getShared = true)
@@ -57,66 +59,85 @@ class Services extends BaseService
         return new SchoolModel();
     }
     
-    public static function homeroomModel($getShared = true)
+    public static function schoolHomeroomModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('homeroomModel');
+            return static::getSharedInstance('schoolHomeroomModel');
         }
         
-        return new HomeroomModel();
+        return new SchoolHomeroomModel();
     }
     
-    public static function timeModel($getShared = true)
+    public static function schoolTimeModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('timeModel');
+            return static::getSharedInstance('schoolTimeModel');
         }
         
-        return new TimeModel();
+        return new SchoolTimeModel();
     }
     
-    public static function statusModel($getShared = true)
+    public static function schoolAttendStatusModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('statusModel');
+            return static::getSharedInstance('schoolAttendStatusModel');
         }
         
-        return new StatusModel();
+        return new SchoolAttendStatusModel();
     }
     
-    public static function statusDetailModel($getShared = true)
+    public static function schoolStatusDetailModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('statusDetailModel');
+            return static::getSharedInstance('schoolStatusDetailModel');
         }
         
-        return new StatusDetailModel();
+        return new SchoolAttendStatusDetailModel();
     }
     
-    public static function periodModel($getShared = true)
+    public static function schoolPeriodModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('periodModel');
+            return static::getSharedInstance('schoolPeriodModel');
         }
         
-        return new PeriodModel();
+        return new SchoolPeriodModel();
     }
     
-    public static function attendanceModel($getShared = true)
+    public static function schoolAttendModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('attendanceModel');
+            return static::getSharedInstance('schoolAttendModel');
         }
     
-        return new AttendanceModel();
+        return new SchoolAttendModel();
     }
 
-    public static function schoolCategoryModel($getShared = true)
+    public static function mSchoolCategoryModel($getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('schoolCategoryModel');
+            return static::getSharedInstance('mSchoolCategoryModel');
         }
         
-        return new SchoolCategoryModel();
+        return new MSchoolCategoryModel();
     }
+    
+    public static function schoolLessonModel($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('schoolLessonModel');
+        }
+        
+        return new SchoolLessonModel();
+    }
+    
+    public static function schoolCurriculumModel($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('schoolCurriculumModel');
+        }
+        
+        return new SchoolCurriculumModel();
+    }
+    
 }

@@ -2,61 +2,52 @@
 
 namespace App\Domain;
 
-use App\Entities\AttendanceEntity;
-use App\Entities\HomeroomEntity;
-use App\Entities\PeriodEntity;
-use App\Entities\SchoolCategoryEntity;
+use App\Entities\MSchoolCategoryEntity;
+use App\Entities\SchoolAttendEntity;
+use App\Entities\SchoolCurriculumEntity;
+use App\Entities\SchoolHomeroomEntity;
+use App\Entities\SchoolPeriodEntity;
 use App\Entities\SchoolEntity;
-use App\Models\SchoolCode;
 use DateTime;
 use Exception;
 
 class SchoolDomain
 {
     private SchoolEntity $schoolEntity;
-    private SchoolCategoryEntity $schoolCategory;
-    private HomeroomEntity $activeHomeroom;
+    private MSchoolCategoryEntity $schoolCategory;
+    private SchoolHomeroomEntity $activeHomeroom;
+    private array $periods;
+    private array $curriculumChoices;
+    private array $homeroomChoices;
+    private array $lessons;
+    private array $attends;
     
-    /**
-     * @var PeriodEntity[]
-     */
-    private ?array $periods;
-    
-    /**
-     * @var AttendanceEntity[]|null
-     */
-    private ?array $attendances;
-    
-    public function __construct(
-        SchoolEntity $schoolEntity
-    ) {
+    public function __construct(SchoolEntity $schoolEntity)
+    {
         $this->schoolEntity = $schoolEntity;
-        
-        if ($schoolEntity->id) {
-            $model = service('periodModel');
-            $this->periods = $model->where('school_id', $schoolEntity->id)->findAll();
-            
-            $model = service('homeroomModel');
-            $this->homerooms = $model->where('school_id', $schoolEntity->id)->findAll();
     
-            $model = service('attendanceModel');
-            foreach ($this->homerooms as $homeroom) {
-                $this->attendances[$homeroom->id] = $model->where('homeroom_id', $homeroom->id)->findAll();
-            }
-        }
+        $model = service('schoolCurriculumModel');
+        $this->curriculumChoices = $model->where('school_id', $schoolEntity->id)->orderBy('id', 'ASC')->findAll();
     
-        if ($schoolEntity->school_category_id) {
-            $model = service('schoolCategoryModel');
-            $this->schoolCategory = $model->find($schoolEntity->school_category_id);
+        $model = service('schoolHomeroomModel');
+        $this->homeroomChoices = $model->where('school_id', $schoolEntity->id)->orderBy('id', 'ASC')->findAll();
+
+        if ($schoolEntity->m_school_category_id) {
+            $model = service('mSchoolCategoryModel');
+            $this->schoolCategory = $model->find($schoolEntity->m_school_category_id);
         }
     }
     
     /**
-     * @return PeriodEntity|null
+     * @return SchoolPeriodEntity|null
      * @throws Exception
      */
-    public function getCurrentPeriod(): ?PeriodEntity
+    public function getCurrentPeriod(): ?SchoolPeriodEntity
     {
+        if (!$this->curriculums) {
+            return null;
+        }
+        
         $today = new DateTime();
         foreach ($this->periods as $period) {
             $from = new DateTime($period->from_date);
@@ -67,10 +58,11 @@ class SchoolDomain
             }
         }
         
+        // 該当する学期がない
         return null;
     }
     
-    /** いまが仮評定時期（3年生で1学期）かどうか
+    /** （未完）いまが仮評定時期（3年生で1学期）かどうか
      * @param $studentId
      * @return bool
      */
@@ -84,6 +76,20 @@ class SchoolDomain
     }
     
     /**
+     * カリキュラムが使う学期情報をセットする
+     * @param $curriculumId
+     * @return void
+     */
+    public function setPeriodsByCurriculum($curriculumId)
+    {
+        $model = service('schoolPeriodModel');
+        $this->periods = $model
+            ->where('school_id', $this->schoolEntity->id)
+            ->where('school_curriculum_id', $curriculumId)
+            ->findAll();
+    }
+    
+    /**
      * @return SchoolCode
      */
     public function getSchoolCode(): SchoolCode
@@ -92,15 +98,23 @@ class SchoolDomain
     }
     
     /**
-     * @return SchoolCategoryEntity
+     * @return MSchoolCategoryEntity
      */
-    public function getSchoolCategory(): SchoolCategoryEntity
+    public function getSchoolCategory(): MSchoolCategoryEntity
     {
         return $this->schoolCategory;
     }
     
     /**
-     * @return PeriodEntity[]|null
+     * @return SchoolCurriculumEntity[]|null
+     */
+    public function getCurriculumChoices(): ?array
+    {
+        return $this->curriculumChoices;
+    }
+    
+    /**
+     * @return SchoolPeriodEntity[]|null
      */
     public function getPeriods(): ?array
     {
@@ -108,14 +122,14 @@ class SchoolDomain
     }
     
     /**
-     * @return HomeroomEntity[]|null
+     * @return SchoolHomeroomEntity[]|null
      */
-    public function getHomerooms(): ?array
+    public function getHomeroomChoices(): ?array
     {
-        return $this->homerooms;
+        return $this->homeroomChoices;
     }
     
-    /** いまが学年末学期かどうか
+    /** （未完）いまが学年末学期かどうか
      * @return bool
      * @throws Exception
      */
@@ -141,42 +155,21 @@ class SchoolDomain
     }
     
     /**
-     * @return array
-     */
-    public function getMixedOnReference(): array
-    {
-        // TODO: $referenceValues をミキシングしたperiodsを返す
-        // 1学期期初～参照1, 参照1の翌日～参照2, 参照2の翌日～参照3
-        // ただ、これは学校ごとに違うから学校のクラスのほうに持ったほうがええかも
-    }
-    
-    /**
      * @param int $homeroomId
      * @return void
      */
     public function setActiveHomeroom(int $homeroomId): void
     {
-        foreach ($this->homerooms as $homeroom) {
-            if ($homeroom->id == $homeroomId) {
-                $this->activeHomeroom = $homeroom;
-            }
-        }
+        $model = service('schoolHomeroomModel');
+        $this->activeHomeroom = $model->find($homeroomId);
     }
     
     /**
-     * @return HomeroomEntity
+     * @return SchoolHomeroomEntity
      */
-    public function getActiveHomeroom(): HomeroomEntity
+    public function getActiveHomeroom(): SchoolHomeroomEntity
     {
         return $this->activeHomeroom;
-    }
-    
-    /**
-     * @return attendanceEntity[]
-     */
-    public function getActiveHomeroomAttendances(): array
-    {
-        return $this->attendances[$this->activeHomeroom->id];
     }
     
     /**

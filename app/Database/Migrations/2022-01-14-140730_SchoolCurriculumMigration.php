@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SchoolPeriodMigration extends Migration
+class SchoolCurriculumMigration extends Migration
 {
     public function up()
     {
@@ -19,21 +19,9 @@ class SchoolPeriodMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
-                'school_curriculum_id' => [
-                    'type' => 'INT',
-                    'unsigned' => true,
-                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '50',
-                ],
-                'from_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
-                ],
-                'to_date' => [
-                    'type' => 'date',
-                    'default' => '0000-00-00',
                 ],
                 'remark' => [
                     'type' => 'VARCHAR',
@@ -47,13 +35,12 @@ class SchoolPeriodMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('school_curriculum_id', 'school_curriculum', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'from_date', 'to_date']);
-        $this->forge->createTable('school_period');
+        $this->forge->addUniqueKey(['school_id', 'name']);
+        $this->forge->createTable('school_curriculum');
     }
 
     public function down()
     {
-        $this->forge->dropTable('school_period');
+        $this->forge->dropTable('school_curriculum');
     }
 }
