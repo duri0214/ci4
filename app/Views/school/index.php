@@ -102,7 +102,7 @@
             </select>
         </label>
         <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
-        <p><a href="<?= route_to('certification_list') ?>">資格管理へ</a></p>
+        <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
         <a href="<?= route_to('home') ?>">ポートフォリオへもどる</a>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
