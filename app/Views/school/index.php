@@ -91,16 +91,6 @@
         }
         ?>
         
-        <label>
-            <!-- '/change_year/' + this.value -->
-            <select style="font-size:12px;padding: 7px 10px;" onChange="location.href = '/home/school/#';">
-                <option value="2021" selected>2021年度</option>
-                <option value="2020" >2020年度</option>
-                <option value="2019" >2019年度</option>
-                <option value="2018" >2018年度</option>
-                <option value="2017" >2017年度</option>
-            </select>
-        </label>
         <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
         <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
         <a href="<?= route_to('home') ?>">ポートフォリオへもどる</a>
