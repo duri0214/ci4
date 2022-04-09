@@ -26,6 +26,16 @@
     </head>
     <body>
         <h1>school</h1>
+        <h2>todo</h2>
+        <ul>
+            <li>カリキュラム、HRを選択したらajaxで以下の情報を表示する
+                <ul>
+                    <li>カリキュラムの学期リスト</li>
+                    <li>カリキュラムの現在の学期</li>
+                    <li>HRの出席情報</li>
+                </ul>
+            </li>
+        </ul>
         <p>学校名: <?= $school->name ?? null ?></p>
         <p>所在地: 〒<?= $school->zipcode ?? null ?> <?= $school->address ?? null ?></p>
         <p>tel: <?= $school->tel ?? null ?></p>
