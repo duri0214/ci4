@@ -14,23 +14,40 @@
     <body>
         <?= $breadcrumb ?? null ?>
         <h1>取扱資格の編集</h1>
+        <h2>todo</h2>
+        <ul>
+            <li>試験アイテム（＝試験日）の新規作成、削除</li>
+        </ul>
+
         <?= service('validation')->listErrors(); ?>
-        <?php if (empty($certification)) {
+
+        <form action="#" method="post">
+            <input type="submit" value="資格アイテムを追加（＋マークはjavascriptでつくる）">
+        </form>
+
+        <?php if (empty($cert)) {
             echo '<p>資格レコードなし</p>';
         } else {
             ?>
-            <h2><?= $certification['name'] ?></h2>
+            <h2><?= $cert['name'] ?></h2>
     
-            <?php if (empty($certification['items'])) {
+            <?php if (empty($cert['items'])) {
                 echo '<p>アイテムレコードなし</p>';
             } else {
                 $i = 1; ?>
-                <form action="<?= route_to('certification_edit_post') ?>" method="post">
+                <form action="<?= route_to('cert_edit_post') ?>" method="post">
                     <?= csrf_field() ?>
                     <table class="table small table-sm">
-                        <?php foreach ($certification['items'] as $item) : ?>
+                        <thead>
                             <tr>
-                                <th><?= $i ?>回目</th>
+                                <th>回数</th>
+                                <th>試験日</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <?php foreach ($cert['items'] as $item) : ?>
+                            <tr>
+                                <td><?= $i ?>回目</td>
                                 <td><?= $item->the_day_of_the_test->format('Y-m-d') ?></td>
                             </tr>
                             <?php

@@ -6,6 +6,7 @@ use App\Models\MSchoolCategoryModel;
 use App\Models\SchoolAttendModel;
 use App\Models\SchoolAttendStatusDetailModel;
 use App\Models\SchoolAttendStatusModel;
+use App\Models\SchoolCertModel;
 use App\Models\SchoolCurriculumModel;
 use App\Models\SchoolHomeroomModel;
 use App\Models\SchoolLessonModel;
@@ -140,4 +141,12 @@ class Services extends BaseService
         return new SchoolCurriculumModel();
     }
     
+    public static function schoolCertModel($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('schoolCertModel');
+        }
+        
+        return new SchoolCertModel();
+    }
 }

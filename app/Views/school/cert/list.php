@@ -21,7 +21,8 @@
         <script
                 src="https://code.jquery.com/jquery-3.6.0.min.js"
                 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-                crossorigin="anonymous"></script>
+                crossorigin="anonymous">
+        </script>
 
         <!-- select2 -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -40,43 +41,43 @@
         <?= session()->getFlashdata('error') ?>
         <?= service('validation')->listErrors() ?>
         
-        <form action="<?= route_to('certification_info_register') ?>" method="post">
+        <form action="<?= route_to('cert_info_register') ?>" method="post">
             <?= csrf_field() ?>
             <div>
                 <label class="select2-label" for="selected_cert_single">処理対象の資格
                     <select class="select2_single" name="selected_cert_single">
                         <option></option>
-                        <?php
-                        if (!empty($certs)) {
+                        <?php if (!empty($certs)) {
                             foreach ($certs as $cert) {
                                 echo('<option>');
                                 echo($cert->name.' '.$cert->remark);
                                 echo('</option>');
                             }
-                        }
-                        ?>
+                        } ?>
                     </select>
                 </label>
             </div>
             <div>
                 <label class="select2-label" for="selected_cert_multi">処理対象の資格
                     <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
-                        <?php
-                        if (!empty($certs)) {
+                        <?php if (!empty($certs)) {
                             foreach ($certs as $cert) {
                                 echo('<option>');
                                 echo($cert->name.' '.$cert->remark);
                                 echo('</option>');
                             }
-                        }
-                        ?>
+                        } ?>
                     </select>
                 </label>
             </div>
             <input type="submit" value="編集">
         </form>
-        <?php
-        if (!empty($certifications)) { ?>
+
+        <form action="#" method="post">
+            <input type="submit" value="資格を追加（＋マークはjavascriptでつくる）">
+        </form>
+        
+        <?php if (!empty($certs)) { ?>
             <table class="table small table-sm">
                 <thead>
                     <tr>
@@ -85,23 +86,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($certifications as $certification) : ?>
+                    <?php foreach ($certs as $cert) : ?>
                         <tr>
-                            <td><?= $certification->name_short ?></td>
+                            <td><?= $cert->name ?></td>
                             <td class="text-center padding50">
-                                <a href="<?= route_to('certification_item_edit', $certification->id) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="<?= route_to('cert_item_list', $cert->id) ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php
-        } else {
+        <?php } else {
             echo '<p>学校で取り扱っている資格がありません</p>';
-        }
-        ?>
-        <p><a href="<?= route_to('certification_manage_get') ?>">学校取扱資格を選択する</a></p>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        } ?>
+        <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous">
+        </script>
     </body>
     <script>
         $(document).ready(function() {
@@ -119,6 +123,5 @@
                 width: '100%'
             });
         });
-
     </script>
 </html>
