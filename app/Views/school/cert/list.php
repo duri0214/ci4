@@ -39,7 +39,7 @@
             <li>プルダウン(1つ選択)　がクリアーできて、プレースホルダが表示されていることを確認する</li>
         </uo>
         <?= session()->getFlashdata('error') ?>
-        <?= service('validation')->listErrors() ?>
+        <?= isset($validation) ? $validation->listErrors() : null ?>
         
         <form action="<?= route_to('cert_info_register') ?>" method="post">
             <?= csrf_field() ?>

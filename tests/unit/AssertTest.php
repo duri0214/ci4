@@ -2,7 +2,7 @@
 
 namespace unit;
 
-use App\Models\Assert;
+use App\Models\Domain\Assert;
 use PHPUnit\Framework\TestCase;
 
 class AssertTest extends TestCase
