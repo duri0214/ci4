@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain;
+namespace App\Models\Domain;
 
 use App\Entities\MSchoolCategoryEntity;
 use App\Entities\SchoolAttendEntity;

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Domain\SchoolDomain;
+use App\Models\Domain\SchoolDomain;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Exception;
 
