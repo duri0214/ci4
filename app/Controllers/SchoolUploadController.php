@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Libraries\Breadcrumb;
 use App\Libraries\ConvertFile;
-use App\Models\PostalModel;
+use App\Models\MPostalModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use ReflectionException;
 
@@ -34,7 +34,7 @@ class SchoolUploadController extends BaseController
      */
     public function indexPostal(): string
     {
-        $model = new PostalModel();
+        $model = new MPostalModel();
         
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));
@@ -63,7 +63,7 @@ class SchoolUploadController extends BaseController
             return view(route_to('postal_upload_get'), $data);
         }
     
-        $model = new PostalModel();
+        $model = new MPostalModel();
         $file = $this->request->getFile('file');
         if ($file && $file->isValid() && !$file->hasMoved()) {
             // save to writable/uploads then convert to utf8
