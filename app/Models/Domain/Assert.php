@@ -8,27 +8,23 @@ class Assert
 {
     /**
      * @param $value
-     * @return bool
+     * @return void
      */
-    public static function isInt($value): bool
+    public static function isInt($value): void
     {
         if (!is_int($value)) {
             throw new AssertionError('Value is not int');
         }
-        
-        return true;
     }
     
     /**
      * @param string $value
-     * @return bool
+     * @return void
      */
-    public static function containsNumeric(string $value): bool
+    public static function containsNumeric(string $value): void
     {
         if (preg_match("/[0-9]/", $value)) {
             throw new AssertionError('Value is contains numeric');
         }
-    
-        return true;
     }
 }
