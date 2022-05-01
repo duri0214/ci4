@@ -41,9 +41,9 @@
         <?= session()->getFlashdata('error') ?>
         <?= isset($validation) ? $validation->listErrors() : null ?>
         
-        <form action="<?= route_to('cert_info_register') ?>" method="post">
+        <form class="mt-4" action="<?= route_to('cert_info_register') ?>" method="post">
             <?= csrf_field() ?>
-            <div>
+            <div class="mb-2">
                 <label class="select2-label" for="selected_cert_single">処理対象の資格
                     <select class="select2_single" name="selected_cert_single">
                         <option></option>
@@ -57,7 +57,7 @@
                     </select>
                 </label>
             </div>
-            <div>
+            <div class="mb-2">
                 <label class="select2-label" for="selected_cert_multi">処理対象の資格
                     <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
                         <?php if (!empty($certs)) {
@@ -70,11 +70,15 @@
                     </select>
                 </label>
             </div>
-            <input type="submit" value="編集">
+            <input class="mb-4 btn btn-primary" type="submit" value="編集">
         </form>
 
         <form action="#" method="post">
-            <input type="submit" value="資格を追加（＋マークはjavascriptでつくる）">
+            <label>
+                <input class="form-control" type="text" name="newCertName">
+            </label>
+            <button class="btn btn-primary" type="submit">資格を追加</button>
+            <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>
         </form>
         
         <?php if (!empty($certs)) { ?>
