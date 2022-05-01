@@ -12,6 +12,10 @@ class SchoolUploadController extends BaseController
 {
     public const UPLOAD_FOLDER = "../writable/uploads/";
     
+    /**
+     * 授業アップロード画面
+     * @return string
+     */
     public function indexLesson(): string
     {
         $b = new Breadcrumb();
@@ -29,6 +33,7 @@ class SchoolUploadController extends BaseController
     }
     
     /**
+     * 郵便番号アップロード画面
      * Fetch all records
      * @return string
      */
@@ -41,7 +46,7 @@ class SchoolUploadController extends BaseController
         $b->add('アップロード管理', null);
     
         $data = [
-            'postals' => $model->paginate(100),
+            'postals' => $model->paginate(15),
             'pager' => $model->pager,
             'breadcrumb' => $b->render(),
         ];
@@ -55,11 +60,22 @@ class SchoolUploadController extends BaseController
      */
     public function importFile(): string|RedirectResponse
     {
+        $model = new MPostalModel();
+    
         // Validation
-        $input = $this->validate(['file' => 'uploaded[file]|ext_in[file,csv]',]);
+        $input = $this->validate($this->getValidationRules());
         if (!$input) {
             // Not valid then return index for upload
-            $data['validation'] = $this->validator;
+            $b = new Breadcrumb();
+            $b->add('Home', route_to('school_home'));
+            $b->add('アップロード管理', null);
+    
+            $data = [
+                'postals' => $model->paginate(15),
+                'pager' => $model->pager,
+                'breadcrumb' => $b->render(),
+                'validation' => $this->validator,
+            ];
             return view(route_to('postal_upload_get'), $data);
         }
     
@@ -81,14 +97,27 @@ class SchoolUploadController extends BaseController
             }
             
             // Set Session: 成功
-            session()->setFlashdata('message', $records.' 件 登録されました '.date("Y/m/d H:i:s"));
-            session()->setFlashdata('alert-class', 'alert-success');
-        } else {
-            // Set Session: 失敗
-            session()->setFlashdata('message', 'File not imported.');
-            session()->setFlashdata('alert-class', 'alert-danger');
+            session()->setFlashdata('success', $records.' 件 登録されました '.date("Y/m/d H:i:s"));
         }
         
-        return redirect('postal_upload_get');
+        return redirect()->route('postal_upload_get');
+    }
+    
+    /**
+     * バリデーションルールの配列を取得
+     * @return array
+     */
+    private function getValidationRules(): array
+    {
+        return [
+            'file' => [
+                'label'  => 'ファイル',
+                'rules'  => 'uploaded[file]|ext_in[file,csv]',
+                'errors' => [
+                    'uploaded' => '{field} のアップロードが失敗しました',
+                    'ext_in' => '{field} の拡張子はCSVのみです',
+                ]
+            ],
+        ];
     }
 }

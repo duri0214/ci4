@@ -11,6 +11,10 @@
                 href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 crossorigin="anonymous">
+        <!-- FONTAWESOME -->
+        <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
+        <!-- External CSS -->
+        <link rel="stylesheet" href="/assets/school/css/upload/postal.css">
     </head>
     <body>
         <div class="container">
@@ -25,80 +29,71 @@
                 </li>
             </ul>
     
-            <ul>
-                <li>ページングのCSS（paddingなど）</li>
-                <li>郵便番号の検索窓</li>
-            </ul>
-    
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php
-                        // Display Response
-                        use Config\Services;
-                    
-                        if (session()->has('message')) { ?>
-                            <div class="alert <?= session()->getFlashdata('alert-class') ?>">
-                                <?= session()->getFlashdata('message') ?>
-                            </div>
-                        <?php } ?>
-                        <?php $validation = Services::validation(); ?>
-                        <form method="post" action="<?= route_to('postal_upload_post') ?>" enctype="multipart/form-data">
-                            <?= csrf_field(); ?>
-                            <div class="form-group">
-                                <label for="file">File:</label>
-                                <input type="file" class="form-control" id="file" name="file" />
-                                <!-- Error -->
-                                <?php if ($validation->getError('file')) {?>
-                                    <div class='alert alert-danger mt-2'>
-                                        <?= $validation->getError('file'); ?>
-                                    </div>
-                                <?php }?>
-                            </div>
-                            <input type="submit" class="btn btn-success" name="submit" value="インポート">
-                        </form>
-        
-                    </div>
+                <a href="https://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html" target="_blank">郵便番号データダウンロード</a>
+                <div class="mt-4">
+                    <?php if (session()->getFlashdata('success')) {
+                        echo ('<div class="alert alert-success mt-2">');
+                        echo (session()->getFlashdata('success'));
+                        echo ('</div>');
+                    } ?>
+                    <?php if (isset($validation)) {
+                        echo ('<div class="alert alert-danger mt-2">');
+                        echo ($validation->listErrors());
+                        echo ('</div>');
+                    } ?>
+
+                    <form method="post" action="<?= route_to('postal_upload_post') ?>" enctype="multipart/form-data">
+                        <?= csrf_field(); ?>
+                        <div class="mb-1">
+                            <label class="form-label">File
+                                <input class="form-control" type="file" name="file" required />
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-success" name="submit" value="インポート">
+                    </form>
                 </div>
-        
-                <div class="row">
-                    <!-- Postal list -->
-                    <div class="col-md-12 mt-4" >
-                        <h3 class="mb-4">登録済みの郵便番号</h3>
-                        <table class="table small table-sm">
-                            <thead>
-                            <tr>
-                                <th>郵便番号</th>
-                                <th>都道府県</th>
-                                <th>市町村</th>
-                                <th>それ以降</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            if (isset($postals) && count($postals) > 0) {
-                                foreach ($postals as $postal) {
-                                    ?>
-                                    <tr>
-                                        <td><?= substr_replace($postal->code, '-', 3, 0) ?></td>
-                                        <td><?= $postal->prefecture ?></td>
-                                        <td><?= $postal->municipality ?></td>
-                                        <td><?= $postal->town ?></td>
-                                    </tr>
-                                    <?php
-                                }
-                            } else {
+                
+                <!-- Postal list -->
+                <div class="mt-4" >
+                    <h3>登録済みの郵便番号</h3>
+                    <div class="input-group">
+                        <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="郵便番号を入力（未完成）"></input>
+                        <span class="input-group-btn input-group-append"><submit type="submit" id="btn-search" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit></span>
+                    </div>
+                    <table class="table small table-sm">
+                        <thead>
+                        <tr>
+                            <th>郵便番号</th>
+                            <th>都道府県</th>
+                            <th>市町村</th>
+                            <th>それ以降</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        if (isset($postals) && count($postals) > 0) {
+                            foreach ($postals as $postal) {
                                 ?>
                                 <tr>
-                                    <td colspan="5">レコードなし</td>
+                                    <td><?= substr_replace($postal->code, '-', 3, 0) ?></td>
+                                    <td><?= $postal->prefecture ?></td>
+                                    <td><?= $postal->municipality ?></td>
+                                    <td><?= $postal->town ?></td>
                                 </tr>
                                 <?php
                             }
+                        } else {
                             ?>
-                            </tbody>
-                        </table>
-                        <?= isset($pager) ? $pager->links() : null ?>
-                    </div>
+                            <tr>
+                                <td colspan="5">レコードなし</td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                    <p><?= isset($pager) ? $pager->links() : null ?></p>
                 </div>
             </div>
         </div>
