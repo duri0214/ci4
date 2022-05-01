@@ -51,6 +51,7 @@ $routes->post('school/upload/postal', 'SchoolUploadController::importFile', ['as
 $routes->get('school/cert/list', 'SchoolCertController::certList', ['as' => 'cert_list']);
 $routes->get('school/cert/(:num)/item/list', 'SchoolCertController::certItemList/$1', ['as' => 'cert_item_list']);
 $routes->post('school/cert/info/register', 'SchoolCertController::certInfoRegister', ['as' => 'cert_info_register']);
+$routes->post('school/cert/addNewItem', 'SchoolCertController::addNewItem', ['as' => 'cert_add_item']);
 
 /*
  * --------------------------------------------------------------------

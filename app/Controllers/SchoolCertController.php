@@ -78,4 +78,54 @@ class SchoolCertController extends BaseController
         }
         $this->certList();
     }
+    
+    /**
+     * @return string|RedirectResponse
+     * @throws ReflectionException
+     */
+    public function addNewItem(): string|RedirectResponse
+    {
+        $model = model(SchoolCertModel::class);
+        if ($this->validate($this->getValidationRules())) {
+            $model->save(
+                [
+                    'school_id' => 1,
+                    'name'  => $this->request->getPost('newItemName'),
+                    'remark'  => 'hello!',
+                ]
+            );
+            // success: listに戻る
+            session()->setFlashdata('success', $this->request->getPost('newItemName').' が登録されました');
+            return redirect()->route('cert_list');
+        } else {
+            // error
+            $model = service('schoolCertModel');
+            $b = new Breadcrumb();
+            $b->add('Home', route_to('school_home'));
+            $b->add('資格一覧', null);
+            $data = [
+                'certs' => $model->findAll(),
+                'breadcrumb' => $b->render(),
+                'validation' => $this->validator,
+            ];
+            return view(route_to('cert_list'), $data);
+        }
+    }
+    
+    /**
+     * バリデーションルールの配列を取得
+     * @return array
+     */
+    private function getValidationRules(): array
+    {
+        return [
+            'newItemName' => [
+                'label'  => '資格名',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} は必須入力です'
+                ]
+            ],
+        ];
+    }
 }

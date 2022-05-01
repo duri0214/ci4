@@ -29,82 +29,90 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     </head>
     <body>
-        <?= $breadcrumb ?? null ?>
-        <h1>資格一覧</h1>
-        <uo>
-            <li>ドロップダウンでなにかを登録させようとする</li>
-            <li>バリデーション（コールバックタイプ）をかけて</li>
-            <li>通れば redirect to list</li>
-            <li>通らなければ 差し戻し</li>
-            <li>プルダウン(1つ選択)　がクリアーできて、プレースホルダが表示されていることを確認する</li>
-        </uo>
-        <?= session()->getFlashdata('error') ?>
-        <?= isset($validation) ? $validation->listErrors() : null ?>
-        
-        <form class="mt-4" action="<?= route_to('cert_info_register') ?>" method="post">
-            <?= csrf_field() ?>
-            <div class="mb-2">
-                <label class="select2-label" for="selected_cert_single">処理対象の資格
-                    <select class="select2_single" name="selected_cert_single">
-                        <option></option>
-                        <?php if (!empty($certs)) {
-                            foreach ($certs as $cert) {
-                                echo('<option>');
-                                echo($cert->name.' '.$cert->remark);
-                                echo('</option>');
-                            }
-                        } ?>
-                    </select>
-                </label>
-            </div>
-            <div class="mb-2">
-                <label class="select2-label" for="selected_cert_multi">処理対象の資格
-                    <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
-                        <?php if (!empty($certs)) {
-                            foreach ($certs as $cert) {
-                                echo('<option>');
-                                echo($cert->name.' '.$cert->remark);
-                                echo('</option>');
-                            }
-                        } ?>
-                    </select>
-                </label>
-            </div>
-            <input class="mb-4 btn btn-primary" type="submit" value="編集">
-        </form>
+        <div class="container">
+            <?= $breadcrumb ?? null ?>
+            <h1>資格一覧</h1>
+            
+            <?php if (session()->getFlashdata('success')) {
+                echo ('<div class="alert alert-success mt-2">');
+                echo (session()->getFlashdata('success'));
+                echo ('</div>');
+            } ?>
+            <?php if (isset($validation)) {
+                echo ('<div class="alert alert-danger mt-2">');
+                echo ($validation->listErrors());
+                echo ('</div>');
+            } ?>
 
-        <form action="#" method="post">
-            <label>
-                <input class="form-control" type="text" name="newCertName">
-            </label>
-            <button class="btn btn-primary" type="submit">資格を追加</button>
-            <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>
-        </form>
-        
-        <?php if (!empty($certs)) { ?>
-            <table class="table small table-sm">
-                <thead>
-                    <tr>
-                        <th>資格名</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($certs as $cert) : ?>
+            <form action="<?= route_to('cert_info_register') ?>" method="post">
+                <?= csrf_field() ?>
+                <div class="mb-2">
+                    <label class="select2-label" for="selected_cert_single">処理対象の資格
+                        <select class="select2_single" name="selected_cert_single">
+                            <option></option>
+                            <?php if (!empty($certs)) {
+                                foreach ($certs as $cert) {
+                                    echo('<option>');
+                                    echo($cert->name.' '.$cert->remark);
+                                    echo('</option>');
+                                }
+                            } ?>
+                        </select>
+                    </label>
+                </div>
+                <div class="mb-2">
+                    <label class="select2-label" for="selected_cert_multi">処理対象の資格
+                        <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
+                            <?php if (!empty($certs)) {
+                                foreach ($certs as $cert) {
+                                    echo('<option>');
+                                    echo($cert->name.' '.$cert->remark);
+                                    echo('</option>');
+                                }
+                            } ?>
+                        </select>
+                    </label>
+                </div>
+                <input class="mb-4 btn btn-primary" type="submit" value="編集">
+            </form>
+    
+            <form class="mb-4" action="/school/cert/addNewItem" method="post">
+                <?= csrf_field() ?>
+                <label>資格名
+                    <input class="form-control" type="text" name="newItemName">
+                </label>
+                <button class="btn btn-primary" type="submit">追加</button>
+                <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>
+            </form>
+            
+            <?php if (!empty($certs)) { ?>
+                <table class="table small table-sm">
+                    <thead>
                         <tr>
-                            <td><?= $cert->name ?></td>
-                            <td class="text-center padding50">
-                                <a href="<?= route_to('cert_item_list', $cert->id) ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </td>
+                            <th>資格名</th>
+                            <th>備考</th>
+                            <th></th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php } else {
-            echo '<p>学校で取り扱っている資格がありません</p>';
-        } ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($certs as $cert) : ?>
+                            <tr>
+                                <td><?= $cert->name ?></td>
+                                <td><?= $cert->remark ?></td>
+                                <td>
+                                    <a href="<?= route_to('cert_item_list', $cert->id) ?>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php } else {
+                echo '<p>学校で取り扱っている資格がありません</p>';
+            } ?>
+        </div>
+
         <script
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
