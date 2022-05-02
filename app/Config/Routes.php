@@ -22,6 +22,7 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
+$routes->setPrioritize();
 
 /*
  * --------------------------------------------------------------------
@@ -32,6 +33,7 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index', ['as' => 'home']);
+$routes->get('(:any)', 'Pages::view/$1', ['priority' => 1]);
 $routes->get('home/csv_export', 'HomeController::csvExport', ['as' => 'home_csv_export']);
 $routes->get('home/excel_export', 'HomeController::excelExport', ['as' => 'home_excel_export']);
 $routes->get('home/rotate_pdf', 'HomeController::rotatePdf', ['as' => 'home_rotate_pdf']);

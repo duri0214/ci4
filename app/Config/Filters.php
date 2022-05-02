@@ -6,6 +6,9 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use Myth\Auth\Filters\LoginFilter;
+use Myth\Auth\Filters\PermissionFilter;
+use Myth\Auth\Filters\RoleFilter;
 
 class Filters extends BaseConfig
 {
@@ -19,6 +22,9 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'login' => LoginFilter::class,
+        'role' => RoleFilter::class,
+        'permission' => PermissionFilter::class,
     ];
 
     /**
@@ -61,5 +67,5 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = ['login' => ['before' => ['school*']],];
 }
