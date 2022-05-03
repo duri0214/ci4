@@ -20,9 +20,15 @@ class SchoolMigration extends Migration
                     'unsigned' => true,
                     'comment' => '「中学」「高校」などの学校カテゴリー',
                 ],
+                'school_corporation_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'comment' => '法人名',
+                ],
                 'name' => [
                     'type' => 'VARCHAR',
                     'constraint' => '50',
+                    'comment' => '学校名',
                 ],
                 'zipcode' => [
                     'type' => 'VARCHAR',
@@ -57,6 +63,7 @@ class SchoolMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('m_school_category_id', 'm_school_category', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('school_corporation_id', 'school_corporation', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addUniqueKey('code');
         $this->forge->createTable('school');
     }

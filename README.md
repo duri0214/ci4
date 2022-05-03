@@ -40,25 +40,26 @@
 1. php spark db:seed VocabularyBookSeeder
 2. php spark db:seed UserSeeder
 3. php spark db:seed MSchoolCategorySeeder
-4. php spark db:seed SchoolSeeder
-5. php spark db:seed SchoolCurriculumSeeder
-6. php spark db:seed SchoolPeriodSeeder
-7. php spark db:seed SchoolRoleSeeder
-8. php spark db:seed SchoolUserSeeder
-9. php spark db:seed SchoolUserRoleSeeder
-10. php spark db:seed SchoolTimeSeeder
-11. php spark db:seed SchoolHomeroomSeeder
-12. php spark db:seed SchoolSubjectSeeder
-13. php spark db:seed SchoolSubSubjectSeeder
-14. php spark db:seed SchoolLessonSeeder
-15. php spark db:seed SchoolLessonItemSegmentSeeder
-16. php spark db:seed SchoolLessonItemSeeder
-17. php spark db:seed SchoolLessonMemberSeeder
-18. php spark db:seed SchoolAttendStatusSeeder
-19. php spark db:seed SchoolAttendStatusDetailSeeder
-20. php spark db:seed SchoolAttendSeeder
-21. php spark db:seed SchoolCertSeeder
-22. php spark db:seed SchoolCertItemSeeder
+4. php spark db:seed SchoolCorporationSeeder
+5. php spark db:seed SchoolSeeder
+6. php spark db:seed SchoolCurriculumSeeder
+7. php spark db:seed SchoolPeriodSeeder
+8. php spark db:seed SchoolRoleSeeder
+9. php spark db:seed SchoolUserSeeder
+10. php spark db:seed SchoolUserRoleSeeder
+11. php spark db:seed SchoolTimeSeeder
+12. php spark db:seed SchoolHomeroomSeeder
+13. php spark db:seed SchoolSubjectSeeder
+14. php spark db:seed SchoolSubSubjectSeeder
+15. php spark db:seed SchoolLessonSeeder
+16. php spark db:seed SchoolLessonItemSegmentSeeder
+17. php spark db:seed SchoolLessonItemSeeder
+18. php spark db:seed SchoolLessonMemberSeeder
+19. php spark db:seed SchoolAttendStatusSeeder
+20. php spark db:seed SchoolAttendStatusDetailSeeder
+21. php spark db:seed SchoolAttendSeeder
+22. php spark db:seed SchoolCertSeeder
+23. php spark db:seed SchoolCertItemSeeder
 
 ## codeigniterにおけるエンティティと関係
 https://forum.codeigniter.com/thread-80298.html
