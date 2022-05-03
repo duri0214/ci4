@@ -19,13 +19,9 @@ class SchoolUserMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
-                'name' => [
-                    'type' => 'VARCHAR',
-                    'constraint' => '100',
-                ],
-                'email' => [
-                    'type' => 'VARCHAR',
-                    'constraint' => '255',
+                'user_id' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
                 ],
                 'remark' => [
                     'type' => 'VARCHAR',
@@ -39,7 +35,8 @@ class SchoolUserMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'email']);
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['user_id', 'school_id']);
         $this->forge->createTable('school_user');
     }
 

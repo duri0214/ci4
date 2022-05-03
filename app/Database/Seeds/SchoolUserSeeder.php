@@ -12,32 +12,27 @@ class SchoolUserSeeder extends Seeder
             [
                 'id' => 1,
                 'school_id' => 1,
-                'name' => 'デモ ミドルネーム 先生（管理者）',
-                'email' => 'demo_t1@gmail.ac.jp',
+                'user_id' => 1,
             ],
             [
                 'id' => 2,
                 'school_id' => 1,
-                'name' => 'デモ　先生（非常勤）',
-                'email' => 'demo_t2@gmail.ac.jp',
+                'user_id' => 2,
             ],
             [
                 'id' => 3,
                 'school_id' => 1,
-                'name' => 'デモ　学生1（学生）',
-                'email' => 'demo_s1@gmail.ac.jp',
+                'user_id' => 3,
             ],
             [
                 'id' => 4,
                 'school_id' => 1,
-                'name' => 'デモ　学生2（学生）',
-                'email' => 'demo_s2@gmail.ac.jp',
+                'user_id' => 4,
             ],
             [
                 'id' => 5,
                 'school_id' => 1,
-                'name' => 'デモ　学生3（学生）',
-                'email' => 'demo_s3@gmail.ac.jp',
+                'user_id' => 5,
             ],
         ];
     

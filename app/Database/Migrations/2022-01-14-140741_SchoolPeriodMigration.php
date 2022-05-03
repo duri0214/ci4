@@ -48,7 +48,7 @@ class SchoolPeriodMigration extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_id', 'school', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('school_curriculum_id', 'school_curriculum', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_id', 'from_date', 'to_date']);
+        $this->forge->addUniqueKey(['school_id', 'school_curriculum_id', 'from_date', 'to_date']);
         $this->forge->createTable('school_period');
     }
 
