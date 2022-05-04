@@ -132,6 +132,6 @@ class UserModel extends Model
             ->where('users.active', 1)
             ->where('school_user.id', null)
             ->get()
-            ->getResultObject();
+            ->getResult(User::class);
     }
 }
