@@ -5,7 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>システム管理</title>
+        <title>システム管理｜未登録管理</title>
     
         <!-- Bootstrap CSS -->
         <link
@@ -31,7 +31,7 @@
     <body>
         <div class="container">
             <?= $breadcrumb ?? null ?>
-            <h1>システム管理</h1>
+            <h1>システム管理｜未登録管理</h1>
             アクティベーションが済んだが、学校へのアサインが済んでいないユーザーのリストです
             <uo><li>shiftキーを押しながらまとめてチェックする、みたいな機能</li></uo>
     
