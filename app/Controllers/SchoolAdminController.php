@@ -7,7 +7,7 @@ use App\Libraries\Breadcrumb;
 
 class SchoolAdminController extends BaseController
 {
-    public function index(): string
+    public function unregisteredList(): string
     {
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));
@@ -19,6 +19,6 @@ class SchoolAdminController extends BaseController
             'breadcrumb' => $b->render(),
         ];
     
-        return view('school/admin/index', $data);
+        return view('school/admin/unregistered/list', $data);
     }
 }
