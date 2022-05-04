@@ -112,13 +112,26 @@ class UserModel extends Model
      */
     protected function addToGroup($data)
     {
-        if (is_numeric($this->assignGroup))
-        {
+        if (is_numeric($this->assignGroup)) {
             $groupModel = model(GroupModel::class);
             $groupModel->addUserToGroup($data['id'], $this->assignGroup);
         }
 
         return $data;
     }
-
+    
+    /**
+     * 「メールアクティベートが済んでいるが、学校紐づけが完了していないユーザー」を返します
+     * @return array
+     */
+    public function getUnregisteredSchoolUsers(): array
+    {
+        return $this->db->table('users')
+            ->join('school_user', 'school_user.user_id = users.id', 'left')
+            ->select('users.*')
+            ->where('users.active', 1)
+            ->where('school_user.id', null)
+            ->get()
+            ->getResultObject();
+    }
 }

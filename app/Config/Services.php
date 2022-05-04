@@ -14,6 +14,7 @@ use App\Models\SchoolPeriodModel;
 use App\Models\SchoolModel;
 use App\Models\SchoolTimeModel;
 use App\Models\SchoolUserModel;
+use App\Models\UserModel;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -148,5 +149,14 @@ class Services extends BaseService
         }
         
         return new SchoolCertModel();
+    }
+    
+    public static function userModel($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('userModel');
+        }
+        
+        return new UserModel();
     }
 }

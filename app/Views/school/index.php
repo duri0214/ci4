@@ -104,7 +104,8 @@
             
             <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
             <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
-            <a href="<?= route_to('home') ?>">ポートフォリオへもどる</a>
+            <p><a href="<?= route_to('school_admin') ?>">システム管理へ</a></p>
+            <p><a href="<?= route_to('home') ?>">ポートフォリオへもどる</a></p>
         </div>
         <script
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -42,6 +42,7 @@ $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'ho
 
 $routes->post('register', 'AuthController::attemptRegister');
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
+$routes->get('school/admin', 'SchoolAdminController::index', ['as' => 'school_admin']);
 $routes->get('school/lesson/list', 'SchoolLessonController::lessonList', ['as' => 'lesson_list']);
 $routes->get('school/lesson/(:num)/item/list', 'SchoolLessonController::lessonItemList/$1', ['as' => 'lesson_detail']);
 $routes->match(['get', 'post'], 'school/lesson/create', 'SchoolLessonController::lessonCreate', ['as' => 'lesson_create']);
