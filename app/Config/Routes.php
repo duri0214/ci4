@@ -40,6 +40,7 @@ $routes->get('home/rotate_pdf', 'HomeController::rotatePdf', ['as' => 'home_rota
 $routes->get('home/store', 'HomeController::store', ['as' => 'home_store']);
 $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'home_api']);
 
+$routes->post('register', 'AuthController::attemptRegister');
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
 $routes->get('school/lesson/list', 'SchoolLessonController::lessonList', ['as' => 'lesson_list']);
 $routes->get('school/lesson/(:num)/item/list', 'SchoolLessonController::lessonItemList/$1', ['as' => 'lesson_detail']);
