@@ -3,7 +3,6 @@
 namespace App\Models\Domain;
 
 use App\Entities\MSchoolCategoryEntity;
-use App\Entities\SchoolAttendEntity;
 use App\Entities\SchoolCurriculumEntity;
 use App\Entities\SchoolHomeroomEntity;
 use App\Entities\SchoolPeriodEntity;
