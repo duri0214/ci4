@@ -79,7 +79,7 @@
             <form class="mb-4" action="/school/cert/addNewItem" method="post">
                 <?= csrf_field() ?>
                 <label>資格名
-                    <input class="form-control" type="text" name="newItemName" value="<?= old('newItemName') ?>">
+                    <input class="form-control" type="text" name="newItemName" value="<?= old('newItemName') ?>" required>
                 </label>
                 <button class="btn btn-primary" type="submit">追加</button>
                 <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>
