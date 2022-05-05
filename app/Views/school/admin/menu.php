@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr><td><a href="<?= route_to('school_admin_unregistered_list') ?>">未登録管理</a></td></tr>
+                    <tr><td><a href="<?= route_to('unregistered_list') ?>">未登録ユーザーの紐づけ</a></td></tr>
                 </tbody>
             </table>
         </div>

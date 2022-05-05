@@ -11,14 +11,14 @@ use CodeIgniter\Model;
 class SchoolUserModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'user';
+    protected $table            = 'school_user';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = SchoolUserEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['school_id', 'name', 'email', 'remark'];
+    protected $allowedFields    = ['school_id', 'user_id', 'remark'];
 
     // Dates
     protected $useTimestamps = true;

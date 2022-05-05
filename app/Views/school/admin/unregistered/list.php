@@ -33,7 +33,10 @@
             <?= $breadcrumb ?? null ?>
             <h1>システム管理｜未登録管理</h1>
             アクティベーションが済んだが、学校へのアサインが済んでいないユーザーのリストです
-            <uo><li>shiftキーを押しながらまとめてチェックする、みたいな機能</li></uo>
+            <uo>
+                <li>shiftキーを押しながらまとめてチェックする、みたいな機能</li>
+                <li>すでに登録済みの生徒を別の学校に移籍する機能</li>
+            </uo>
     
             <?php if (session()->getFlashdata('success')) {
                 echo ('<div class="alert alert-success mt-2">');
@@ -46,17 +49,15 @@
                 echo ('</div>');
             } ?>
 
-            <form action="<?= route_to('school_user_register') ?>" method="post">
+            <form method="post" action="#">
                 <?= csrf_field() ?>
                 <div class="mt-4">
                     <label>
-                        <select class="select2_single" name="school_of_assignment">
+                        <select class="select2_single" name="school_id">
                             <option></option>
                             <?php if (!empty($schools)) {
                                 foreach ($schools as $school) {
-                                    echo('<option>');
-                                    echo($school->name.' '.$school->remark);
-                                    echo('</option>');
+                                    echo('<option value="'.$school->id.'">'.$school->name.'</option>');
                                 }
                             } ?>
                         </select>
@@ -78,7 +79,7 @@
                                 <tr>
                                     <td>
                                         <label>
-                                            <input type="checkbox" name="use[<?= $user->id ?>]">
+                                            <input type="checkbox" name="registration_users[<?= $user->id ?>]">
                                         </label>
                                     </td>
                                     <td><?= $user->email ?></td>
@@ -88,10 +89,10 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <input class="btn btn-outline-primary" type="submit" aria-disabled="true">
                 <?php } else {
                     echo '<p>未登録の生徒はいません</p>';
                 } ?>
+                <button id="register" class="btn btn-outline-danger">登録先の学校を選んでください</button>
             </form>
         </div>
     </body>
@@ -103,5 +104,22 @@
                 width: '100%',
             });
         });
+        
+        // 登録先の学校を選択していないと登録ボタンの submit が働かないようにする
+        $('select').on('change', function() {
+            const selected_idx = $(this).find('option:selected').index();
+            const register = document.querySelector('#register');
+            if (selected_idx > 0) {
+                register.classList.replace('btn-outline-danger', 'btn-outline-success')
+                register.textContent = '登録できます';
+                register.parentElement.setAttribute('action', '<?= route_to('user_register') ?>');
+                register.setAttribute('type', 'submit')
+            } else {
+                register.classList.replace('btn-outline-success', 'btn-outline-danger')
+                register.textContent = '登録先の学校を選んでください';
+                register.parentElement.removeAttribute('action');
+                register.setAttribute('type', 'button')
+            }
+        }).trigger('change');
     </script>
 </html>
