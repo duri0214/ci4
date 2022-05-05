@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>school</h1>
+            <h1>school（ログインユーザ： <?= $user->username ?? null ?>）</h1>
             <h2>todo</h2>
             <ul>
                 <li>カリキュラム、HRを選択したらajaxで以下の情報を表示する
@@ -45,44 +45,37 @@
             <label>
                 <select class="select2-curriculum form-control" name="curriculum">
                     <option></option>
-                    <?php
-                    if (!empty($curriculumChoices)) {
+                    <?php if (!empty($curriculumChoices)) {
                         foreach ($curriculumChoices as $curriculumChoice) {
                             echo('<option>');
                             echo($curriculumChoice->name.' '.$curriculumChoice->remark);
                             echo('</option>');
                         }
-                    }
-                    ?>
+                    } ?>
                 </select>
             </label>
     
             <label>
                 <select class="select2-homeroom form-control" name="curriculum">
                     <option></option>
-                    <?php
-                    if (!empty($homeroomChoices)) {
+                    <?php if (!empty($homeroomChoices)) {
                         foreach ($homeroomChoices as $homeroom) {
                             echo('<option>');
                             echo($homeroom->name.' '.$homeroom->remark);
                             echo('</option>');
                         }
-                    }
-                    ?>
+                    } ?>
                 </select>
             </label>
-    
-    
+            
             <p>カリキュラム（id=1）がもつすべての学期リスト:</p>
-            <?php
-            if (!empty($periods)) {
+            <?php if (!empty($periods)) {
                 foreach ($periods as $period) : ?>
                     <li><?= $period->name ?> <?= $period->from_date->format('Y-m-d') ?> ～ <?= $period->to_date->format('Y-m-d') ?></li>
                 <?php endforeach;
             } else {
                 echo '<p>レコードなし</p>';
-            }
-            ?>
+            } ?>
     
             <p>現在の学期:</p>
             <?php if (!empty($currentPeriod)) { ?>
@@ -92,15 +85,13 @@
             } ?>
             
             <p>出席情報:</p>
-            <?php
-            if (!empty($attends)) {
+            <?php if (!empty($attends)) {
                 foreach ($attends as $attend) : ?>
                     <li><?= $attend->attend_date->format('Y-m-d') ?> <?= $attend->remark ?></li>
                 <?php endforeach;
             } else {
                 echo '<p>レコードなし</p>';
-            }
-            ?>
+            } ?>
             
             <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
             <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
@@ -113,21 +104,18 @@
                 crossorigin="anonymous">
         </script>
     </body>
+    <script>
+        $(function() {
+            $('.select2-curriculum').select2({
+                placeholder: "カリキュラムを選択してください",
+                allowClear: true,
+                width: '100%'
+            });
+            $('.select2-homeroom').select2({
+                placeholder: "ホームルームを選択してください",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
 </html>
-
-<script>
-    $(document).ready(function() {
-        $('.select2-curriculum').select2({
-            placeholder: "カリキュラムを選択してください",
-            allowClear: true,
-            width: '100%'
-        });
-    });
-    $(document).ready(function() {
-        $('.select2-homeroom').select2({
-            placeholder: "ホームルームを選択してください",
-            allowClear: true,
-            width: '100%'
-        });
-    });
-</script>

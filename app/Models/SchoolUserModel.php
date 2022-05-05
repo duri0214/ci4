@@ -42,4 +42,16 @@ class SchoolUserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    
+    /**
+     * @param int $loginId
+     * @return SchoolUserEntity
+     */
+    public function getSchoolUser(int $loginId): SchoolUserEntity
+    {
+        return $this->db->table($this->table)
+            ->where('user_id', $loginId)
+            ->get()
+            ->getResult(SchoolUserEntity::class)[0];
+    }
 }

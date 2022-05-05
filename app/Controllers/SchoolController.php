@@ -8,20 +8,15 @@ use Exception;
 
 class SchoolController extends BaseController
 {
-    // TODO: Demoになってます：グローバル定数として school.id のリストを定義しておく（defineに？）
-    const SCHOOL_LIST = ['Demo' => 1, 'NihonBunri' => 2];
-    
     /**
      * @throws Exception
      */
     public function index(): string
     {
-        $school_code_from_login = 'Demo';
-    
-        // schoolEntityを取得
-        $schoolId = self::SCHOOL_LIST[$school_code_from_login];
-        $model = service('schoolModel');
-        $schoolEntity = $model->find($schoolId);
+        // loginしたuserとschoolを確定
+        $userEntity = service('userModel')->find($_SESSION['logged_in']);
+        $schoolUserEntity = service('schoolUserModel')->getSchoolUser($userEntity->id);
+        $schoolEntity = service('schoolModel')->find($schoolUserEntity->school_id);
         
         if (is_null($schoolEntity)) {
             throw PageNotFoundException::forPageNotFound();
@@ -31,6 +26,7 @@ class SchoolController extends BaseController
         $schoolDomain = new SchoolDomain($schoolEntity);
         
         $data = [
+            'user' => $userEntity,
             'school' => $schoolDomain->getSchoolEntity(),
             'schoolCategory' => $schoolDomain->getSchoolCategory(),
             'curriculumChoices' => $schoolDomain->getCurriculumChoices(),
