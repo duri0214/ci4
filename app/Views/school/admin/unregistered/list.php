@@ -97,7 +97,7 @@
         </div>
     </body>
     <script>
-        $(document).ready(function() {
+        $(function() {
             $('.select2_single').select2({
                 placeholder: "未登録ユーザを割り当てる学校を選択してください",
                 allowClear: true,

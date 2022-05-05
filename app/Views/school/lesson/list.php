@@ -5,6 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>学校管理システム｜授業管理｜授業一覧</title>
 
         <!-- Bootstrap CSS -->
         <link
@@ -12,8 +13,6 @@
                 rel="stylesheet"
                 integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous">
-
-        <title>授業一覧</title>
     </head>
     <body>
         <div class="container">

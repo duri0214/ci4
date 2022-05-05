@@ -2,7 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Cert</title>
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>学校管理システム｜資格管理</title>
 
         <!-- Bootstrap CSS -->
         <link
@@ -120,15 +123,13 @@
         </script>
     </body>
     <script>
-        $(document).ready(function() {
+        $(function() {
             $('.select2_single').select2({
                 placeholder: "資格を選択してください",
                 allowClear: true,
                 width: '100%',
                 tags: true
             });
-        });
-        $(document).ready(function() {
             $('.select2_multi').select2({
                 placeholder: "資格を選択してください（複数可）",
                 allowClear: true,
