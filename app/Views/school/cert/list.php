@@ -38,9 +38,9 @@
                 echo (session()->getFlashdata('success'));
                 echo ('</div>');
             } ?>
-            <?php if (isset($validation)) {
+            <?php if (session()->getFlashdata('errors')) {
                 echo ('<div class="alert alert-danger mt-2">');
-                echo ($validation->listErrors());
+                echo (session()->getFlashdata('errors'));
                 echo ('</div>');
             } ?>
 
@@ -79,7 +79,7 @@
             <form class="mb-4" action="/school/cert/addNewItem" method="post">
                 <?= csrf_field() ?>
                 <label>資格名
-                    <input class="form-control" type="text" name="newItemName">
+                    <input class="form-control" type="text" name="newItemName" value="<?= old('newItemName') ?>">
                 </label>
                 <button class="btn btn-primary" type="submit">追加</button>
                 <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>

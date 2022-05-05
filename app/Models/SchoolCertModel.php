@@ -42,4 +42,12 @@ class SchoolCertModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    
+    public function exists($schoolId, $itemName): bool
+    {
+        return $this->db
+                ->table($this->table)
+                ->where(['school_id' => $schoolId, 'name' => $itemName])
+                ->countAllResults() > 0;
+    }
 }

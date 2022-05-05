@@ -10,9 +10,36 @@ use ReflectionException;
 
 class SchoolCertController extends BaseController
 {
+    private $validationRules = [
+        [
+            'newItemName' => [
+                'label'  => '資格名',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} は必須入力です'
+                ]
+            ]
+        ],
+        [
+            'selected_cert_single' => [
+                'label'  => '資格名（単数）',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} は必須入力です'
+                ]
+            ],
+            'selected_cert_multi' => [
+                'label'  => '資格名（複数）',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => '{field} は必須入力です'
+                ]
+            ]
+        ]
+    ];
+    
     public function certList(): string
     {
-        // 動作確認OK！
         // TODO: certの柄編集削除のPOST処理もここに入ります
         
         $model = service('schoolCertModel');
@@ -26,7 +53,7 @@ class SchoolCertController extends BaseController
             'breadcrumb' => $b->render(),
         ];
     
-        return view(route_to('cert_list'), $data);
+        return view('school/cert/list', $data);
     }
     
     /**
@@ -36,7 +63,6 @@ class SchoolCertController extends BaseController
      */
     public function certItemList(int $cert_id): string
     {
-        // 動作確認OK！
         // TODO: itemの柄編集削除のPOST処理もここに入ります
         
         $model = model(SchoolCertModel::class);
@@ -60,72 +86,42 @@ class SchoolCertController extends BaseController
     
     /**
      * 資格のその他情報の登録（資格一覧のドロップダウン部分）
-     * @return void
+     * @return RedirectResponse
      */
-    public function certInfoRegister(): void
+    public function certInfoRegister(): RedirectResponse
     {
-        // 動作確認OK！
-        
-        // TODO: validation(callback) and redirect
-        helper(['form', 'url']);
-        if ($this->validate([
-            'selected_cert_single' => 'required',
-            'selected_cert_multi'  => 'required',
-        ])) {
-            // can register
-            // dd(['validate成功', $this->request->getPost()]);
-            $this->certList();
+        if ($this->validate($this->validationRules[1])) {
+            // TODO: 登録時の処理
+            return redirect()->back()->withInput()->with('success', '◯◯ が登録されました（処理未作成）');
+        } else {
+            return redirect()->back()->withInput()->with('errors', $this->validator->listErrors());
         }
-        $this->certList();
     }
     
     /**
-     * @return string|RedirectResponse
+     * @return RedirectResponse
      * @throws ReflectionException
      */
-    public function addNewItem(): string|RedirectResponse
+    public function addNewItem(): RedirectResponse
     {
         $model = model(SchoolCertModel::class);
-        if ($this->validate($this->getValidationRules())) {
-            $model->save(
-                [
-                    'school_id' => 1,
-                    'name'  => $this->request->getPost('newItemName'),
-                    'remark'  => 'hello!',
-                ]
-            );
-            // success: listに戻る
-            session()->setFlashdata('success', $this->request->getPost('newItemName').' が登録されました');
-            return redirect()->route('cert_list');
+        $schoolId = 1;  // TODO: login user に紐づく school_id
+        $itemName = $this->request->getPost('newItemName');
+        if ($this->validate($this->validationRules[0])) {
+            if (!$model->exists($schoolId, $itemName)) {
+                $model->save(
+                    [
+                        'school_id' => $schoolId,
+                        'name'  => $itemName,
+                        'remark'  => 'hello!',
+                    ]
+                );
+                return redirect()->back()->withInput()->with('success', $itemName.' が登録されました');
+            } else {
+                return redirect()->back()->withInput()->with('errors', $itemName.' はすでに登録されています');
+            }
         } else {
-            // error
-            $model = service('schoolCertModel');
-            $b = new Breadcrumb();
-            $b->add('Home', route_to('school_home'));
-            $b->add('資格一覧', null);
-            $data = [
-                'certs' => $model->findAll(),
-                'breadcrumb' => $b->render(),
-                'validation' => $this->validator,
-            ];
-            return view(route_to('cert_list'), $data);
+            return redirect()->back()->withInput()->with('errors', $this->validator->listErrors());
         }
-    }
-    
-    /**
-     * バリデーションルールの配列を取得
-     * @return array
-     */
-    private function getValidationRules(): array
-    {
-        return [
-            'newItemName' => [
-                'label'  => '資格名',
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => '{field} は必須入力です'
-                ]
-            ],
-        ];
     }
 }
