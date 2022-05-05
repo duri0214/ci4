@@ -47,7 +47,8 @@ $routes->get('school/admin/unregistered/list', 'SchoolAdminController::unregiste
 $routes->post('school/admin/unregistered/user_register', 'SchoolAdminController::userRegister', ['as' => 'user_register']);
 $routes->get('school/lesson/list', 'SchoolLessonController::lessonList', ['as' => 'lesson_list']);
 $routes->get('school/lesson/(:num)/item/list', 'SchoolLessonController::lessonItemList/$1', ['as' => 'lesson_detail']);
-$routes->match(['get', 'post'], 'school/lesson/create', 'SchoolLessonController::lessonCreate', ['as' => 'lesson_create']);
+$routes->get('school/lesson/create', 'SchoolLessonController::lessonCreate', ['as' => 'lesson_create']);
+$routes->post('school/lesson/register', 'SchoolLessonController::lessonRegister', ['as' => 'lesson_register']);
 $routes->match(['get', 'post'], 'school/lesson/edit', 'SchoolLessonController::edit', ['as' => 'lesson_edit']);
 $routes->match(['get', 'post'], 'school/lesson/(:num)/item/create', 'SchoolLessonController::lessonItemCreate/$1', ['as' => 'lesson_item_create']);
 $routes->match(['get', 'post'], 'school/lesson/(:num)/item/(:num)/edit', 'SchoolLessonController::lessonItemEdit/$1/$2', ['as' => 'lesson_item_edit']);

@@ -12,6 +12,7 @@ use App\Models\SchoolHomeroomModel;
 use App\Models\SchoolLessonModel;
 use App\Models\SchoolPeriodModel;
 use App\Models\SchoolModel;
+use App\Models\SchoolSubSubjectModel;
 use App\Models\SchoolTimeModel;
 use App\Models\SchoolUserModel;
 use App\Models\UserModel;
@@ -158,5 +159,14 @@ class Services extends BaseService
         }
         
         return new UserModel();
+    }
+    
+    public static function schoolSubSubjectModel($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('schoolSubSubjectModel');
+        }
+        
+        return new SchoolSubSubjectModel();
     }
 }
