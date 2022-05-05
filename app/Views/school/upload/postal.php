@@ -37,9 +37,9 @@
                         echo (session()->getFlashdata('success'));
                         echo ('</div>');
                     } ?>
-                    <?php if (isset($validation)) {
+                    <?php if (session()->getFlashdata('errors')) {
                         echo ('<div class="alert alert-danger mt-2">');
-                        echo ($validation->listErrors());
+                        echo (session()->getFlashdata('errors'));
                         echo ('</div>');
                     } ?>
 

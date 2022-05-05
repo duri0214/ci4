@@ -29,7 +29,7 @@ class SchoolUploadController extends BaseController
             'breadcrumb' => $b->render(),
         ];
     
-        return view(route_to('lesson_upload_get'), $data);
+        return view('school/upload/lesson', $data);
     }
     
     /**
@@ -51,32 +51,18 @@ class SchoolUploadController extends BaseController
             'breadcrumb' => $b->render(),
         ];
     
-        return view(route_to('postal_upload_get'), $data);
+        return view('school/upload/postal', $data);
     }
     
     /**
      * File upload and Insert records
      * @throws ReflectionException
      */
-    public function importFile(): string|RedirectResponse
+    public function importFile(): RedirectResponse
     {
-        $model = new MPostalModel();
-    
-        // Validation
-        $input = $this->validate($this->getValidationRules());
-        if (!$input) {
-            // Not valid then return index for upload
-            $b = new Breadcrumb();
-            $b->add('Home', route_to('school_home'));
-            $b->add('アップロード管理', null);
-    
-            $data = [
-                'postals' => $model->paginate(15),
-                'pager' => $model->pager,
-                'breadcrumb' => $b->render(),
-                'validation' => $this->validator,
-            ];
-            return view(route_to('postal_upload_get'), $data);
+        if (!$this->validate($this->getValidationRules())) {
+            // Not valid
+            return redirect()->back()->withInput()->with('errors', $this->validator->listErrors());
         }
     
         $model = new MPostalModel();
@@ -87,20 +73,17 @@ class SchoolUploadController extends BaseController
             $file->move(self::UPLOAD_FOLDER, $newName, true);
             $files["sjis"] = self::UPLOAD_FOLDER.$newName;
             $files["utf8"] = ConvertFile::sjisToUtf8($files["sjis"]);
-    
-            // process the file
-            $records = $model->insertFromCsv($files["utf8"]);
             
-            // delete used files
+            // insert records then delete used file
+            $records = $model->insertFromCsv($files["utf8"]);
             foreach ($files as $file) {
                 unlink($file);
             }
             
-            // Set Session: 成功
-            session()->setFlashdata('success', $records.' 件 登録されました '.date("Y/m/d H:i:s"));
+            return redirect()->back()->withInput()->with('success', $records.' 件 登録されました '.date("Y/m/d H:i:s"));
+        } else {
+            return redirect()->back()->withInput()->with('errors', 'アップロードが失敗しました '.date("Y/m/d H:i:s"));
         }
-        
-        return redirect()->route('postal_upload_get');
     }
     
     /**
