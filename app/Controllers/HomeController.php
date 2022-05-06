@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\VocabularyBookModel;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use TCPDF;
 
 class HomeController extends BaseController
 {
@@ -166,28 +168,38 @@ class HomeController extends BaseController
         return view('home/index');
     }
     
-    /**
-     * dev\ci4_batches> php batches\public\index.php Home rotatePdf
-     */
-    public function rotatePdf()
+    public function rotatePdf(): RedirectResponse
     {
-        // TODO: PDFを読み込んでください（ここ事故る）
-        // 原因：$getSharedがTrueになるから
-        $param = [
-            'orientation' => 'Landscape', // 用紙の向き
-            'unit' => 'mm', // 単位
-            'format' => 'A4', // 用紙フォーマット
-            'encoding' => 'UTF-8' // 文字コード
-        ];
-        $tcpdf = service('tcpdf', $param, false);
+        // 基本、タテA4の枠組みで出力
+        $tcpdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         
-        // TODO: ここも事故ってる？
-        $tcpdf->setSourceFile('D:\OneDrive\ダウンロード\sample.pdf');
+        // set document information
+        $tcpdf->SetCreator('TCPDF');
+        $tcpdf->SetAuthor('yoshi.');
+        $tcpdf->SetTitle('TCPDF Title');
+        $tcpdf->SetSubject('TCPDF Subject');
+        $tcpdf->SetKeywords('TCPDF, PDF, example, test, guide');
+
+        // 標準ではヘッダがつくのでいまは除外
+        $tcpdf->setPrintHeader(false);
+        $tcpdf->setPrintFooter(false);
+    
+        // タテA4ページを追加
+        $tcpdf->AddPage('P');
+        $tcpdf->Cell(0, 0, 'A4 PORTRAIT', 1, 1, 'C');
         
-        // TODO: PDFを回転してください
-        $tcpdf->Rotate(90);
+        // ヨコA4ページを追加し、右90度回し
+        $tcpdf->AddPage('L', ['Rotate' => 90]);
+        $tcpdf->Cell(0, 0, 'A4 LANDSCAPE', 1, 1, 'C');
         
-        // TODO: PDFを保存してください
-        $tcpdf->Output('D:\OneDrive\ダウンロード\sample_rotated.pdf', 'F');
+        // from html
+        $html = "<h1>Hello World!</h1>";
+        $tcpdf->writeHTML($html);
+        
+        // 保存
+        $tcpdf->Output('D:\onedrive\ダウンロード\sample_rotated.pdf', 'F');
+    
+        // もとのページに戻る
+        return redirect()->back();
     }
 }
