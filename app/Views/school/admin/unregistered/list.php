@@ -78,9 +78,7 @@
                             <?php foreach ($users as $user) : ?>
                                 <tr>
                                     <td>
-                                        <label>
-                                            <input type="checkbox" name="registration_users[<?= $user->id ?>]">
-                                        </label>
+                                        <input class="chk_group" type="checkbox" name="registration_users[<?= $user->id ?>]">
                                     </td>
                                     <td><?= $user->email ?></td>
                                     <td><?= $user->username ?></td>
@@ -121,5 +119,22 @@
                 register.setAttribute('type', 'button')
             }
         }).trigger('change');
+
+        // Shift+クリックでチェックボックスを一括選択
+        $(function(){
+            let checked_last = null;
+            $('.chk_group').on('click', function(event){
+                if (event.shiftKey && checked_last) {
+                    const $targets = $('.chk_group');
+                    const p1 = $targets.index(checked_last);
+                    const p2 = $targets.index(this);
+                    for (let i = Math.min(p1, p2); i <= Math.max(p1, p2); ++i) {
+                        $targets.get(i).checked = checked_last.checked;
+                    }
+                } else {
+                    checked_last = this;
+                }
+            });
+        });
     </script>
 </html>
