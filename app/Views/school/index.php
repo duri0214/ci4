@@ -98,7 +98,8 @@
             
             <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
             <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
-            <p><a href="<?= route_to('school_admin_menu') ?>">システム管理へ</a></p>
+            <p><a href="<?= route_to('report_menu') ?>">証明書管理へ</a></p>
+            <p><a href="<?= route_to('admin_menu') ?>">システム管理へ</a></p>
             <p><a href="<?= route_to('home') ?>">ポートフォリオへもどる</a></p>
         </div>
         <script

@@ -59,7 +59,8 @@ $routes->get('school/cert/list', 'SchoolCertController::certList', ['as' => 'cer
 $routes->get('school/cert/(:num)/item/list', 'SchoolCertController::certItemList/$1', ['as' => 'cert_item_list']);
 $routes->post('school/cert/info/register', 'SchoolCertController::certInfoRegister', ['as' => 'cert_info_register']);
 $routes->post('school/cert/addNewItem', 'SchoolCertController::addNewItem', ['as' => 'cert_add_item']);
-$routes->post('school/report/menu', 'SchoolCertController::addNewItem', ['as' => 'report_menu']);
+$routes->get('school/report/menu', 'SchoolReportController::menu', ['as' => 'report_menu']);
+$routes->get('school/report/enrollment', 'SchoolReportController::enrollment', ['as' => 'report_enrollment']);
 
 /*
  * --------------------------------------------------------------------

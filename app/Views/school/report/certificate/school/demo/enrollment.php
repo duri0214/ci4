@@ -31,7 +31,7 @@
     <body>
         <div class="container">
             <p class="mt-5 pt-5 me-5 text-end small">■■高証　第 <?= $issue_num ?? '■' ?> 号</p>
-            <h1 class="mt-5 pt-5 text-center">在　学　証　明　書</h1>
+            <h1 class="mt-5 pt-5 text-center">在　籍　証　明　書</h1>
             
             <section id="student-profile" class="mt-5 pt-5">
                 <div class="row">
@@ -66,7 +66,7 @@
             </section>
 
             <h4 class="mt-5 pt-5 ms-5 ps-5 me-5 pe-5 text-center" style="line-height:2rem">
-                上記の者は、本校 ■■課程 ■■科 第 ■ 学年に在学していることを証明する。
+                上記の者は、本校 ■■課程 ■■科 第 ■ 学年に在籍していることを証明する。
             </h4>
             <p class="mt-5 pt-5 ms-5 small"><?= $publish_date ?? '令和 ■■年 ■■月 ■■日' ?></p>
             
@@ -89,3 +89,4 @@
         </div>
     </body>
 </html>
+<?php exit() ?>
