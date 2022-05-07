@@ -3,9 +3,9 @@
 namespace App\Factory;
 
 use App\Entities\SchoolEntity;
-use App\Models\School\AbstractSchool;
-use App\Models\School\Demo;
-use App\Models\School\NihonBunri;
+use App\Models\Domain\Logic\School\AbstractSchool;
+use App\Models\Domain\Logic\School\Demo;
+use App\Models\Domain\Logic\School\NihonBunri;
 use App\Repository\SchoolRepository;
 
 class SchoolFactory
