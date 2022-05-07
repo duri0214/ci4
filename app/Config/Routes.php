@@ -42,7 +42,7 @@ $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'ho
 
 $routes->post('register', 'AuthController::attemptRegister');
 $routes->get('school', 'SchoolController::index', ['as' => 'school_home']);
-$routes->get('school/admin/menu', 'SchoolAdminController::menuList', ['as' => 'school_admin_menu']);
+$routes->get('school/admin/menu', 'SchoolAdminController::menu', ['as' => 'admin_menu']);
 $routes->get('school/admin/unregistered/list', 'SchoolAdminController::unregisteredList', ['as' => 'unregistered_list']);
 $routes->post('school/admin/unregistered/user_register', 'SchoolAdminController::userRegister', ['as' => 'user_register']);
 $routes->get('school/lesson/list', 'SchoolLessonController::lessonList', ['as' => 'lesson_list']);
@@ -59,6 +59,7 @@ $routes->get('school/cert/list', 'SchoolCertController::certList', ['as' => 'cer
 $routes->get('school/cert/(:num)/item/list', 'SchoolCertController::certItemList/$1', ['as' => 'cert_item_list']);
 $routes->post('school/cert/info/register', 'SchoolCertController::certInfoRegister', ['as' => 'cert_info_register']);
 $routes->post('school/cert/addNewItem', 'SchoolCertController::addNewItem', ['as' => 'cert_add_item']);
+$routes->post('school/report/menu', 'SchoolCertController::addNewItem', ['as' => 'report_menu']);
 
 /*
  * --------------------------------------------------------------------

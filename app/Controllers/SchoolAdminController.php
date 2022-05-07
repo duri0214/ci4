@@ -9,7 +9,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolAdminController extends BaseController
 {
-    public function menuList(): string
+    public function menu(): string
     {
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));
