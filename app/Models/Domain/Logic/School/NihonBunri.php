@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models\School;
+namespace App\Models\Domain\Logic\School;
 
-use App\Domain\SchoolDomain;
+use App\Models\Domain\SchoolDomain;
+
+use function App\Models\School\count;
 
 class NihonBunri extends AbstractSchool
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\School;
+namespace App\Models\Domain\Logic\School;
 
 use App\Entities\MSchoolCategoryEntity;
-use App\Entities\SchoolPeriodEntity;
 use App\Entities\SchoolEntity;
+use App\Entities\SchoolPeriodEntity;
 
 abstract class AbstractSchool
 {
