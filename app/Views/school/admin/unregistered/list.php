@@ -78,7 +78,7 @@
                             <?php foreach ($users as $user) : ?>
                                 <tr>
                                     <td>
-                                        <input class="chk_group" type="checkbox" name="registration_users[<?= $user->id ?>]">
+                                        <input class="chk_group" type="checkbox" name="users[<?= $user->id ?>]">
                                     </td>
                                     <td><?= $user->email ?></td>
                                     <td><?= $user->username ?></td>

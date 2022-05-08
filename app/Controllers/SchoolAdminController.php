@@ -40,19 +40,19 @@ class SchoolAdminController extends BaseController
     
     public function userRegister(): RedirectResponse
     {
-        $schoolId = $this->request->getPost('school_id');
-        $users = $this->request->getPost('registration_users');
+        $registrationSchoolId = $this->request->getPost('school_id');
+        $registrationUsers = $this->request->getPost('users');
         
-        if (isset($users)) {
+        if (isset($registrationUsers)) {
             $list = [];
-            foreach ($users as $user_k => $user) {
+            foreach ($registrationUsers as $user_k => $user) {
                 $entity = new SchoolUserEntity();
-                $entity->school_id = $schoolId;
+                $entity->school_id = $registrationSchoolId;
                 $entity->user_id = $user_k;
                 $list[] = $entity;
             }
             service('schoolUserModel')->insertBatch($list);
-            return redirect()->back()->withInput()->with('success', count($users).' 件の登録が完了しました');
+            return redirect()->back()->withInput()->with('success', count($registrationUsers).' 件の登録が完了しました');
         }
         
         return redirect()->back()->withInput()->with('success', '0 件の登録が完了しました');
