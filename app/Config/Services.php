@@ -16,6 +16,7 @@ use App\Models\SchoolSubSubjectModel;
 use App\Models\SchoolTimeModel;
 use App\Models\SchoolUserModel;
 use App\Models\UserModel;
+use App\Repository\LoginRepository;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -43,6 +44,15 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+    
+    public static function schoolLoginRepository($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('schoolLoginRepository');
+        }
+        
+        return new LoginRepository();
+    }
     
     public static function schoolUserModel($getShared = true)
     {

@@ -8,6 +8,12 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolLessonController extends BaseController
 {
+    public function __construct()
+    {
+        $repository = service('schoolLoginRepository');
+        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+    }
+    
     /**
      * @return string
      */

@@ -9,6 +9,12 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolAdminController extends BaseController
 {
+    public function __construct()
+    {
+        $repository = service('schoolLoginRepository');
+        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+    }
+    
     public function menu(): string
     {
         $b = new Breadcrumb();

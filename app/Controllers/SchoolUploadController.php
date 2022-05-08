@@ -12,6 +12,12 @@ class SchoolUploadController extends BaseController
 {
     public const UPLOAD_FOLDER = "../writable/uploads/";
     
+    public function __construct()
+    {
+        $repository = service('schoolLoginRepository');
+        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+    }
+    
     /**
      * 授業アップロード画面
      * @return string

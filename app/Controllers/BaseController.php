@@ -36,6 +36,12 @@ class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
+    
+    /**
+     * ログインしたユーザの情報（テーブル名の添字でアクセスする）
+     * @var array
+     */
+    protected array $login = [];
 
     /**
      * Constructor.

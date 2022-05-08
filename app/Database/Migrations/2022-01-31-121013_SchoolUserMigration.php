@@ -23,6 +23,11 @@ class SchoolUserMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
+                'is_superuser' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'comment' => '開発者用'
+                ],
                 'remark' => [
                     'type' => 'VARCHAR',
                     'constraint' => '255',

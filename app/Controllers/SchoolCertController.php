@@ -38,6 +38,12 @@ class SchoolCertController extends BaseController
         ]
     ];
     
+    public function __construct()
+    {
+        $repository = service('schoolLoginRepository');
+        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+    }
+    
     public function certList(): string
     {
         // TODO: certの柄編集削除のPOST処理もここに入ります
@@ -105,7 +111,7 @@ class SchoolCertController extends BaseController
     public function addNewItem(): RedirectResponse
     {
         $model = model(SchoolCertModel::class);
-        $schoolId = 1;  // TODO: login user に紐づく school_id
+        $schoolId = $this->login['schoolUser']->school_id;
         $itemName = $this->request->getPost('newItemName');
         if ($this->validate($this->validationRules[0])) {
             if (!$model->exists($schoolId, $itemName)) {

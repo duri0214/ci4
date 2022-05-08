@@ -8,15 +8,19 @@ use Exception;
 
 class SchoolController extends BaseController
 {
+    public function __construct()
+    {
+        $repository = service('schoolLoginRepository');
+        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+    }
+    
     /**
      * @throws Exception
      */
     public function index(): string
     {
-        // loginしたuserとschoolを確定
-        $userEntity = service('userModel')->find($_SESSION['logged_in']);
-        $schoolUserEntity = service('schoolUserModel')->getSchoolUser($userEntity->id);
-        $schoolEntity = service('schoolModel')->find($schoolUserEntity->school_id);
+        // schoolを確定
+        $schoolEntity = service('schoolModel')->find($this->login['schoolUser']->school_id);
         
         if (is_null($schoolEntity)) {
             throw PageNotFoundException::forPageNotFound();
@@ -26,7 +30,7 @@ class SchoolController extends BaseController
         $schoolDomain = new SchoolDomain($schoolEntity);
         
         $data = [
-            'user' => $userEntity,
+            'user' => $this->login['user'],
             'school' => $schoolDomain->getSchoolEntity(),
             'schoolCategory' => $schoolDomain->getSchoolCategory(),
             'curriculumChoices' => $schoolDomain->getCurriculumChoices(),
