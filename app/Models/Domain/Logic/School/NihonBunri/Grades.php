@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models\Domain\Logic\School;
+namespace App\Models\Domain\Logic\School\NihonBunri;
 
+use App\Models\Domain\Logic\AbstractGrades;
 use App\Models\Domain\SchoolDomain;
+use JetBrains\PhpStorm\Pure;
 
-use function App\Models\School\count;
-
-class NihonBunri extends AbstractSchool
+class Grades extends AbstractGrades
 {
     public const SCHOOL_CODE = 'NihonBunri';
     
     /**
      * @param SchoolDomain $domain
      */
-    public function __construct(SchoolDomain $domain)
+    #[Pure] public function __construct(SchoolDomain $domain)
     {
         $this->school = $domain->getSchoolEntity();
         $this->school_category = $domain->getSchoolCategory();
@@ -78,26 +78,14 @@ class NihonBunri extends AbstractSchool
      * @param float $score
      * @return float
      */
-    protected function evaluate(float $score): float
+    public function evaluate(float $score): float
     {
-        switch ($score) {
-            case $score >= 80:
-                $evaluate = 5;
-                break;
-            case $score >= 65:
-                $evaluate = 4;
-                break;
-            case $score >= 50:
-                $evaluate = 3;
-                break;
-            case $score >= 40:
-                $evaluate = 2;
-                break;
-            default:
-                $evaluate = 1;
-                break;
-        }
-        
-        return $evaluate;
+        return match (true) {
+            $score >= 80 => 5,
+            $score >= 65 => 4,
+            $score >= 50 => 3,
+            $score >= 40 => 2,
+            default => 1,
+        };
     }
 }

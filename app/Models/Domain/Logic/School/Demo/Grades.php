@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Models\Domain\Logic\School;
+namespace App\Models\Domain\Logic\School\Demo;
 
+use App\Models\Domain\Logic\AbstractGrades;
 use App\Models\Domain\SchoolDomain;
+use JetBrains\PhpStorm\Pure;
 
-class Demo extends AbstractSchool
+class Grades extends AbstractGrades
 {
     public const SCHOOL_CODE = 'Demo';
     
     /**
      * @param SchoolDomain $domain
      */
-    public function __construct(SchoolDomain $domain)
+    #[Pure] public function __construct(SchoolDomain $domain)
     {
         $this->school = $domain->getSchoolEntity();
         $this->school_category = $domain->getSchoolCategory();
@@ -30,7 +32,7 @@ class Demo extends AbstractSchool
      * @param float $score
      * @return float
      */
-    protected function evaluate(float $score): float
+    public function evaluate(float $score): float
     {
         // TODO: Implement evaluate() method.
     }

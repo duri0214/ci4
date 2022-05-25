@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Models\Domain\Logic\School;
+namespace App\Models\Domain\Logic;
 
 use App\Entities\MSchoolCategoryEntity;
 use App\Entities\SchoolEntity;
 use App\Entities\SchoolPeriodEntity;
 
-abstract class AbstractSchool
+abstract class AbstractGrades implements ICsv, IGrades
 {
-    /**
-     * @var SchoolEntity
-     */
-    protected $school;
-    
-    /**
-     * @var MSchoolCategoryEntity
-     */
-    protected $school_category;
+    protected SchoolEntity $school;
+    protected MSchoolCategoryEntity $school_category;
     
     /**
      * @var SchoolPeriodEntity[]
@@ -47,6 +40,13 @@ abstract class AbstractSchool
         return $this->periods;
     }
     
-    abstract public function autoRating(int $groupId): array;
-    abstract protected function evaluate(float $score): float;
+    public function autoRating(int $groupId): array
+    {
+        // TODO: Implement autoRating() method.
+    }
+    
+    public function evaluate(float $score): float
+    {
+        // TODO: Implement evaluate() method.
+    }
 }
