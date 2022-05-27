@@ -16,7 +16,14 @@
 
         <!-- for css -->
         <link rel="stylesheet" href="assets/home/css/index.css">
-        
+
+        <!--jquery-->
+        <script
+                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                crossorigin="anonymous">
+        </script>
+
         <!-- FONTAWESOME -->
         <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
     
@@ -28,10 +35,11 @@
                 <h1 class="display-4">Let's shuffle your sentence</h1>
                 <p class="lead">Can be inspected by drag and drop.</p>
                 <a class="btn btn-primary btn-sm" href="#" role="button">register</a>
-                <a class="btn btn-success btn-sm" href="#" role="button">check</a>
+                <a id="submit" class="btn btn-success btn-sm" href="#" role="button">入れ替えた順番をチェック</a>
                 <hr class="my-4">
             </div>
-            
+
+            <p>現在の順番の表示：<span id="list-ids"></span></p>
             <table class="table table-bordered">
                 <tbody>
                 <?php
@@ -73,7 +81,11 @@
         </script>
         
         <!-- for drug and drop -->
-        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script
+                src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+                integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+                crossorigin="anonymous">
+        </script>
         
         <!-- my script -->
         <script src="assets/home/js/script.js"></script>
