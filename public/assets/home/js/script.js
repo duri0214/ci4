@@ -1,3 +1,4 @@
+/** Draggableで使用 */
 $(function () {
     const tr = $(".sortable");
     tr.sortable();
@@ -6,6 +7,7 @@ $(function () {
         $("#list-ids").text(tr.sortable("toArray").join(','));
     });
 
+    // 置き換えようとして失敗中
     // $('.sortable').sortable({
     //     opacity: 0.5,
     //     placeholder: "drag",
@@ -18,9 +20,9 @@ $(function () {
     // });
 });
 
+/** 文字を小さくしていく */
 function resize(textElem)
 {
-    /* 文字を小さくしていく */
     console.log(textElem.getBoundingClientRect().height , textElem.scrollHeight);
     const regionHeight = textElem.getBoundingClientRect().height;
     const actualHeight = textElem.scrollHeight;
