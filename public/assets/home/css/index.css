@@ -9,3 +9,11 @@ table.table {
     content: '\f058';
     font-weight: 900;
 }
+
+#text-box {
+    width: 50%;
+    height: 100px;
+    font-size: 30px;
+    border: 3px solid #ff8900;
+    padding:8px;
+}

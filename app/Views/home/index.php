@@ -39,6 +39,7 @@
                 <hr class="my-4">
             </div>
 
+            <h2 class="mt-4">Draggable</h2>
             <p>現在の順番の表示：<span id="list-ids"></span></p>
             <table class="table table-bordered">
                 <tbody>
@@ -54,8 +55,13 @@
                 } ?>
                 </tbody>
             </table>
+            
+            <h2 class="mt-4">Text resize</h2>
+            <div class="btn btn-primary btn-sm" onclick="selectShort()">短文</div>
+            <div class="btn btn-primary btn-sm" onclick="selectLong()">長文</div>
+            <div id="text-box"></div>
     
-            <h1>Hello World!</h1>
+            <h2 class="mt-4">Playground</h2>
             <a href=<?= route_to('home_store') ?>>
                 <button>store</button>
             </a>
@@ -89,5 +95,28 @@
         
         <!-- my script -->
         <script src="assets/home/js/script.js"></script>
+        <script>
+            // the text from db
+            const shortText = "お寿司食べたい🍣";
+            const longText = "私が好きなお寿司のネタとして、サーモン、本マグロ、はまちが挙げられます。いずれにしても脂がのっていてとても気に入っています。そういえばお寿司屋さんといえば弊社から歩いても行けるところに、私がよく行くお店があるのですが、1000円以下から食べられる「回らないお寿司」でとてもおいしいです。私一人でも、同僚とのランチでも行きます。私が好きなお寿司のネタとして、サーモン、本マグロ、はまちが挙げられます。いずれにしても脂がのっていてとても気に入っています。そういえばお寿司屋さんといえば弊社から歩いても行けるところに、私がよく行くお店があるのですが、1000円以下から食べられる「回らないお寿司」でとてもおいしいです。私一人でも、同僚とのランチでも行きます。";
+
+            const textElem = document.getElementById("text-box");
+
+            /**
+             * 短文を貼り付けるボタンのアクション（resize発火用）
+             */
+            function selectShort() {
+                textElem.innerText = shortText;
+                resize(textElem);
+            }
+
+            /**
+             * 長文を貼り付けるボタンのアクション（resize発火用）
+             */
+            function selectLong() {
+                textElem.innerText = longText;
+                resize(textElem);
+            }
+        </script>
     </body>
 </html>
