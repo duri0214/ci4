@@ -55,7 +55,7 @@
                 } ?>
                 </tbody>
             </table>
-            
+
             <h2 class="mt-4">Text resize</h2>
             <div class="btn btn-primary btn-sm" onclick="selectText(0)">短文</div>
             <div class="btn btn-primary btn-sm" onclick="selectText(1)">中文</div>

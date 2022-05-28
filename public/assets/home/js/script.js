@@ -1,23 +1,15 @@
 /** Draggableで使用 */
 $(function () {
     const tr = $(".sortable");
-    tr.sortable();
+    tr.sortable({
+        revert: true,
+        opacity: 0.5,
+        axis: 'x'
+    });
     tr.disableSelection();
     $("#submit").on('click', function () {
         $("#list-ids").text(tr.sortable("toArray").join(','));
     });
-
-    // 置き換えようとして失敗中
-    // $('.sortable').sortable({
-    //     opacity: 0.5,
-    //     placeholder: "drag",
-    //     handle: '.sortable',
-    //     axis: 'x',
-    //     update: function ( event, ui ) {
-    //         const updateRows = $(this).sortable('toArray').join(',');
-    //         $(this).closest('.table-bordered').find('.to_array_text').text(updateRows);
-    //     }
-    // });
 });
 
 /**
@@ -39,7 +31,7 @@ function resize(el, default_px)
     console.log(`before: actualHeight : regionHeight ? ${el.scrollHeight} : ${regionHeight} (${fontSize})`);
 
     // decrease
-    for (let size = default_px; el.scrollHeight > regionHeight && size >= 1; size -= 1) {
+    for (let size = default_px; el.scrollHeight > regionHeight && size >= 10; size -= 1) {
         el.setAttribute("style", `font-size: ${size}px`);
     }
 
