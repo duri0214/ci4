@@ -29,7 +29,7 @@ class SchoolLessonController extends BaseController
             'breadcrumb' => $b->render(),
         ];
         
-        return view('school/lesson/list', $data);
+        return view('school/admin/lesson/list', $data);
     }
     
     /**
@@ -49,7 +49,7 @@ class SchoolLessonController extends BaseController
             'breadcrumb' => $b->render()
         ];
         
-        return view('school/lesson/create', $data);
+        return view('school/admin/lesson/create', $data);
     }
     
     /**
@@ -96,7 +96,7 @@ class SchoolLessonController extends BaseController
         // TODO: $groupId にはセグメントがある（親子関係など）
         // $school->autoRating($lessonId);
         
-        return redirect("school/lesson/$lessonId");
+        return redirect("school/admin/lesson/$lessonId");
     }
     
     /**
@@ -122,7 +122,7 @@ class SchoolLessonController extends BaseController
         ];
     
         // ある授業の詳細
-        return view("school/lesson/detail", $data);
+        return view("school/admin/lesson/detail", $data);
     }
     
     public function lessonItemCreate(int $lessonId): RedirectResponse
