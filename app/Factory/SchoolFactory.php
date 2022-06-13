@@ -4,7 +4,6 @@ namespace App\Factory;
 
 use App\Entities\SchoolEntity;
 use App\Models\Domain\Logic\AbstractGrades;
-use App\Models\Domain\Logic\School\Demo\Grades;
 
 class SchoolFactory
 {
