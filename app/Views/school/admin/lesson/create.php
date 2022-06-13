@@ -14,9 +14,6 @@
                 integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous">
 
-        <!-- css -->
-        <link rel="stylesheet" href="/assets/school/css/lesson/create.css">
-
         <!--jquery-->
         <script
                 src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -46,8 +43,9 @@
             
             <form action="<?= route_to('lesson_register') ?>" method="post">
                 <?= csrf_field() ?>
-                <div class="mb-2">
-                    <label>年組
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">年組</label>
+                    <div class="col-sm-6">
                         <select id="homeroom_list" class="select2_single" name="selected_homeroom">
                             <option></option>
                             <?php if (!empty($homerooms)) {
@@ -56,10 +54,11 @@
                                 }
                             } ?>
                         </select>
-                    </label>
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <label>科目
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">科目</label>
+                    <div class="col-sm-6">
                         <select id="subsubject_list" class="select2_single" name="selected_subsubject">
                             <option></option>
                             <?php if (!empty($subsubjects)) {
@@ -68,28 +67,32 @@
                                 }
                             } ?>
                         </select>
-                    </label>
+                    </div>
                 </div>
 
-                <div class="mb-2">
-                    <label>授業名
-                        <input type="text" name="lesson_name" value="<?= old('lesson_name') ?>">
-                    </label>
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">授業名</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="lesson_name" value="<?= old('lesson_name') ?>">
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <label>単位
-                        <input type="text" name="lesson_unit" value="<?= old('lesson_unit') ?>">
-                    </label>
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">単位</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="lesson_unit" value="<?= old('lesson_unit') ?>">
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <label>授業説明
-                        <textarea name="lesson_body"><?= old('lesson_body') ?></textarea>
-                    </label>
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">授業説明</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" name="lesson_body"><?= old('lesson_body') ?></textarea>
+                    </div>
                 </div>
-                <div class="mb-2">
-                    <label>続けて入力する
+                <div class="mb-2 form-group row">
+                    <label class="col-sm-2 col-form-label">続けて入力する</label>
+                    <div class="col-sm-6">
                         <input type="checkbox" name="is_continuous" <?php if (old('is_continuous') == 'on') { echo 'checked'; } ?>>
-                    </label>
+                    </div>
                 </div>
                 <button class="btn btn-outline-primary">登録</button>
             </form>
