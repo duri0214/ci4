@@ -51,6 +51,11 @@ class SchoolMigration extends Migration
                     'constraint' => '20',
                     'null' => true,
                 ],
+                'code' => [
+                    'type' => 'VARCHAR',
+                    'constraint' => '200',
+                    'comment' => '学校のコード名。ファイル名の元'
+                ],
                 'remark' => [
                     'type' => 'VARCHAR',
                     'constraint' => '255',
