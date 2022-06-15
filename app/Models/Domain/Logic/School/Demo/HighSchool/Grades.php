@@ -4,11 +4,10 @@ namespace App\Models\Domain\Logic\School\Demo\HighSchool;
 
 use App\Models\Domain\Logic\AbstractGrades;
 use App\Models\Domain\Logic\ICsv;
-use App\Models\Domain\Logic\IGrades;
 use App\Models\Domain\SchoolDomain;
 use JetBrains\PhpStorm\Pure;
 
-class Grades extends AbstractGrades implements IGrades, ICsv
+class Grades extends AbstractGrades implements ICsv
 {
     public const SCHOOL_CODE = 'Demo';
     

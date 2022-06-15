@@ -2,9 +2,9 @@
 
 namespace App\Models\Domain\Logic\School\Demo\JuniorHighSchool;
 
-use App\Models\Domain\Logic\IRank;
+use App\Models\Domain\Logic\AbstractRank;
 
-class Rank implements IRank
+class Rank extends AbstractRank
 {
     
 }
