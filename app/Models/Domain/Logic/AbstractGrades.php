@@ -6,7 +6,7 @@ use App\Entities\MSchoolCategoryEntity;
 use App\Entities\SchoolEntity;
 use App\Entities\SchoolPeriodEntity;
 
-abstract class AbstractGrades implements ICsv, IGrades
+abstract class AbstractGrades
 {
     protected SchoolEntity $school;
     protected MSchoolCategoryEntity $school_category;

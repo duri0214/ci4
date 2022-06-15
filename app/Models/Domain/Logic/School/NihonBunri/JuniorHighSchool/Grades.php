@@ -3,12 +3,12 @@
 namespace App\Models\Domain\Logic\School\NihonBunri\JuniorHighSchool;
 
 use App\Models\Domain\Logic\AbstractGrades;
+use App\Models\Domain\Logic\ICsv;
+use App\Models\Domain\Logic\IGrades;
 use App\Models\Domain\SchoolDomain;
 use JetBrains\PhpStorm\Pure;
 
-use function App\Models\Domain\Logic\School\NihonBunri\count;
-
-class Grades extends AbstractGrades
+class Grades extends AbstractGrades implements IGrades, ICsv
 {
     public const SCHOOL_CODE = 'NihonBunri';
     

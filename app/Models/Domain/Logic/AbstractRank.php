@@ -2,7 +2,7 @@
 
 namespace App\Models\Domain\Logic;
 
-abstract class AbstractReport
+abstract class AbstractRank implements IRank
 {
     
 }

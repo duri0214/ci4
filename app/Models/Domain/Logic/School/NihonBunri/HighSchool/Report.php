@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Models\Domain\Logic\School\NihonBunri;
+namespace App\Models\Domain\Logic\School\NihonBunri\HighSchool;
 
-class Report
+use App\Models\Domain\Logic\IPdf;
+use App\Models\Domain\Logic\IReport;
+
+class Report implements IReport, IPdf
 {
     
 }
