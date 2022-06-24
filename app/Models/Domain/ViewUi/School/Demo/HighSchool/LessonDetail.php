@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Domain\Logic\School\Demo\HighSchool\ViewUi;
+namespace App\Models\Domain\ViewUi\School\Demo\HighSchool;
 
 use App\Models\Domain\Component\AbstractView;
 use App\Models\Domain\Component\Button\Button;
