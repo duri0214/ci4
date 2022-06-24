@@ -12,6 +12,6 @@ class LessonDetailTest extends TestCase
     #[NoReturn] public function testExportHtml()
     {
         $lessonDetail = new LessonDetail();
-        dd([$lessonDetail->reportButtonsAsHtml()]);
+        dd([$lessonDetail->reportButtons()]);
     }
 }

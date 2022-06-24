@@ -24,7 +24,7 @@ class LessonDetail extends AbstractView
     /**
      * @return string
      */
-    public function reportButtonsAsHtml(): string
+    public function reportButtons(): string
     {
         $html = '';
         if (count($this->reportButtons->getItems()) > 0) {
