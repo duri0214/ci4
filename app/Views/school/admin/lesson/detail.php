@@ -19,6 +19,14 @@
             <?= $breadcrumb ?? null ?>
             <h1>授業詳細</h1>
             <?= service('validation')->listErrors(); ?>
+    
+            <!-- 学校独自の帳票ボタン TODO: 変数の置き換え -->
+            <?php
+                $school_code = 'Demo';
+                $school_category = 'HighSchool';
+            ?>
+            <?= view_cell("\App\Models\Domain\ViewUi\School\\$school_code\\$school_category\LessonDetail::reportButtons") ?>
+
             <?php if (empty($lesson)) {
                 echo '<p>授業レコードなし</p>';
             } else { ?>
