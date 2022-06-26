@@ -18,37 +18,40 @@
         <div class="container">
             <?= $breadcrumb ?? null ?>
             <h1>授業詳細</h1>
-            <?= service('validation')->listErrors(); ?>
     
-            <!-- 学校独自の帳票ボタン TODO: 変数の置き換え -->
-            <?php
-                $school_code = 'Demo';
-                $school_category = 'HighSchool';
-            ?>
-            <?= view_cell("\App\Models\Domain\ViewUi\School\\$school_code\\$school_category\LessonDetail::reportButtons") ?>
-
+            <?php if (session()->getFlashdata('success')) {
+                echo ('<div class="alert alert-success mt-2">');
+                echo (session()->getFlashdata('success'));
+                echo ('</div>');
+            } ?>
+            <?php if (session()->getFlashdata('errors')) {
+                echo ('<div class="alert alert-danger mt-2">');
+                echo (session()->getFlashdata('errors'));
+                echo ('</div>');
+            } ?>
+    
             <?php if (empty($lesson)) {
                 echo '<p>授業レコードなし</p>';
             } else { ?>
-                <h2><?= $lesson['entity']->name ?></h2>
+                <h2><?= $lesson->name ?></h2>
                 
-                <?php if (empty($lesson['items'])) {
+                <?php if (empty($lessonEvaluations)) {
                     echo '<p>アイテムレコードなし</p>';
                 } else {
                     $i = 1; ?>
                     <form action="<?= route_to('lesson_edit_post') ?>" method="post">
                         <?= csrf_field() ?>
                         <table class="table small table-sm">
-                            <?php foreach ($lesson['items'] as $item) : ?>
+                            <?php foreach ($lessonEvaluations as $lessonEvaluation) : ?>
                                 <tr>
-                                    <th><?= $i ?>回目</th>
-                                    <td><?= $item->the_day_of_the_test->format('Y-m-d') ?></td>
+                                    <th>評価<?= $i ?></th>
+                                    <td><?= $lessonEvaluation->name ?></td>
                                 </tr>
                                 <?php
                                 $i++;
                             endforeach; ?>
                         </table>
-                        <input type="submit" value="成績を登録する">
+                        <input type="submit" value="評価を管理する（jsで評価項目を増減してこのボタンで決定する）">
                     </form>
                 <?php } ?>
             <?php } ?>
