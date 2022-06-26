@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class SchoolLessonItemMigration extends Migration
+class SchoolLessonEvaluationMigration extends Migration
 {
     public function up()
     {
@@ -19,7 +19,7 @@ class SchoolLessonItemMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
-                'school_lesson_item_segment_id' => [
+                'm_lesson_evaluation_id' => [
                     'type' => 'INT',
                     'unsigned' => true,
                     'comment' => '授業の評価セグメント',
@@ -35,13 +35,13 @@ class SchoolLessonItemMigration extends Migration
         );
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('school_lesson_id', 'school_lesson', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('school_lesson_item_segment_id', 'school_lesson_item_segment', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addUniqueKey(['school_lesson_id', 'school_lesson_item_segment_id']);
-        $this->forge->createTable('school_lesson_item');
+        $this->forge->addForeignKey('m_lesson_evaluation_id', 'm_lesson_evaluation', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['school_lesson_id', 'm_lesson_evaluation_id']);
+        $this->forge->createTable('school_lesson_evaluation');
     }
     
     public function down()
     {
-        $this->forge->dropTable('school_lesson_item');
+        $this->forge->dropTable('school_lesson_evaluation');
     }
 }

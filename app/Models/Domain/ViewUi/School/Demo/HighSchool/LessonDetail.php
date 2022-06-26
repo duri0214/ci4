@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Domain\Logic\School\Demo\HighSchool\ViewUi;
+namespace App\Models\Domain\ViewUi\School\Demo\HighSchool;
 
 use App\Models\Domain\Component\AbstractView;
 use App\Models\Domain\Component\Button\Button;
@@ -24,7 +24,7 @@ class LessonDetail extends AbstractView
     /**
      * @return string
      */
-    public function reportButtonsAsHtml(): string
+    public function reportButtons(): string
     {
         $html = '';
         if (count($this->reportButtons->getItems()) > 0) {

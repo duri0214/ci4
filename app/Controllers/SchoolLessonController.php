@@ -4,17 +4,24 @@ namespace App\Controllers;
 
 use App\Libraries\Breadcrumb;
 use App\Models\SchoolLessonModel;
+use App\Repository\LessonEvaluationRepository;
+use App\Repository\LoginRepository;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class SchoolLessonController extends BaseController
 {
+    private LessonEvaluationRepository $lessonEvaluationRepository;
+    
     public function __construct()
     {
-        $repository = service('schoolLoginRepository');
-        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
+        $loginRepository = new LoginRepository();
+        $this->lessonEvaluationRepository = new LessonEvaluationRepository();
+    
+        $this->login = $loginRepository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
     }
     
     /**
+     * 授業管理｜授業一覧
      * @return string
      */
     public function lessonList(): string
@@ -86,52 +93,27 @@ class SchoolLessonController extends BaseController
     }
     
     /**
-     * @param int $lessonId
-     * @return RedirectResponse
-     */
-    public function lessonEdit(int $lessonId): RedirectResponse
-    {
-        // シェアードから取得。app/Config/Services.php
-        // $school = service('schoolFactory');
-        // TODO: $groupId にはセグメントがある（親子関係など）
-        // $school->autoRating($lessonId);
-        
-        return redirect("school/admin/lesson/$lessonId");
-    }
-    
-    /**
+     * 授業管理｜授業詳細
      * @param int $lessonId
      * @return string
      */
-    public function lessonItemList(int $lessonId): string
+    public function lessonEvaluationList(int $lessonId): string
     {
-        $model = model(SchoolLessonModel::class);
-        $lesson['entity'] = $model->find($lessonId);
-    
-        // $model = model(LessonItemsModel::class);
-        // $lesson['items'] = $model->where('lesson_id', $lessonId)->findAll();
-
+        $model = new SchoolLessonModel();
+        $schoolLesson = $model->find($lessonId);
+        $lessonEvaluations = $this->lessonEvaluationRepository->getDefinition($schoolLesson);
+        
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));
         $b->add('授業管理', route_to('lesson_list'));
         $b->add('授業詳細', null);
     
         $data = [
-            'lesson' => $lesson,
+            'lesson' => $schoolLesson,
+            'lessonEvaluations' => $lessonEvaluations,
             'breadcrumb' => $b->render(),
         ];
     
-        // ある授業の詳細
         return view("school/admin/lesson/detail", $data);
-    }
-    
-    public function lessonItemCreate(int $lessonId): RedirectResponse
-    {
-        dd(["lessonItemCreate($lessonId)"]);
-    }
-    
-    public function lessonItemEdit(int $lessonId, int $lessonItemId): RedirectResponse
-    {
-        dd(["lessonItemCreate($lessonId, $lessonItemId)"]);
     }
 }

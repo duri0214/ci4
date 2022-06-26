@@ -2,26 +2,26 @@
 
 namespace App\Models;
 
-use App\Entities\SchoolLessonItemSegmentEntity;
+use App\Entities\MLessonEvaluationEntity;
 use CodeIgniter\Model;
 
 /**
- * @method SchoolLessonItemSegmentEntity find($id = null)
+ * @method MLessonEvaluationEntity find($id = null)
  */
-class SchoolLessonItemSegmentModel extends Model
+class MLessonEvaluationModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'school_lesson_item_segment';
+    protected $table            = 'm_lesson_evaluation';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = SchoolLessonItemSegmentEntity::class;
+    protected $returnType       = MLessonEvaluationEntity::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['school_lesson_id', 'name', 'remarks'];
+    protected $allowedFields    = ['school_id', 'name', 'remark'];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

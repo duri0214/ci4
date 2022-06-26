@@ -7,7 +7,7 @@ use App\Models\Domain\Component\AbstractUi;
 abstract class AbstractButton extends AbstractUi
 {
     /** 前後の隙間 @var string */
-    protected string $margin = '1em 0';
+    protected string $margin = '5px';
     
     /** 塗りの余白 @var string */
     protected string $padding = '0.6em 1em';

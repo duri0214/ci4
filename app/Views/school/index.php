@@ -95,8 +95,21 @@
             } else {
                 echo '<p>レコードなし</p>';
             } ?>
-            
-            <p><a href="<?= route_to('lesson_list') ?>">授業管理へ</a></p>
+
+            <ul>
+                <li>学校管理
+                    <ul>
+                        <li><a href="<?= route_to('user_list') ?>">ユーザー管理</a></li>
+                        <li>ＨＲ管理</li>
+                        <li><a href="<?= route_to('lesson_list') ?>">授業管理</a></li>
+                        <li>教科・科目管理</li>
+                        <li>学校情報</li>
+                        <li>学期設定</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p></p>
             <p><a href="<?= route_to('cert_list') ?>">資格管理へ</a></p>
             <p><a href="<?= route_to('report_menu') ?>">証明書管理へ</a></p>
             <p><a href="<?= route_to('admin_menu') ?>">システム管理へ</a></p>

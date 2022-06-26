@@ -12,5 +12,5 @@ abstract class AbstractView
      * 授業詳細画面で標準的に配置されるボタンのhtml
      * @return string
      */
-    abstract public function reportButtonsAsHtml(): string;
+    abstract public function reportButtons(): string;
 }

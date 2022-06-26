@@ -51,7 +51,7 @@ $routes->get('school/admin/user/create', 'SchoolUserController::userCreate', ['a
 $routes->get('school/admin/user/edit', 'SchoolUserController::userEdit', ['as' => 'user_edit']);
 $routes->post('school/admin/user/register', 'SchoolUserController::userRegister', ['as' => 'user_register']);
 $routes->get('school/admin/lesson/list', 'SchoolLessonController::lessonList', ['as' => 'lesson_list']);
-$routes->get('school/admin/lesson/(:num)/item/list', 'SchoolLessonController::lessonItemList/$1', ['as' => 'lesson_detail']);
+$routes->get('school/admin/lesson/(:num)/evaluation/list', 'SchoolLessonController::lessonEvaluationList/$1', ['as' => 'lesson_detail']);
 $routes->get('school/admin/lesson/create', 'SchoolLessonController::lessonCreate', ['as' => 'lesson_create']);
 $routes->get('school/admin/lesson/edit', 'SchoolLessonController::edit', ['as' => 'lesson_edit']);
 $routes->post('school/admin/lesson/register', 'SchoolLessonController::lessonRegister', ['as' => 'lesson_register']);
