@@ -34,8 +34,8 @@ $routes->setPrioritize();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index', ['as' => 'home']);
 $routes->get('(:any)', 'Pages::view/$1', ['priority' => 1]);
-$routes->get('home/csv_export', 'HomeController::csvExport', ['as' => 'home_csv_export']);
-$routes->get('home/excel_export', 'HomeController::excelExport', ['as' => 'home_excel_export']);
+$routes->get('home/csv_export', 'SchoolCsvController::csvExport', ['as' => 'home_csv_export']);
+$routes->get('home/excel_export', 'SchoolExcelController::excelExport', ['as' => 'home_excel_export']);
 $routes->get('home/rotate_pdf', 'HomeController::rotatePdf', ['as' => 'home_rotate_pdf']);
 $routes->get('home/store', 'HomeController::store', ['as' => 'home_store']);
 $routes->get('home/api/(\w+)/(\d+)', 'HomeController::store/$1/$2', ['as' => 'home_api']);
