@@ -33,7 +33,6 @@ class SchoolCsvController extends BaseController
     
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename=$csvFileName");
-        header('Content-Transfer-Encoding: binary');
     
         // open stream
         $stream = fopen('php://output', 'w');
