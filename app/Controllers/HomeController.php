@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\VocabularyBookModel;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Mpdf\Mpdf;
 
 class HomeController extends BaseController
@@ -75,7 +74,7 @@ class HomeController extends BaseController
         ];
         
         // 1ページ目はtemplateからのparse
-        $parser = Services::parser();
+        $parser = service('parser');
         $html = $parser->setData($data)->render('home/rotatePdf');
         $mPdf->WriteHTML($html);
         
