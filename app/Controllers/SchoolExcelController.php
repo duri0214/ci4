@@ -6,15 +6,17 @@ use App\Controllers\BaseController;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class SchoolExcelController extends BaseController
 {
     /**
      * /Home/excelExport/ にアクセスしたときにEXCELがダウンロードされる
-     * @return string
+     * @return void
+     * @throws Exception
      */
-    public function excelExport(): string
+    public function excelExport(): void
     {
         // bookを作成
         $book = new Spreadsheet();
@@ -80,7 +82,6 @@ class SchoolExcelController extends BaseController
         $writer = new Xlsx($book);
         $writer->save('php://output');
         
-        // TODO: 出力されたexcelファイルがつねに壊れている？
-        return view('home/index');
+        exit();
     }
 }
