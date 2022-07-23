@@ -4,11 +4,28 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\Breadcrumb;
-use CodeIgniter\HTTP\RedirectResponse;
-use TCPDF;
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
 
 class SchoolReportController extends BaseController
 {
+    public const SCHOOL_REPORT = [
+        'enrollment' => APPPATH.'Views/school/report/enrollment/school'
+    ];
+    public const PDF_CONFIG = [
+        'fontDir' => __DIR__.'/../../public/assets/font/IPA',
+        'fontdata' => [
+            'ipafont-m' => [
+                'R' => 'ipamp.ttf',
+            ],
+            'ipafont-g' => [
+                'R' => 'ipagp.ttf',
+            ],
+        ],
+        'mode' => 'ja+aCJK',
+        'format' => 'A4-P', // or 'A4-L'
+    ];
+    
     public function __construct()
     {
         $repository = service('schoolLoginRepository');
@@ -30,40 +47,47 @@ class SchoolReportController extends BaseController
     
     /**
      * 在籍証明書
-     * @return RedirectResponse
+     * @return string
+     * @throws MpdfException
      */
-    public function enrollment(): RedirectResponse
+    public function enrollment(): string
     {
-        // 基本、タテA4の枠組みで出力
-        $tcpdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
-    
-        // set document information
-        $tcpdf->SetCreator('TCPDF');
-        $tcpdf->SetAuthor('yoshi.');
-        $tcpdf->SetTitle('TCPDF Title');
-        $tcpdf->SetSubject('TCPDF Subject');
-        $tcpdf->SetKeywords('TCPDF, PDF, example, test, guide');
-    
-        // 標準ではヘッダがつくのでいまは除外
-        $tcpdf->setPrintHeader(false);
-        $tcpdf->setPrintFooter(false);
-    
-        // タテA4ページを追加
-        $tcpdf->AddPage('P');
-        $tcpdf->Cell(0, 0, 'A4 PORTRAIT', 1, 1, 'C');
-    
-        // from html
-        $html = view('school/report/certificate/school/demo/enrollment');
-        $tcpdf->writeHTML($html);
-    
-        // ヨコA4ページを追加し、右90度回し
-        $tcpdf->AddPage('L', ['Rotate' => 90]);
-        $tcpdf->Cell(0, 0, 'A4 LANDSCAPE', 1, 1, 'C');
+        $mPdf = new mPDF(self::PDF_CONFIG);
         
-        // 保存
-        $tcpdf->Output('D:\onedrive\ダウンロード\enrollment.pdf', 'F');
+        // from html
+        $schoolCode = $this->login['school']->code;
+        $viewPaths = [
+            'file' => self::SCHOOL_REPORT['enrollment']."/$schoolCode/enrollment.php",
+            'default' => 'school/report/enrollment/school/default/enrollment',
+            'mySchool' => "school/report/enrollment/school/$schoolCode/enrollment",
+        ];
+        $data = [
+            'school_attr' => [
+                ['name' => $this->login['school']->name, 'headmaster' => 'こうちょうう']
+            ],
+            'student_attr' => [
+                ['name' => '岡田義隆', 'name_kana' => 'おかだよしたか', 'birthday' => '1982-2-14']
+            ],
+            'publish' => [
+                ['number' => random_int(1, 999),'date' => date('Y-m-d')]
+            ],
+        ];
+    
+        // TODO: Bootstrapが効かないので生CSSで書き直し Twigにする？ https://twig.symfony.com/
+        // 1ページ目はtemplateからのparse
+        $parser = service('parser');
+        $html = $parser->setData($data)
+            ->render(file_exists($viewPaths['file']) ? $viewPaths['mySchool'] : $viewPaths['default']);
+        $mPdf->WriteHTML($html);
+        
+        // 2ページ目はヨコA4の枠組みで出力
+        $mPdf->AddPage('L');
+        $mPdf->WriteHTML('Hello page 2');
+        
+        // pdfとして出力
+        $mPdf->Output('estimate.pdf', 'D');
     
         // もとのページに戻る
-        return redirect()->back()->with('success', '在籍証明書のダウンロードが完了しました');
+        return view('school/report/menu');
     }
 }

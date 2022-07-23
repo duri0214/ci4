@@ -6,33 +6,16 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>帳票｜在籍証明書</title>
-        
-        <!-- Bootstrap CSS -->
-        <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-                rel="stylesheet"
-                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-                crossorigin="anonymous">
-        
-        <!-- GoogleFont NotoSerifJapanese -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
-        
         <style>
             body {
-                width: 210mm;
-                height: 297mm;
-                border: thin solid red;
-                font-family: 'Noto Serif JP', serif;
+                font-family: 'ipafont-m';
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <p class="mt-5 pt-5 me-5 text-end small">■■高証　第 <?= $issue_num ?? '■' ?> 号</p>
+            <p class="mt-5 pt-5 me-5 text-end small">■■高証　第 { publish }{ number }{ /publish } 号</p>
             <h1 class="mt-5 pt-5 text-center">在　籍　証　明　書</h1>
-            
             <section id="student-profile" class="mt-5 pt-5">
                 <div class="row">
                     <div class="col-6"></div>
@@ -40,7 +23,7 @@
                         ふりがな
                     </div>
                     <div class="col-4 small">
-                        <?= $student_name_kana ?? 'おかだ　よしたか' ?>
+                        { student_attr }{ name_kana }{ /student_attr }
                     </div>
                 </div>
 
@@ -50,7 +33,7 @@
                         氏名
                     </div>
                     <h2 class="col-4">
-                        <?= $student_name ?? '岡田　義隆' ?>
+                        { student_attr }{ name }{ /student_attr }
                     </h2>
                 </div>
 
@@ -60,7 +43,7 @@
                         生年月日
                     </div>
                     <div class="col-4 small">
-                        <?= $student_birthday ?? '平成 ■■年 ■■月 ■■日生' ?>
+                        { student_attr }{ birthday }{ /student_attr }
                     </div>
                 </div>
             </section>
@@ -68,13 +51,15 @@
             <h4 class="mt-5 pt-5 ms-5 ps-5 me-5 pe-5 text-center" style="line-height:2rem">
                 上記の者は、本校 ■■課程 ■■科 第 ■ 学年に在籍していることを証明する。
             </h4>
-            <p class="mt-5 pt-5 ms-5 small"><?= $publish_date ?? '令和 ■■年 ■■月 ■■日' ?></p>
             
             <section id="footer" class="mt-5 pt-5">
                 <div class="row">
+                    発行日　{ publish }{ date }{ /publish }
+                </div>
+                <div class="row">
                     <div class="col-6"></div>
                     <h5 class="col-4">
-                        <?= $school_name ?? '栄光学園中学高等学校' ?>長
+                        { school_attr }{ name }{ /school_attr }
                     </h5>
                     <div class="col-2"></div>
                 </div>
@@ -82,11 +67,10 @@
                     <div class="col-6"></div>
                     <div class="col-2"></div>
                     <h3 class="col-4">
-                        <?= $headTeacher ?? '望月 伸一郎'?>
+                        { school_attr }{ headmaster }{ /school_attr }
                     </h3>
                 </div>
             </section>
         </div>
     </body>
 </html>
-<?php exit() ?>
