@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\VocabularyBookModel;
-use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use TCPDF;
+use Config\Services;
+use Mpdf\Mpdf;
 
 class HomeController extends BaseController
 {
@@ -52,38 +52,41 @@ class HomeController extends BaseController
         echo "Hello $to!" . PHP_EOL;
     }
     
-    public function rotatePdf(): RedirectResponse
+    public function rotatePdf(): string
     {
         // 基本、タテA4の枠組みで出力
-        $tcpdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+        $config = [
+            'fontDir' => __DIR__.'/../../public/assets/font/IPA',
+            'fontdata' => [
+                'ipafont-m' => [
+                    'R' => 'ipamp.ttf',  // regular
+                ],
+                'ipafont-g' => [
+                    'R' => 'ipagp.ttf',  // regular
+                ],
+            ],
+            'mode' => 'ja+aCJK',
+            'format' => 'A4-P', // or 'A4-L'
+        ];
+        $mPdf = new mPDF($config);
         
-        // set document information
-        $tcpdf->SetCreator('TCPDF');
-        $tcpdf->SetAuthor('yoshi.');
-        $tcpdf->SetTitle('TCPDF Title');
-        $tcpdf->SetSubject('TCPDF Subject');
-        $tcpdf->SetKeywords('TCPDF, PDF, example, test, guide');
-
-        // 標準ではヘッダがつくのでいまは除外
-        $tcpdf->setPrintHeader(false);
-        $tcpdf->setPrintFooter(false);
-    
-        // タテA4ページを追加
-        $tcpdf->AddPage('P');
-        $tcpdf->Cell(0, 0, 'A4 PORTRAIT', 1, 1, 'C');
+        $data = [
+            'name' => '十文字学園（大坂）'
+        ];
         
-        // ヨコA4ページを追加し、右90度回し
-        $tcpdf->AddPage('L', ['Rotate' => 90]);
-        $tcpdf->Cell(0, 0, 'A4 LANDSCAPE', 1, 1, 'C');
+        // 1ページ目はtemplateからのparse
+        $parser = Services::parser();
+        $html = $parser->setData($data)->render('home/rotatePdf');
+        $mPdf->WriteHTML($html);
         
-        // from html
-        $html = "<h1>Hello World!</h1>";
-        $tcpdf->writeHTML($html);
+        // 2ページ目はヨコA4の枠組みで出力
+        $mPdf->AddPage('L');
+        $mPdf->WriteHTML('Hello page 2');
         
-        // 保存
-        $tcpdf->Output('D:\onedrive\ダウンロード\sample_rotated.pdf', 'F');
-    
+        // pdfとして出力
+        $mPdf->Output('estimate.pdf', 'D');
+        
         // もとのページに戻る
-        return redirect()->back();
+        return view('home/index');
     }
 }
