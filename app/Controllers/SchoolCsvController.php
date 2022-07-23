@@ -3,14 +3,15 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use SplFileObject;
 
 class SchoolCsvController extends BaseController
 {
     /**
      * /Home/csvExport/ にアクセスしたときにCSVがダウンロードされる
-     * @return string
+     * @return void
      */
-    public function csvExport(): string
+    public function csvExport(): void
     {
         // load from user table into entity
         $user = [
@@ -33,7 +34,7 @@ class SchoolCsvController extends BaseController
     
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename=$csvFileName");
-    
+        
         // open stream
         $stream = fopen('php://output', 'w');
         
@@ -49,7 +50,6 @@ class SchoolCsvController extends BaseController
         // close stream
         fclose($stream);
         
-        // TODO: 出力されたCSVにデバッグ情報がついてしまう
-        return view('home/index');
+        exit();
     }
 }
