@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Document</title>
+
+        <style>
+        </style>
+    </head>
+    <body style="font-size: 35px;">
+        <p style="text-align: center">卒業証明書</p>
+
+        <p>{{ a_student.class_room }} {{ a_student.name }}</p>
+        {% if has_flg %}
+            <p>フラグが true</p>
+        {% else %}
+            <p>フラグが false</p>
+        {% endif %}
+
+        <div>
+            {% for number in numbers %}
+                <span>{{ number }}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            <div style="width: 30%; float: left; background-color: #31708f; font-family: ipafont-m">{{ name }}</div>
+            <div style="width: 30%; float: left; background-color: #bcdff1; font-family: ipafont-g">{{ name }}</div>
+        </div>
+
+    </body>
+</html>

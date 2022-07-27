@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\VocabularyBookModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Mpdf\Mpdf;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class HomeController extends BaseController
 {
@@ -55,7 +57,7 @@ class HomeController extends BaseController
     {
         // 基本、タテA4の枠組みで出力
         $config = [
-            'fontDir' => __DIR__.'/../../public/assets/font/IPA',
+            'fontDir' => APPPATH.'../public/assets/font/IPA',
             'fontdata' => [
                 'ipafont-m' => [
                     'R' => 'ipamp.ttf',  // regular
@@ -70,12 +72,16 @@ class HomeController extends BaseController
         $mPdf = new mPDF($config);
         
         $data = [
-            'name' => '十文字学園（大坂）'
+            'name' => '大坂学園',
+            'numbers' => [1, 2, 3],
+            'a_student' => ["name" => "George", "class_room" => "1-A"],
+            'has_flg' => false,
         ];
+    
+        $twig = new Environment(new FilesystemLoader());
+        $html = $twig->render(APPPATH.'Views/home/rotatePdf.html.twig', $data);
         
         // 1ページ目はtemplateからのparse
-        $parser = service('parser');
-        $html = $parser->setData($data)->render('home/rotatePdf');
         $mPdf->WriteHTML($html);
         
         // 2ページ目はヨコA4の枠組みで出力
