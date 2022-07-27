@@ -78,8 +78,8 @@ class HomeController extends BaseController
             'has_flg' => false,
         ];
     
-        $twig = new Environment(new FilesystemLoader());
-        $html = $twig->render(APPPATH.'Views/home/rotatePdf.html.twig', $data);
+        $twig = new Environment(new FilesystemLoader(APPPATH.'Views/home'));
+        $html = $twig->render('rotatePdf.html.twig', $data);
         
         // 1ページ目はtemplateからのparse
         $mPdf->WriteHTML($html);
