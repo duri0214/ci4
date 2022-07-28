@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>帳票｜在籍証明書</title>
+    <style>
+        body {
+            font-family: 'ipafont-m';
+        }
+
+        #student-profile {
+            margin-top: 50px;
+            text-align: right;
+        }
+
+        #footer {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<p style="text-align: right">{{ publish.caption }}　第 {{ publish.number }} 号</p>
+<h1 style="margin-top: 100px; text-align: center; letter-spacing: 20px">在籍証明書</h1>
+<section id="student-profile">
+    <div style="margin-right: 10px; font-size: small; letter-spacing: 5px">{{ student_attr.name_kana }}</div>
+    <div>
+        <span style="letter-spacing: 5px">氏名</span>
+        <span style="font-size: x-large; letter-spacing: 10px;">{{ student_attr.name }}</span>
+    </div>
+    <div>
+        <span style="font-size: small">生年月日</span>
+        <span>{{ student_attr.birthday|date('Y 年 m 月 d 日') }}</span>
+    </div>
+</section>
+
+<h4 style="margin: 100px auto; width: 500px; font-size: x-large;">
+    上記の者は、本校 ■■課程 ■■科 第 ■ 学年に在籍していることを証明する。
+</h4>
+
+<section id="footer">
+    <div>発行日　{{ publish.date|date('Y 年 m 月 d 日') }}</div>
+    <h5>{{ school_attr.name }}長</h5>
+    <h3>{{ school_attr.headmaster }}</h3>
+</section>
+</body>
+</html>

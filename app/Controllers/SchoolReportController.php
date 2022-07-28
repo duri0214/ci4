@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Libraries\Breadcrumb;
 use Mpdf\Mpdf;
-use Mpdf\MpdfException;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class SchoolReportController extends BaseController
 {
-    public const SCHOOL_REPORT = [
+    public const DIRECTORY = [
         'enrollment' => APPPATH.'Views/school/report/enrollment/school'
     ];
     public const PDF_CONFIG = [
@@ -25,6 +26,7 @@ class SchoolReportController extends BaseController
         'mode' => 'ja+aCJK',
         'format' => 'A4-P', // or 'A4-L'
     ];
+    public const TEMPLATE_NAME = '/enrollment.html.twig';
     
     public function __construct()
     {
@@ -48,36 +50,38 @@ class SchoolReportController extends BaseController
     /**
      * 在籍証明書
      * @return string
-     * @throws MpdfException
      */
     public function enrollment(): string
     {
         $mPdf = new mPDF(self::PDF_CONFIG);
         
-        // from html
-        $schoolCode = $this->login['school']->code;
-        $viewPaths = [
-            'file' => self::SCHOOL_REPORT['enrollment']."/$schoolCode/enrollment.php",
-            'default' => 'school/report/enrollment/school/default/enrollment',
-            'mySchool' => "school/report/enrollment/school/$schoolCode/enrollment",
-        ];
+        // TODO: helper化すべきか？
+        $schoolCode = mb_strtolower($this->login['school']->code);
+        $folder = self::DIRECTORY['enrollment']."/$schoolCode";
+        if (!file_exists($folder.self::TEMPLATE_NAME)) {
+            $folder = self::DIRECTORY['enrollment']."/default";
+        }
+
         $data = [
             'school_attr' => [
-                ['name' => $this->login['school']->name, 'headmaster' => 'こうちょうう']
+                'name' => $this->login['school']->name,
+                'headmaster' => '佐伯 十四夫'
             ],
             'student_attr' => [
-                ['name' => '岡田義隆', 'name_kana' => 'おかだよしたか', 'birthday' => '1982-2-14']
+                'name' => '岡田義隆',
+                'name_kana' => 'おかだよしたか',
+                'birthday' => '1982-2-14'
             ],
             'publish' => [
-                ['number' => random_int(1, 999),'date' => date('Y-m-d')]
+                'caption' => 'デモ高証',
+                'number' => random_int(1, 999),
+                'date' => date('Y-m-d')
             ],
         ];
     
-        // TODO: Bootstrapが効かないので生CSSで書き直し Twigにする？ https://twig.symfony.com/
         // 1ページ目はtemplateからのparse
-        $parser = service('parser');
-        $html = $parser->setData($data)
-            ->render(file_exists($viewPaths['file']) ? $viewPaths['mySchool'] : $viewPaths['default']);
+        $twig = new Environment(new FilesystemLoader($folder));
+        $html = $twig->render(self::TEMPLATE_NAME, $data);
         $mPdf->WriteHTML($html);
         
         // 2ページ目はヨコA4の枠組みで出力
