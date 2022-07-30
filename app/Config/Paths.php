@@ -82,4 +82,6 @@ class Paths
      * @var string
      */
     public $viewDirectory = __DIR__ . '/../Views';
+    
+    public string $phpUnit = 'D:\OneDrive\dev\ci4\phpunit.xml';
 }
