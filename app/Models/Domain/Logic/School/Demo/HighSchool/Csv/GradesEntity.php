@@ -6,6 +6,11 @@ use App\Models\Domain\Logic\Csv\AbstractEntity;
 
 class GradesEntity extends AbstractEntity
 {
+    /**
+     * @var int
+     */
+    public const NUMBER_OF_FIELDS = 8;
+    
     // 任意の属性を定義し、setメソッドで値の点検の仕組みをそれぞれつくる
     private ?int $userId;
     private ?string $name;
