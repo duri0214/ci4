@@ -7,7 +7,7 @@ use App\Models\Domain\Logic\AbstractCsv;
 class GradesEntity extends AbstractCsv
 {
     // 任意の属性を定義し、setメソッドで値の点検の仕組みをそれぞれつくる
-    private ?int $user_id;
+    private ?int $userId;
     private ?string $name;
     private ?int $score1;
     private ?int $score2;
@@ -36,7 +36,7 @@ class GradesEntity extends AbstractCsv
      */
     public function setUserId(?int $user_id): void
     {
-        $this->user_id = $user_id;
+        $this->userId = $user_id;
     }
     
     /**
