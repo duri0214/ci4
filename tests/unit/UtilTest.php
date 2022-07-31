@@ -4,10 +4,10 @@ namespace tests\unit;
 
 use App\Libraries\Slack;
 use App\Libraries\Util;
+use database\Models\PositiveInt;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
-use Tests\Support\Models\PositiveInt;
 
 class UtilTest extends TestCase
 {
