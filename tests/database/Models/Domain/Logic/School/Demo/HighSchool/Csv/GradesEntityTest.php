@@ -25,8 +25,8 @@ class GradesEntityTest extends TestCase
             'score6' => 2,
         ];
         
-        $grades = new GradesEntity($data);
-        $this->assertEquals(0, count($grades->getErrors()));
+        $entity = new GradesEntity($data);
+        $this->assertCount(0, $entity->getErrors());
     }
     
     /**
@@ -45,9 +45,9 @@ class GradesEntityTest extends TestCase
             'score5' => 120,    // Errors caused by business logic.
             'score6' => -1,     // Errors caused by business logic.
         ];
-        
-        $grades = new GradesEntity($data);
-        $this->assertEquals(2, count($grades->getErrors()));
+    
+        $entity = new GradesEntity($data);
+        $this->assertCount(2, $entity->getErrors());
     }
     
     /**
@@ -68,7 +68,7 @@ class GradesEntityTest extends TestCase
             'score7' => 95,     // entity has not it
         ];
     
-        $grades = new GradesEntity($data);
-        $this->assertEquals(0, count($grades->getErrors()));
+        $entity = new GradesEntity($data);
+        $this->assertCount(0, $entity->getErrors());
     }
 }

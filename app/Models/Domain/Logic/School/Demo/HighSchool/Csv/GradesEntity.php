@@ -2,9 +2,9 @@
 
 namespace App\Models\Domain\Logic\School\Demo\HighSchool\Csv;
 
-use App\Models\Domain\Logic\AbstractCsv;
+use App\Models\Domain\Logic\Csv\AbstractEntity;
 
-class GradesEntity extends AbstractCsv
+class GradesEntity extends AbstractEntity
 {
     // 任意の属性を定義し、setメソッドで値の点検の仕組みをそれぞれつくる
     private ?int $userId;
@@ -105,5 +105,22 @@ class GradesEntity extends AbstractCsv
         $this->checkIfGreaterThan($value);
         $this->checkIfLessThan($value);
         $this->score6 = $value;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'user_id' => $this->userId,
+            'name' => $this->name,
+            'score1' => $this->score1,
+            'score2' => $this->score2,
+            'score3' => $this->score3,
+            'score4' => $this->score4,
+            'score5' => $this->score5,
+            'score6' => $this->score6,
+        ];
     }
 }
