@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Support\Models;
+namespace database\Models;
 
 use Exception;
 
