@@ -46,9 +46,7 @@ class SchoolCertController extends BaseController
     
     public function certList(): string
     {
-        // TODO: certの柄編集削除のPOST処理もここに入ります
-        
-        $model = service('schoolCertModel');
+        $model = new SchoolCertModel();
     
         $b = new Breadcrumb();
         $b->add('Home', route_to('school_home'));

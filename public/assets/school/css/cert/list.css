@@ -10,3 +10,10 @@
 .select2-container  .select2-search--inline .select2-search__field {
     margin-top: 6px;
 }
+
+.clickable-tr {
+    cursor: pointer;
+}
+.clickable-tr:hover {
+    background: #f3f3f3;
+}

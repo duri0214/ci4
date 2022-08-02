@@ -99,14 +99,9 @@
                     </thead>
                     <tbody>
                         <?php foreach ($certs as $cert) : ?>
-                            <tr>
+                            <tr class="clickable-tr" data-href="<?= route_to('cert_item_list', $cert->id) ?>">
                                 <td><?= $cert->name ?></td>
                                 <td><?= $cert->remark ?></td>
-                                <td>
-                                    <a href="<?= route_to('cert_item_list', $cert->id) ?>">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -134,6 +129,19 @@
                 placeholder: "資格を選択してください（複数可）",
                 allowClear: true,
                 width: '100%'
+            });
+        });
+
+        // clickable tr-tag
+        jQuery( function($) {
+            $('tbody tr[data-href]').addClass('clickable').click( function() {
+                window.location = $(this).attr('data-href');
+            }).find('a').hover( function() {
+                $(this).parents('tr').off('click');
+            }, function() {
+                $(this).parents('tr').on('click', function() {
+                    window.location = $(this).attr('data-href');
+                });
             });
         });
     </script>
