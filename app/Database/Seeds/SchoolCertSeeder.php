@@ -9,11 +9,11 @@ class SchoolCertSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['id' => 1, 'school_id' => 1, 'name' => '日本漢字能力検定１級'],
-            ['id' => 2, 'school_id' => 1, 'name' => '日本漢字能力検定準１級'],
-            ['id' => 3, 'school_id' => 1, 'name' => '日本漢字能力検定２級'],
-            ['id' => 4, 'school_id' => 1, 'name' => '日本漢字能力検定準２級'],
-            ['id' => 5, 'school_id' => 1, 'name' => '日本漢字能力検定３級'],
+            ['id' => 1, 'school_id' => 1, 'name' => '日本漢字能力検定１級', '備考あああ'],
+            ['id' => 2, 'school_id' => 1, 'name' => '日本漢字能力検定準１級', '備考ああい'],
+            ['id' => 3, 'school_id' => 1, 'name' => '日本漢字能力検定２級', '備考ああう'],
+            ['id' => 4, 'school_id' => 1, 'name' => '日本漢字能力検定準２級', '備考ああえ'],
+            ['id' => 5, 'school_id' => 1, 'name' => '日本漢字能力検定３級', '備考ああお'],
             ['id' => 6, 'school_id' => 1, 'name' => '日本漢字能力検定４級'],
             ['id' => 7, 'school_id' => 1, 'name' => '日本漢字能力検定５級'],
             ['id' => 8, 'school_id' => 1, 'name' => '日本漢字能力検定６級'],
