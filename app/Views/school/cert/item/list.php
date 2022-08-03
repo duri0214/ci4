@@ -37,11 +37,22 @@
                 echo '<p>資格レコードなし</p>';
             } else {
                 ?>
-                <h2><?= $cert['name'] ?></h2>
+                <h2>資格名: <?= $cert['name'] ?></h2>
                 <form method="post">
                     <?= csrf_field() ?>
-                    <input type="date" name="the_day_of_the_test" pattern="\d{4}-\d{2}-\d{2}">
-                    <input type="submit" formaction="<?= route_to('create_cert_item', $cert['id']) ?>" value="新規">
+                    <label>資格名を変更
+                        <input class="form-control" type="text" name="certName" value="<?= old('certName') ?>" required>
+                    </label>
+                </form>
+                
+                <form method="post">
+                    <?= csrf_field() ?>
+                    <label>内訳アイテムを作成
+                        <input type="date" name="the_day_of_the_test" pattern="\d{4}-\d{2}-\d{2}">
+                    </label>
+                    <label>
+                        <input type="submit" formaction="<?= route_to('create_cert_item', $cert['id']) ?>" value="新規">
+                    </label>
                 </form>
     
                 <?php if (empty($cert['items'])) {
