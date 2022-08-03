@@ -60,10 +60,15 @@ $routes->match(['get', 'post'], 'school/lesson/(:num)/item/(:num)/edit', 'School
 $routes->get('school/upload/lesson', 'SchoolUploadController::indexLesson', ['as' => 'lesson_upload_get']);
 $routes->get('school/upload/postal', 'SchoolUploadController::indexPostal', ['as' => 'postal_upload_get']);
 $routes->post('school/upload/postal', 'SchoolUploadController::importFile', ['as' => 'postal_upload_post']);
+
+// 資格管理
 $routes->get('school/cert/list', 'SchoolCertController::certList', ['as' => 'cert_list']);
+$routes->post('school/cert/create', 'SchoolCertController::createCert', ['as' => 'create_cert']);
 $routes->get('school/cert/(:num)/item/list', 'SchoolCertController::certItemList/$1', ['as' => 'cert_item_list']);
-$routes->post('school/cert/info/register', 'SchoolCertController::certInfoRegister', ['as' => 'cert_info_register']);
-$routes->post('school/cert/addNewItem', 'SchoolCertController::addNewItem', ['as' => 'cert_add_item']);
+$routes->post('school/cert/(:num)/item/create', 'SchoolCertController::createCertItem', ['as' => 'create_cert_item']);
+$routes->post('school/cert/(:num)/item/update', 'SchoolCertController::updateCertItem/$1', ['as' => 'update_cert_item']);
+$routes->post('school/cert/(:num)/item/delete', 'SchoolCertController::deleteCertItem/$1', ['as' => 'delete_cert_item']);
+
 $routes->get('school/report/menu', 'SchoolReportController::menu', ['as' => 'report_menu']);
 $routes->get('school/report/enrollment', 'SchoolReportController::enrollment', ['as' => 'report_enrollment']);
 

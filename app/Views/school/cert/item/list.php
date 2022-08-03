@@ -6,7 +6,10 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>学校管理システム｜資格管理｜資格詳細</title>
-        
+
+        <!-- FONTAWESOME -->
+        <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
+
         <!-- Bootstrap CSS -->
         <link
                 href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -16,31 +19,36 @@
     </head>
     <body>
         <div class="container">
-    
             <?= $breadcrumb ?? null ?>
             <h1>取扱資格の編集</h1>
-            <h2>todo</h2>
-            <ul>
-                <li>試験アイテム（＝試験日）の新規作成、削除</li>
-            </ul>
     
-            <?= service('validation')->listErrors(); ?>
-    
-            <form action="#" method="post">
-                <input type="submit" value="資格アイテムを追加（＋マークはjavascriptでつくる）">
-            </form>
-    
+            <?php if (session()->getFlashdata('success')) {
+                echo ('<div class="alert alert-success mt-2">');
+                echo (session()->getFlashdata('success'));
+                echo ('</div>');
+            } ?>
+            <?php if (session()->getFlashdata('errors')) {
+                echo ('<div class="alert alert-danger mt-2">');
+                echo (session()->getFlashdata('errors'));
+                echo ('</div>');
+            } ?>
+            
             <?php if (empty($cert)) {
                 echo '<p>資格レコードなし</p>';
             } else {
                 ?>
                 <h2><?= $cert['name'] ?></h2>
-        
+                <form method="post">
+                    <?= csrf_field() ?>
+                    <input type="date" name="the_day_of_the_test" pattern="\d{4}-\d{2}-\d{2}">
+                    <input type="submit" formaction="<?= route_to('create_cert_item', $cert['id']) ?>" value="新規">
+                </form>
+    
                 <?php if (empty($cert['items'])) {
                     echo '<p>アイテムレコードなし</p>';
                 } else {
                     $i = 1; ?>
-                    <form action="<?= route_to('cert_edit_post') ?>" method="post">
+                    <form method="post">
                         <?= csrf_field() ?>
                         <table class="table small table-sm">
                             <thead>
@@ -55,11 +63,18 @@
                                     <td><?= $i ?>回目</td>
                                     <td><?= $item->the_day_of_the_test->format('Y-m-d') ?></td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="date" name="the_day_of_the_test" pattern="\d{4}-\d{2}-\d{2}">
+                                        <input type="submit" formaction="<?= route_to('update_cert_item', $item->id) ?>" value="更新">
+                                        <input type="submit" formaction="<?= route_to('delete_cert_item', $item->id) ?>" value="削除">
+                                    </td>
+                                </tr>
                                 <?php
                                 $i++;
                             endforeach; ?>
                         </table>
-                        <input type="submit" value="更新">
                     </form>
                 <?php } ?>
             <?php } ?>

@@ -14,9 +14,6 @@
                 integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous">
         
-        <!-- FONTAWESOME -->
-        <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
-
         <!-- css -->
         <link rel="stylesheet" href="/assets/school/css/cert/list.css">
 
@@ -47,42 +44,45 @@
                 echo ('</div>');
             } ?>
 
-            <form action="<?= route_to('cert_info_register') ?>" method="post">
-                <?= csrf_field() ?>
-                <div class="mb-2">
-                    <label class="select2-label" for="selected_cert_single">処理対象の資格
-                        <select class="select2_single" name="selected_cert_single">
-                            <option></option>
-                            <?php if (!empty($certs)) {
-                                foreach ($certs as $cert) {
-                                    echo('<option>');
-                                    echo($cert->name.' '.$cert->remark);
-                                    echo('</option>');
-                                }
-                            } ?>
-                        </select>
-                    </label>
-                </div>
-                <div class="mb-2">
-                    <label class="select2-label" for="selected_cert_multi">処理対象の資格
-                        <select class="select2_multi" name="selected_cert_multi" multiple="multiple">
-                            <?php if (!empty($certs)) {
-                                foreach ($certs as $cert) {
-                                    echo('<option>');
-                                    echo($cert->name.' '.$cert->remark);
-                                    echo('</option>');
-                                }
-                            } ?>
-                        </select>
-                    </label>
-                </div>
-                <input class="mb-4 btn btn-primary" type="submit" value="編集">
-            </form>
+            <!--<form action="--><?//= route_to('cert_info_register') ?><!--" method="post">-->
+            <!--    --><?//= csrf_field() ?>
+            <!--    <div class="mb-2">-->
+            <!--        <label class="select2-label" for="selected_cert_single">処理対象の資格-->
+            <!--            <select class="select2_single" name="selected_cert_single">-->
+            <!--                <option></option>-->
+            <!--                --><?php //if (!empty($certs)) {
+            //                     foreach ($certs as $cert) {
+            //                         echo('<option>');
+            //                         echo($cert->name.' '.$cert->remark);
+            //                         echo('</option>');
+            //                     }
+            //                 } ?>
+            <!--            </select>-->
+            <!--        </label>-->
+            <!--    </div>-->
+            <!--    <div class="mb-2">-->
+            <!--        <label class="select2-label" for="selected_cert_multi">処理対象の資格-->
+            <!--            <select class="select2_multi" name="selected_cert_multi" multiple="multiple">-->
+            <!--                --><?php //if (!empty($certs)) {
+            //                     foreach ($certs as $cert) {
+            //                         echo('<option>');
+            //                         echo($cert->name.' '.$cert->remark);
+            //                         echo('</option>');
+            //                     }
+            //                 } ?>
+            <!--            </select>-->
+            <!--        </label>-->
+            <!--    </div>-->
+            <!--    <input class="mb-4 btn btn-primary" type="submit" value="編集">-->
+            <!--</form>-->
     
-            <form class="mb-4" action="/school/cert/addNewItem" method="post">
+            <form class="mb-4" action="/school/cert/create" method="post">
                 <?= csrf_field() ?>
                 <label>資格名
-                    <input class="form-control" type="text" name="newItemName" value="<?= old('newItemName') ?>" required>
+                    <input class="form-control" type="text" name="newCertName" value="<?= old('newCertName') ?>" required>
+                </label>
+                <label>備考
+                    <input class="form-control" type="text" name="newCertRemark" value="<?= old('newCertRemark') ?>">
                 </label>
                 <button class="btn btn-primary" type="submit">追加</button>
                 <div id="submitHelp" class="form-text mb-4">資格をひとつ追加できます</div>
