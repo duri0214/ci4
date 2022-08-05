@@ -3,8 +3,9 @@
 namespace App\Models\Domain\Logic\School\Demo\HighSchool\Csv;
 
 use App\Models\Domain\Logic\Csv\AbstractEntity;
+use App\Models\Domain\Logic\Csv\IEntity;
 
-class GradesEntity extends AbstractEntity
+class GradesEntity extends AbstractEntity implements IEntity
 {
     /**
      * @var int
@@ -110,6 +111,14 @@ class GradesEntity extends AbstractEntity
         $this->checkIfGreaterThan($value);
         $this->checkIfLessThan($value);
         $this->score6 = $value;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
     
     /**

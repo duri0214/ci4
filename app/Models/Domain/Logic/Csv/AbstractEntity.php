@@ -2,26 +2,12 @@
 
 namespace App\Models\Domain\Logic\Csv;
 
-abstract class AbstractEntity
+abstract class AbstractEntity implements IEntity
 {
     /**
      * @var array
      */
     protected array $errors = [];
-    
-    /**
-     * CSVの列編成を決めている配列
-     * @return array
-     */
-    abstract public function toArray(): array;
-    
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
     
     /**
      * $value > $threshold だったらエラーを発生します
