@@ -9,7 +9,7 @@ interface IRepository
      * @param IEntity $entity
      * @return void
      */
-    public function addEntity(IEntity $entity): void;
+    public function addRecord(IEntity $entity): void;
     
     /**
      * 集めたエンティティ群を返します
