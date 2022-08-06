@@ -2,8 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\Domain\Logic\School\Demo\HighSchool\Csv\GradesEntity;
+use App\Models\Domain\Logic\School\Demo\HighSchool\Csv\GradesRepository;
 use App\Models\VocabularyBookModel;
+use App\Service\CsvService;
 use CodeIgniter\HTTP\ResponseInterface;
+use JetBrains\PhpStorm\NoReturn;
 use Mpdf\Mpdf;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -48,9 +52,54 @@ class HomeController extends BaseController
      * @param string $to
      * @return void
      */
-    public function message(string $to = 'World')
+    public function message(string $to = 'World'): void
     {
         echo "Hello $to!" . PHP_EOL;
+    }
+    
+    #[NoReturn] public function csvExport(): void
+    {
+        // 配置はガチャガチャにしてある
+        $gradesRecords = [
+            [
+                'score4' => 97,
+                'score5' => 100,
+                'score6' => 2,
+                'user_id' => 1,
+                'name' => 'yoshitaka1',
+                'score1' => 100,
+                'score2' => 99,
+                'score3' => 98,
+            ],
+            [
+                'user_id' => 2,
+                'name' => 'yoshitaka2',
+                'score1' => 100,
+                'score2' => 99,
+                'score3' => 98,
+                'score4' => 97,
+                'score5' => 100,
+                'score6' => 2,
+            ],
+            [
+                'score2' => 99,
+                'score3' => 98,
+                'score4' => 97,
+                'user_id' => 3,
+                'name' => 'yoshitaka3',
+                'score1' => 100,
+                'score5' => 100,
+                'score6' => 2,
+            ]
+        ];
+        
+        $repository = new GradesRepository();
+        foreach ($gradesRecords as $gradesRecord) {
+            $repository->addRecord(new GradesEntity($gradesRecord));
+        }
+    
+        $service = new CsvService($repository);
+        $service->export('home_controller.csv');
     }
     
     public function rotatePdf(): string

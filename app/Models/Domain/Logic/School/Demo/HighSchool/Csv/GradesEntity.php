@@ -7,12 +7,6 @@ use App\Models\Domain\Logic\Csv\IEntity;
 
 class GradesEntity extends AbstractEntity implements IEntity
 {
-    /**
-     * @var int
-     */
-    public const NUMBER_OF_FIELDS = 8;
-    
-    // 任意の属性を定義し、setメソッドで値の点検の仕組みをそれぞれつくる
     private ?int $userId;
     private ?string $name;
     private ?int $score1;
@@ -27,6 +21,9 @@ class GradesEntity extends AbstractEntity implements IEntity
      */
     public function __construct(array $data)
     {
+        // STEP1: 属性変数を定義してください
+        // STEP2: 各種setメソッドで値の点検の仕組みを作ってください
+        // STEP3: toArray()で1レコードの出力の順番を作ってください
         $this->setUserId($data['user_id'] ?? null);
         $this->setName($data['name'] ?? null);
         $this->setScore1($data['score1'] ?? null);

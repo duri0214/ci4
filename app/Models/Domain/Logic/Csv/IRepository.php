@@ -2,30 +2,21 @@
 
 namespace App\Models\Domain\Logic\Csv;
 
+use App\Models\Domain\Logic\Csv\Encode\IEncode;
+
 interface IRepository
 {
     /**
-     * リポジトリにエンティティを追加して集めます
+     * データを追加します
      * @param IEntity $entity
      * @return void
      */
     public function addRecord(IEntity $entity): void;
     
     /**
-     * 集めたエンティティ群を返します
-     * @return IEntity[]
+     * 集めたデータをヘッダーと一緒に返します
+     * @param IEncode|null $encoding 指定がなければ utf-8 です
+     * @return array
      */
-    public function getRecords(): array;
-    
-    /**
-     * CSVとして出力します
-     * @return void
-     */
-    public function export(): void;
-    
-    /**
-     * CSVから取り込みます
-     * @return void
-     */
-    public function import(): void;
+    public function publish(IEncode $encoding = null): array;
 }
