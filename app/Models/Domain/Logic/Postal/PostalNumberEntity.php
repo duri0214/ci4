@@ -34,7 +34,7 @@ class PostalNumberEntity
         if (preg_match("/\A\d{3}[-]\d{4}\z/", $zip) || preg_match("/\A\d{7}\z/", $zip)) {
             $this->postalNumber = $postalNumber;
         } else {
-            throw new Exception('※郵便番号を 123-4567 または 1234567 の形式でご記入ください');
+            throw new Exception('※郵便番号は 123-4567 または 1234567 の形式です');
         }
     }
 }
