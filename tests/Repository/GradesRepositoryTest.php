@@ -1,6 +1,6 @@
 <?php
 
-namespace database\Repository;
+namespace Repository;
 
 use App\Models\Domain\Logic\School\Demo\HighSchool\Csv\GradesEntity;
 use App\Models\Domain\Logic\School\Demo\HighSchool\Csv\GradesRepository;

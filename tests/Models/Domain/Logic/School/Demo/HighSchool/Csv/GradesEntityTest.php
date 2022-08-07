@@ -1,6 +1,6 @@
 <?php
 
-namespace database\Models\Domain\Logic\School\Demo\HighSchool\Csv;
+namespace Models\Domain\Logic\School\Demo\HighSchool\Csv;
 
 use App\Models\Domain\Logic\School\Demo\HighSchool\Csv\GradesEntity;
 use JetBrains\PhpStorm\NoReturn;
