@@ -2,11 +2,11 @@
 
 namespace App\Models\Domain\Logic\School\Demo\HighSchool\Csv;
 
+use App\Entities\IEntity;
 use App\Models\Domain\Logic\Csv\Encode\IEncode;
-use App\Models\Domain\Logic\Csv\IEntity;
-use App\Models\Domain\Logic\Csv\IRepository;
+use App\Models\Domain\Logic\Csv\AbstractRepository;
 
-class GradesRepository implements IRepository
+class GradesRepository extends AbstractRepository
 {
     public const HEADERS = [
         ['属性', '属性', 'スコア', 'スコア', 'スコア', 'スコア', 'スコア', 'スコア'],
@@ -16,14 +16,14 @@ class GradesRepository implements IRepository
     /**
      * @var IEntity[]
      */
-    private array $records;
+    private array $grades;
     
     /**
      * @inheritDoc
      */
     public function addRecord(IEntity $entity): void
     {
-        $this->records[] = $entity;
+        $this->grades[] = $entity;
     }
     
     /**
@@ -34,7 +34,7 @@ class GradesRepository implements IRepository
         $header = self::HEADERS;
         $data = [];
     
-        foreach ($this->records as $record) {
+        foreach ($this->grades as $record) {
             $data[] = $record->toArray();
         }
     
