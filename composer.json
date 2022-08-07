@@ -12,7 +12,8 @@
         "myth/auth": "1.*",
         "twig/twig": "^3.0",
         "ext-curl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",
