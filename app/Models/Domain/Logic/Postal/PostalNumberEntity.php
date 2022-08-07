@@ -28,7 +28,7 @@ class PostalNumberEntity
      * @param string $postalNumber
      * @throws Exception
      */
-    public function setPostalNumber(string $postalNumber): void
+    private function setPostalNumber(string $postalNumber): void
     {
         $zip = mb_convert_kana($postalNumber, 'a', 'UTF-8');
         if (preg_match("/\A\d{3}[-]\d{4}\z/", $zip) || preg_match("/\A\d{7}\z/", $zip)) {
