@@ -4,10 +4,9 @@ namespace tests\unit;
 
 use App\Libraries\Slack;
 use App\Libraries\Util;
-use database\Models\PositiveInt;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
+use Tests\Support\database\Models\PositiveInt;
 
 class UtilTest extends TestCase
 {
@@ -28,40 +27,30 @@ class UtilTest extends TestCase
     }
     
     /**
+     * x >= 0 だけしか許容しないことをテストする
      * @throws Exception
      */
     public function testPositiveInt()
     {
-        // x >= 0 だけしか許容しないバリューオブジェクトに想定内の値を入れる
+        // 想定内の値を入れる
         $actual = new PositiveInt(1234);
         $excepted = 1234;
         $this->assertEquals($excepted, $actual->getValue());
     
-        // x >= 0 だけしか許容しないバリューオブジェクトに想定外の値を入れる
-        $this->expectException(\Exception::class);
-        $actual = new PositiveInt(-1);
+        // 想定外の値を入れる
+        $this->expectException(Exception::class);
+        new PositiveInt(-1);
     }
     
     /**
-     * codeigniter4をWindowsローカルで動かす https://qiita.com/YoshitakaOkada/items/7bdc4906725dab5adca6
-     * TODO: エンティティとモデルはまだつくってません
-     * @throws ReflectionException
+     * slackに投稿できることをテストする
+     * @return void
      */
-    public function testDbManipulate()
+    public function testSlack(): void
     {
-        $blog_id = 1;
-        $blog_m = model('App\Models\Blog');
-        $blog_m->insertBatch();
-        $blog = $blog_m->find($blog_id);
-    }
-    
-    public function testSlack()
-    {
-        // TODO: まだうまくいってません
         $service = new Slack();
         $actual = $service->sendMessage($service->sampleMessage());
-        $excepted = date('Y-m-d').PHP_EOL."晴のち時々曇";
         
-        $this->assertEquals($excepted, $actual);
+        $this->assertEquals('ok', $actual);
     }
 }

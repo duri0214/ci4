@@ -23,7 +23,7 @@ class Slack
         
         $options = [
             CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true, // 実行結果を文字列で返す
+            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS =>
@@ -52,7 +52,7 @@ class Slack
         $options = [
             CURLOPT_URL => $url,
             CURLOPT_HEADER => false,
-            CURLOPT_RETURNTRANSFER => true, // 実行結果を文字列で返す
+            CURLOPT_RETURNTRANSFER => true,
         ];
         curl_setopt_array($conn, $options);
         $res = json_decode(curl_exec($conn), true)["forecasts"][self::TODAY];
