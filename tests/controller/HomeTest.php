@@ -19,11 +19,11 @@ class HomeTest extends CIUnitTestCase
      */
     public function testIndex()
     {
-        // Get a simple page
+        // Get a simple page（CSVとかPDFとか「MIMEダウンロード系」はできないようだ）
         $path_list = [
             '/',
             '/home/store',
-            // '/home/csv_export', // TODO: CSVとかPDFはまだできてない
+            // '/home/csv_export',
             // '/home/excel_export',
             // '/home/rotate_pdf',
             '/school',
@@ -39,7 +39,7 @@ class HomeTest extends CIUnitTestCase
             '/school/admin/lesson/create',
             '/school/upload/lesson',
             '/school/cert/1/item/list',
-            '/school/report/enrollment',    // 在籍証明書のPDFは通るな...
+            '/school/report/enrollment',
             '/school/admin/unregistered/list',
         ];
         foreach ($path_list as $item) {
