@@ -3,17 +3,17 @@
 namespace App\Service;
 
 use App\Models\Domain\Logic\Csv\Encode\Sjis;
-use App\Models\Domain\Logic\Csv\IRepository;
+use App\Repository\AbstractRepository;
 use JetBrains\PhpStorm\NoReturn;
 
 class CsvService
 {
-    private IRepository $repository;
+    private AbstractRepository $repository;
     
     /**
-     * @param IRepository $repository
+     * @param AbstractRepository $repository
      */
-    public function __construct(IRepository $repository)
+    public function __construct(AbstractRepository $repository)
     {
         $this->repository = $repository;
     }
