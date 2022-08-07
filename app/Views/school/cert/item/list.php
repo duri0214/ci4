@@ -37,14 +37,20 @@
                 echo '<p>資格レコードなし</p>';
             } else {
                 ?>
-                <h2>資格名: <?= $cert['name'] ?></h2>
+                <h2>資格名: <?= $cert['name'] ?><i class="fas fa-edit ps-4"></i></h2>
                 <form method="post">
                     <?= csrf_field() ?>
-                    <label>資格名を変更
-                        <input class="form-control" type="text" name="certName" value="<?= old('certName') ?>" required>
-                    </label>
+                    <div class="row mb-3">
+                        <label for="certName" class="col-sm-2 col-form-label">資格名を変更</label>
+                        <div class="col-sm-6">
+                            <input class="form-control"
+                                   type="text"
+                                   name="certName"
+                                   value="<?= old('certName') ?>"
+                                   required>
+                        </div>
+                    </div>
                 </form>
-                
                 <form method="post">
                     <?= csrf_field() ?>
                     <label>内訳アイテムを作成
@@ -72,7 +78,7 @@
                             <?php foreach ($cert['items'] as $item) : ?>
                                 <tr>
                                     <td><?= $i ?>回目</td>
-                                    <td><?= $item->the_day_of_the_test->format('Y-m-d') ?></td>
+                                    <td><?= $item->the_day_of_the_test->format('Y-m-d') ?><i class="fas fa-edit ps-4"></i></td>
                                 </tr>
                                 <tr>
                                     <td></td>
