@@ -2,6 +2,8 @@
 
 namespace App\Models\Domain\Logic\Csv;
 
+use App\Entities\IEntity;
+
 abstract class AbstractEntity implements IEntity
 {
     /**
