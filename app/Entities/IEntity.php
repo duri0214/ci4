@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Domain\Logic\Csv;
+namespace App\Entities;
 
 interface IEntity
 {
