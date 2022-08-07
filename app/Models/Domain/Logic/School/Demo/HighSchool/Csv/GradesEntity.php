@@ -3,7 +3,7 @@
 namespace App\Models\Domain\Logic\School\Demo\HighSchool\Csv;
 
 use App\Models\Domain\Logic\Csv\AbstractEntity;
-use App\Models\Domain\Logic\Csv\IEntity;
+use App\Entities\IEntity;
 
 class GradesEntity extends AbstractEntity implements IEntity
 {
