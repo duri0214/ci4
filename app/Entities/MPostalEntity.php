@@ -11,4 +11,13 @@ class MPostalEntity extends Entity
     protected $casts   = [
         'id' => 'integer',
     ];
+    
+    /**
+     * 結合して返す
+     * @return string
+     */
+    public function getConcat(): string
+    {
+        return $this->prefecture . ' ' . $this->municipality . ' ' . $this->town;
+    }
 }

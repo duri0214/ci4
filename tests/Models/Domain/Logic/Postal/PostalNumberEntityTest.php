@@ -1,6 +1,6 @@
 <?php
 
-namespace database\Models\Domain\Logic\Postal;
+namespace Models\Domain\Logic\Postal;
 
 use App\Models\Domain\Logic\Postal\PostalNumberEntity;
 use Exception;
@@ -14,11 +14,12 @@ class PostalNumberEntityTest extends TestCase
     public function testGetPostalNumber()
     {
         // 想定内の値を入れる
-        $data = ['0000000', '000-0000'];
-        foreach ($data as $aData) {
-            $entity = new PostalNumberEntity($aData);
-            $this->assertEquals($aData, $entity->getPostalNumber());
-        }
+        $entity = new PostalNumberEntity('0000000');
+        $this->assertEquals('0000000', $entity->getPostalNumber());
+        $this->assertEquals('000-0000', $entity->getPostalNumber(true));
+        $entity = new PostalNumberEntity('000-0000');
+        $this->assertEquals('0000000', $entity->getPostalNumber());
+        $this->assertEquals('000-0000', $entity->getPostalNumber(true));
         
         // 想定外の値を入れる
         $this->expectException(Exception::class);
