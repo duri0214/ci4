@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 1,
                 'email' => 'demo_t1@gmail.ac.jp',
-                'username' => 'デモ ミドルネーム 先生（管理者）',
+                'username' => 'デモ先生 複数学校兼務（管理者）',
                 'activate_hash' => $activateHash,
                 'password_hash' => $passwordHash,
                 'active' => 1,

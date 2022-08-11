@@ -8,26 +8,17 @@ use Exception;
 
 class SchoolController extends BaseController
 {
-    public function __construct()
-    {
-        $repository = service('schoolLoginRepository');
-        $this->login = $repository->getTablesRelatedByLoggedInUser($_SESSION['logged_in']);
-    }
-    
     /**
      * @throws Exception
      */
     public function index(): string
     {
-        // schoolを確定
-        $schoolEntity = service('schoolModel')->find($this->login['schoolUser']->school_id);
-        
-        if (is_null($schoolEntity)) {
-            throw PageNotFoundException::forPageNotFound();
+        if (!isset($this->login['school'])) {
+            throw PageNotFoundException::forPageNotFound('現在のログインユーザには所属する学校がありません。管理者に要求してください。');
         }
         
         // TODO: シェアード化してね（画面が切り替わっても保持できるように）
-        $schoolDomain = new SchoolDomain($schoolEntity);
+        $schoolDomain = new SchoolDomain($this->login['school']);
         
         $data = [
             'user' => $this->login['user'],

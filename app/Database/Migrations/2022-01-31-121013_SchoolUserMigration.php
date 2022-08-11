@@ -23,10 +23,16 @@ class SchoolUserMigration extends Migration
                     'type' => 'INT',
                     'unsigned' => true,
                 ],
-                'is_superuser' => [
+                'has_superuser' => [
                     'type' => 'INT',
                     'unsigned' => true,
                     'comment' => '開発者用'
+                ],
+                'active' => [
+                    'type' => 'INT',
+                    'unsigned' => true,
+                    'default' => 0,
+                    'comment' => 'アクティブな学校（複数の学校を兼務していた場合）'
                 ],
                 'remark' => [
                     'type' => 'VARCHAR',
