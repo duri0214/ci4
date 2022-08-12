@@ -1,34 +1,38 @@
 ## TODO
-- 複数のリポジトリ操作をサービス層に持っていく
-  - とともに、ドメイン層も整備することになると思う
+- [x] 複数のリポジトリ操作をサービス層に持っていく
+  - [x] とともに、ドメイン層も整備することになると思う
 - CSVアップロード機能
-  - ユーザーが自由にマスタを登録するテーブルをダイナミックに作れる？
-  - serviceの処理ステップ
-    - csv吐き出し
-    - csv読み込み
-    - validation
-      - 項目数が一致しているか
-    - MySQL取り込み
-    - 通知
+  - [ ] ユーザーが自由にマスタを登録する `user table` をダイナミックに作れる？
+  - CsvServiceの処理ステップ
+    - [x] csv吐き出し
+    - [ ] csv読み込み
+    - [ ] validation
+    - [ ] 項目数が一致しているか
+    - [ ] MySQL取り込み
+    - [ ] 通知
 
-# migration
-1. 特定のテーブルだけ消して作り直すとき
-   1. 該当テーブルを消す
-   2. migrations テーブルから該当マイグレーションレコードを消す
-2. 新規のとき（編集はそのまま既存migrationを編集して）
-   1. php spark make:migration --suffix
-   2. [up()とdown()メソッドを記述](https://qiita.com/YoshitakaOkada/items/7bdc4906725dab5adca6#up-%E3%81%A8-down-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E8%A8%98%E8%BF%B0)
-3. php spark migrate -n 'Myth\Auth'
-4. php spark migrate
+## migration作成
+- 一部のテーブルを消して作り直すとき
+  - 該当テーブルを消す
+  - `migrations` テーブルから該当マイグレーションレコードを消す
+- 新規作成のとき
+  - `php spark make:migration --suffix`
+  - [up()とdown()メソッドを記述](https://qiita.com/YoshitakaOkada/items/7bdc4906725dab5adca6#up-%E3%81%A8-down-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E8%A8%98%E8%BF%B0)
 
-# seeder新規作成
-php spark make:seeder --suffix
-# entity新規作成
-php spark make:entity --suffix
-# model新規作成
-php spark make:model --suffix
+## migrate!!
+- 更地db作成
+- `php spark migrate -n 'Myth\Auth'`
+- `php spark migrate`
 
-# seederの順番
+## その他新規作成
+### seeder
+- `php spark make:seeder --suffix`
+### entity
+- `php spark make:entity --suffix`
+### model
+- `php spark make:model --suffix`
+
+## seeder実行!!
 1. php spark db:seed VocabularyBookSeeder
 2. php spark db:seed UserSeeder
 3. php spark db:seed MSchoolCategorySeeder
