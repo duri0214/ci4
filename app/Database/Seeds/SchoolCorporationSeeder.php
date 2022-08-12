@@ -13,6 +13,10 @@ class SchoolCorporationSeeder extends Seeder
                 'id' => 1,
                 'name' => '学校法人デモ学園',
             ],
+            [
+                'id' => 2,
+                'name' => '学校法人デモ学園2',
+            ],
         ];
         
         // Using Query Builder

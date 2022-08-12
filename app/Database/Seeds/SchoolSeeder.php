@@ -21,6 +21,18 @@ class SchoolSeeder extends Seeder
                 'code' => 'Demo',
                 'remark' => 'デモ学校です'
             ],
+            [
+                'id' => 2,
+                'm_school_category_id' => 3,
+                'school_corporation_id' => 2,
+                'name' => 'デモ高等学校2',
+                'zipcode' => '000-0000',
+                'address' => '福岡市のどこかの住所',
+                'tel' => '0000-00-0000',
+                'prefecture' => '福岡県',
+                'code' => 'Demo2',
+                'remark' => 'デモ高等学校2です'
+            ],
         ];
     
         // Using Query Builder
